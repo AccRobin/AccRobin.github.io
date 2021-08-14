@@ -278,9 +278,9 @@
         <category>搜索</category>
       </categories>
       <tags>
+        <tag>笔记</tag>
         <tag>搜索</tag>
         <tag>01BFS</tag>
-        <tag>笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -414,8 +414,8 @@
         <category>字符串</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
         <tag>字符串</tag>
+        <tag>笔记</tag>
         <tag>多项式</tag>
         <tag>FFT</tag>
       </tags>

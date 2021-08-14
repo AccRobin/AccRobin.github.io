@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Hexo</title>
+  <title>Acc Robin&#39;s</title>
   
   
   <link href="http://example.com/atom.xml" rel="self"/>
@@ -10,7 +10,7 @@
   <id>http://example.com/</id>
   
   <author>
-    <name>John Doe</name>
+    <name>AccRobin</name>
     
   </author>
   
@@ -28,7 +28,8 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;CF846E-Chemistry-in-Berland-题解&quot;&gt;&lt;a href=&quot;#CF846E-Chemistry-in-Berland-题解&quot; class=&quot;headerlink&quot; title=&quot;CF846E Chemistry in Berland</summary>
+    <summary type="html">&lt;h2 id=&quot;cf846e-chemistry-in-berland-题解&quot;&gt;CF846E Chemistry in Berland 题解&lt;/h2&gt;
+&lt;p&gt;&lt;a</summary>
         
       
     
@@ -61,7 +62,9 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;「JSOI2015」最小表示-题解&quot;&gt;&lt;a href=&quot;#「JSOI2015」最小表示-题解&quot; class=&quot;headerlink&quot; title=&quot;「JSOI2015」最小表示 题解&quot;&gt;&lt;/a&gt;「JSOI2015」最小表示 题解&lt;/h2&gt;&lt;p&gt;&lt;a</summary>
+    <summary type="html">&lt;h2 id=&quot;jsoi2015-最小表示-题解&quot;&gt;「JSOI2015」最小表示 题解&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.luogu.com.cn/problem/P6134&quot;&gt;传送门&lt;/a&gt;&lt;/p&gt;
+&lt;h3</summary>
         
       
     
@@ -94,7 +97,8 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;CF1557D-Ezzat-and-Grid-题解&quot;&gt;&lt;a href=&quot;#CF1557D-Ezzat-and-Grid-题解&quot; class=&quot;headerlink&quot; title=&quot;CF1557D Ezzat and Grid 题解&quot;&gt;&lt;/a&gt;CF1557D</summary>
+    <summary type="html">&lt;h2 id=&quot;cf1557d-ezzat-and-grid-题解&quot;&gt;CF1557D Ezzat and Grid 题解&lt;/h2&gt;
+&lt;p&gt;&lt;a</summary>
         
       
     
@@ -131,7 +135,9 @@
       
         
         
-    <summary type="html">&lt;h2 id=&quot;不抽象代数基础&quot;&gt;&lt;a href=&quot;#不抽象代数基础&quot; class=&quot;headerlink&quot; title=&quot;不抽象代数基础&quot;&gt;&lt;/a&gt;不抽象代数基础&lt;/h2&gt;&lt;h3 id=&quot;划分&quot;&gt;&lt;a href=&quot;#划分&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;h2 id=&quot;不抽象代数基础&quot;&gt;不抽象代数基础&lt;/h2&gt;
+&lt;h3 id=&quot;划分&quot;&gt;划分&lt;/h3&gt;
+&lt;p&gt;设 &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math</summary>
         
       
     
@@ -187,7 +193,8 @@
         
     <summary type="html">&lt;p&gt;##[UOJ180]实验室外的攻防战 题解&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://uoj.ac/problem/180&quot;&gt;题目链接&lt;/a&gt;&lt;/p&gt;
-&lt;h3 id=&quot;题意&quot;&gt;&lt;a href=&quot;#题意&quot; class=&quot;headerlink&quot;</summary>
+&lt;h3 id=&quot;题意&quot;&gt;题意&lt;/h3&gt;
+&lt;p&gt;给定两个长度为 &lt;span class=&quot;katex&quot;&gt;&lt;span</summary>
         
       
     
@@ -224,7 +231,9 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;01-BFS-学习笔记&quot;&gt;&lt;a href=&quot;#01-BFS-学习笔记&quot; class=&quot;headerlink&quot; title=&quot;01-BFS 学习笔记&quot;&gt;&lt;/a&gt;01-BFS 学习笔记&lt;/h1&gt;&lt;h2 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot;</summary>
+    <summary type="html">&lt;h1&gt;01-BFS 学习笔记&lt;/h1&gt;
+&lt;h2 id=&quot;问题描述&quot;&gt;问题描述&lt;/h2&gt;
+&lt;p&gt;给定一张图，其边权要么为 &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math</summary>
         
       
     
@@ -235,11 +244,11 @@
     <category term="搜索" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%90%9C%E7%B4%A2/"/>
     
     
-    <category term="笔记" scheme="http://example.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
     <category term="搜索" scheme="http://example.com/tags/%E6%90%9C%E7%B4%A2/"/>
     
     <category term="01BFS" scheme="http://example.com/tags/01BFS/"/>
+    
+    <category term="笔记" scheme="http://example.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
@@ -274,7 +283,10 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;对-OSU问题-的一些小思考&quot;&gt;&lt;a href=&quot;#对-OSU问题-的一些小思考&quot; class=&quot;headerlink&quot; title=&quot;对 OSU问题 的一些小思考&quot;&gt;&lt;/a&gt;对 OSU问题 的一些小思考&lt;/h1&gt;&lt;h2 id=&quot;原版-OSU-问题&quot;&gt;&lt;a</summary>
+    <summary type="html">&lt;h1&gt;对 OSU问题 的一些小思考&lt;/h1&gt;
+&lt;h2 id=&quot;原版-osu-问题&quot;&gt;原版 OSU 问题&lt;/h2&gt;
+&lt;h3 id=&quot;问题描述&quot;&gt;问题描述&lt;/h3&gt;
+&lt;p&gt;一个长度为 &lt;span class=&quot;katex&quot;&gt;&lt;span</summary>
         
       
     
@@ -332,7 +344,9 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;FFT处理含有通配符的单模式匹配问题&quot;&gt;&lt;a href=&quot;#FFT处理含有通配符的单模式匹配问题&quot; class=&quot;headerlink&quot; title=&quot;FFT处理含有通配符的单模式匹配问题&quot;&gt;&lt;/a&gt;FFT处理含有通配符的单模式匹配问题&lt;/h1&gt;&lt;h2</summary>
+    <summary type="html">&lt;h1&gt;FFT处理含有通配符的单模式匹配问题&lt;/h1&gt;
+&lt;h2 id=&quot;问题描述&quot;&gt;问题描述&lt;/h2&gt;
+&lt;p&gt;在&lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math</summary>
         
       
     
@@ -343,9 +357,9 @@
     <category term="字符串" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     
     
-    <category term="字符串" scheme="http://example.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
-    
     <category term="笔记" scheme="http://example.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="字符串" scheme="http://example.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     
     <category term="多项式" scheme="http://example.com/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F/"/>
     

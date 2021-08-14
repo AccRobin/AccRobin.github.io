@@ -4,14 +4,21 @@
   <meta charset="utf-8">
   
   
-  <title>Archives | Hexo</title>
+  <title>01-BFS 学习笔记 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/index.html">
+  <meta name="description" content="01-BFS 学习笔记问题描述给定一张图，其边权要么为 $0$ 要么为 $1$，在线性时间内求出从 $S$ 到 $T$ 的最短路。 解决方案注意到边权最大为 $1$，考虑优化普通的 $\mathrm{Dijkstra}$ 算法： 将优先队列替换为 双端队列 ，在松弛时若通过边权为 $0$ 的边松弛，则将新点加入队首，否则加入队尾。 这样可以免去堆的复杂度，则总复杂度为 $O(V+E)$。 例题 A">
+<meta property="og:type" content="article">
+<meta property="og:title" content="01-BFS 学习笔记">
+<meta property="og:url" content="http://example.com/2021/08/09/note/01-BFS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="01-BFS 学习笔记问题描述给定一张图，其边权要么为 $0$ 要么为 $1$，在线性时间内求出从 $S$ 到 $T$ 的最短路。 解决方案注意到边权最大为 $1$，考虑优化普通的 $\mathrm{Dijkstra}$ 算法： 将优先队列替换为 双端队列 ，在松弛时若通过边权为 $0$ 的边松弛，则将新点加入队首，否则加入队尾。 这样可以免去堆的复杂度，则总复杂度为 $O(V+E)$。 例题 A">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-08-09T03:33:01.000Z">
+<meta property="article:modified_time" content="2021-08-09T06:14:22.081Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="搜索">
+<meta property="article:tag" content="01BFS">
+<meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -69,216 +76,88 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/08/13/solver/CF846E%20Chemistry%20in%20Berland%20%E9%A2%98%E8%A7%A3/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-08-13T15:56:02.000Z" itemprop="datePublished">Aug 13</time>
+        <section id="main"><article id="post-note/01-BFS 学习笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/08/09/note/01-BFS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time class="dt-published" datetime="2021-08-09T03:33:01.000Z" itemprop="datePublished">2021-08-09</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>►<a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%90%9C%E7%B4%A2/">搜索</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/13/solver/CF846E%20Chemistry%20in%20Berland%20%E9%A2%98%E8%A7%A3/">CF846E Chemistry in Berland 题解</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      01-BFS 学习笔记
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/08/12/solver/%E3%80%8CJSOI2015%E3%80%8D%E6%9C%80%E5%B0%8F%E8%A1%A8%E7%A4%BA%E9%A2%98%E8%A7%A3/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-08-12T15:46:00.000Z" itemprop="datePublished">Aug 12</time>
-</a>
+    <div class="e-content article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/12/solver/%E3%80%8CJSOI2015%E3%80%8D%E6%9C%80%E5%B0%8F%E8%A1%A8%E7%A4%BA%E9%A2%98%E8%A7%A3/">「JSOI2015」最小表示 题解</a>
-    </h1>
-  
+        <h1 id="01-BFS-学习笔记"><a href="#01-BFS-学习笔记" class="headerlink" title="01-BFS 学习笔记"></a>01-BFS 学习笔记</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>给定一张图，其边权要么为 $0$ 要么为 $1$，在线性时间内求出从 $S$ 到 $T$ 的最短路。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>注意到边权最大为 $1$，考虑优化普通的 $\mathrm{Dijkstra}$ 算法：</p>
+<p>将优先队列替换为 <strong>双端队列</strong> ，在松弛时若通过边权为 $0$ 的边松弛，则将新点加入队首，否则加入队尾。</p>
+<p>这样可以免去堆的复杂度，则总复杂度为 $O(V+E)$。</p>
+<h2 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://atcoder.jp/contests/abc176/tasks/abc176_d"><strong>ABC176D Wizard in Maze</strong></a></li>
+</ul>
+<h4 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h4><p>给定一张 $n\times m$ 的仅由 <code>.</code>  和 <code>#</code> 组成的网格图，<code>.</code> 是空地，<code>#</code> 不能走，每次要么向四联通的 <code>.</code> 走一格，要么用魔法传送到 $5\times 5$ 的区域内任意一处，问从 $S$ 走到 $T$ 最少用几次魔法。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.spoj.com/problems/KATHTHI/en/"><strong>SP22393 KATHTHI</strong></a></li>
+</ul>
+<h4 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h4><p>给一个由字母组成的 $n\times m$ 的网格图，每次向四个方向走，如果字母不同距离 $+1$，问从 $(1,1)$ 走到 $(n,m)$ 的最小距离。</p>
+<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><p>上面都是 01-BFS 裸题，当做板子写吧！</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/590/C"><strong>CF590C Three States</strong></a></li>
+</ul>
+<h4 id="题意-2"><a href="#题意-2" class="headerlink" title="题意"></a>题意</h4><p>$n\times m$​ 的地图上有 $5$​ 种格子：<code>1</code> 表示国家一，<code>2</code> 表示国家二，<code>3</code> 表示国家三，<code>.</code>表示可以修路的地方，<code>#</code> 表示不能修路的地方。保证每个国家的面积至少为 $1$ 且自身连通，现在想要通过修路使三个国家连通，求最少的修路格数。</p>
+<h4 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h4><p>从每个国家都跑一次 01-BFS，枚举每一个点到三个国家的距离和即可。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>其实针对 01-BFS 出的题难点都不在 01-BFS 上，01-BFS 也不会专门作为考点，只是一种优化最短路的方式而已。</p>
+<p>大多的难点都在于问题的转化上。</p>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/08/11/solver/CF1557D%20Ezzat%20and%20Grid%20%E9%A2%98%E8%A7%A3/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-08-11T14:20:03.000Z" itemprop="datePublished">Aug 11</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/11/solver/CF1557D%20Ezzat%20and%20Grid%20%E9%A2%98%E8%A7%A3/">CF1557D Ezzat and Grid 题解</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/08/11/note/%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-08-11T09:18:00.000Z" itemprop="datePublished">Aug 11</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/08/09/note/01-BFS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" data-id="cksb6pvsy000ebh8e57zo90vl" data-title="01-BFS 学习笔记" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/11/note/%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/">「未完成」不抽象代数学习笔记</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/08/10/markdown/%E4%B8%80%E4%BA%9B%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-08-10T01:52:00.000Z" itemprop="datePublished">Aug 10</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/10/markdown/%E4%B8%80%E4%BA%9B%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/">「未完成」一些经典问题的数据结构处理方法</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/08/10/solver/%E9%A2%98%E8%A7%A3uoj180%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%A4%96%E7%9A%84%E6%94%BB%E9%98%B2%E6%88%98/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-08-10T01:50:11.000Z" itemprop="datePublished">Aug 10</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/10/solver/%E9%A2%98%E8%A7%A3uoj180%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%A4%96%E7%9A%84%E6%94%BB%E9%98%B2%E6%88%98/">「UOJ180」实验室外的攻防战 题解</a>
-    </h1>
-  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/01BFS/" rel="tag">01BFS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/08/10/solver/%E9%A2%98%E8%A7%A3uoj180%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%A4%96%E7%9A%84%E6%94%BB%E9%98%B2%E6%88%98/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          「UOJ180」实验室外的攻防战 题解
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/08/09/markdown/%E4%B8%80%E4%BA%9B%E6%9C%89%E8%B6%A3%E7%9A%84%E5%B0%8F%E7%BB%93%E8%AE%BA/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">一些有趣的小结论</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/08/09/note/01-BFS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-08-09T03:33:01.000Z" itemprop="datePublished">Aug 9</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/09/note/01-BFS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">01-BFS 学习笔记</a>
-    </h1>
-  
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/08/09/markdown/%E4%B8%80%E4%BA%9B%E6%9C%89%E8%B6%A3%E7%9A%84%E5%B0%8F%E7%BB%93%E8%AE%BA/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-08-09T00:52:09.000Z" itemprop="datePublished">Aug 9</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/09/markdown/%E4%B8%80%E4%BA%9B%E6%9C%89%E8%B6%A3%E7%9A%84%E5%B0%8F%E7%BB%93%E8%AE%BA/">一些有趣的小结论</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/08/05/talk/%E5%AF%B9OSU%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%80%9D%E8%80%83/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-08-05T03:51:44.000Z" itemprop="datePublished">Aug 5</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/05/talk/%E5%AF%B9OSU%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%80%9D%E8%80%83/">对OSU问题的一些小思考</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/08/03/markdown/Mobius%E5%8F%8D%E6%BC%94%E5%BA%94%E7%94%A8%E5%B0%8F%E8%AE%B0/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-08-03T07:02:30.000Z" itemprop="datePublished">Aug 3</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/08/03/markdown/Mobius%E5%8F%8D%E6%BC%94%E5%BA%94%E7%94%A8%E5%B0%8F%E8%AE%B0/">「未完成」Mobius反演应用题小记</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
-  </nav>
 
 </section>
         

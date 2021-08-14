@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>CF1557D Ezzat and Grid 题解 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="CF1557D Ezzat and Grid 题解传送门 题意给你一个 $n\times m$ 的 01 串，让你删去最少的行（删去一行之后，上下两行变为相邻）使得任意相邻两行都有至少一个公共的位置上是 1. $n\le 3\times 10^5,m\le 10^9$，每次给出某一行上一个区间 $[l,r]$ 由 $1$ 组成。 题解首先做一步小转化，从“删去最少”变成“选取最多”。 考虑DP，令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CF1557D Ezzat and Grid 题解">
+<meta property="og:url" content="http://example.com/2021/08/11/solver/CF1557D%20Ezzat%20and%20Grid%20%E9%A2%98%E8%A7%A3/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="CF1557D Ezzat and Grid 题解传送门 题意给你一个 $n\times m$ 的 01 串，让你删去最少的行（删去一行之后，上下两行变为相邻）使得任意相邻两行都有至少一个公共的位置上是 1. $n\le 3\times 10^5,m\le 10^9$，每次给出某一行上一个区间 $[l,r]$ 由 $1$ 组成。 题解首先做一步小转化，从“删去最少”变成“选取最多”。 考虑DP，令">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-08-11T14:20:03.000Z">
+<meta property="article:modified_time" content="2021-08-11T14:39:29.299Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="DP">
+<meta property="article:tag" content="线段树">
+<meta property="article:tag" content="DP优化">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-solver/CF1557D Ezzat and Grid 题解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2021/08/11/solver/CF1557D%20Ezzat%20and%20Grid%20%E9%A2%98%E8%A7%A3/" class="article-date">
+  <time class="dt-published" datetime="2021-08-11T14:20:03.000Z" itemprop="datePublished">2021-08-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E9%A2%98%E8%A7%A3/">题解</a>►<a class="article-category-link" href="/categories/%E9%A2%98%E8%A7%A3/DP/">DP</a>►<a class="article-category-link" href="/categories/%E9%A2%98%E8%A7%A3/DP/DP%E4%BC%98%E5%8C%96/">DP优化</a>►<a class="article-category-link" href="/categories/%E9%A2%98%E8%A7%A3/DP/DP%E4%BC%98%E5%8C%96/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BC%98%E5%8C%96DP/">数据结构优化DP</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      CF1557D Ezzat and Grid 题解
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="CF1557D-Ezzat-and-Grid-题解"><a href="#CF1557D-Ezzat-and-Grid-题解" class="headerlink" title="CF1557D Ezzat and Grid 题解"></a>CF1557D Ezzat and Grid 题解</h2><p><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1557/D">传送门</a></p>
+<h3 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h3><p>给你一个 $n\times m$ 的 01 串，让你删去最少的行（删去一行之后，上下两行变为相邻）使得任意相邻两行都有至少一个公共的位置上是 1.</p>
+<p>$n\le 3\times 10^5,m\le 10^9$，每次给出某一行上一个区间 $[l,r]$ 由 $1$ 组成。</p>
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>首先做一步小转化，从“删去最少”变成“选取最多”。</p>
+<p>考虑DP，令 $f_{i}$​ 表示前 $i$​ 行最多选取几行，转移有<br>$$<br>f_i=\max_{j&lt;i \land \text{第i行与第j行有公共的1}} f_{j}+1<br>$$<br>注意到我们需要处理区间相交的问题，无疑线段树是合适的选择。</p>
+<p>我们使用线段树来维护区间最大值：加入第 $i$ 行时，使用线段树求出与第 $i$ 有公共部分的最大值 $f_j,(j&lt;i)$，完成 $f_j$ 到 $f_i$ 的转移之后再将第 $i$ 行有 $1$ 的位置全部更新成 $f_i$。</p>
+<p>注意此题还要求输出方案，所以线段树上维护最大值的同时维护一下最大值来自于哪一行。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"><span class="keyword">namespace</span> Acc&#123;</span><br><span class="line">	<span class="keyword">using</span> pii=pair&lt;<span class="keyword">int</span>,<span class="keyword">int</span>&gt;;</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">3e5</span>+<span class="number">9</span>;</span><br><span class="line">	<span class="keyword">const</span> pii NUL=&#123;<span class="number">0</span>,<span class="number">-1</span>&#125;;</span><br><span class="line">	<span class="keyword">int</span> b[N&lt;&lt;<span class="number">1</span>],L[N&lt;&lt;<span class="number">3</span>],R[N&lt;&lt;<span class="number">3</span>],las[N],f;</span><br><span class="line">	pii v[N&lt;&lt;<span class="number">3</span>],t[N&lt;&lt;<span class="number">3</span>];</span><br><span class="line">	vector&lt;pii&gt;g[N];</span><br><span class="line">	<span class="meta">#<span class="meta-keyword">define</span> lc (o&lt;&lt;1)</span></span><br><span class="line">	<span class="meta">#<span class="meta-keyword">define</span> rc (o&lt;&lt;1|1)</span></span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">up</span><span class="params">(pii&amp;x,pii y)</span></span>&#123;<span class="keyword">if</span>(x&lt;y)x=y;&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">bd</span><span class="params">(<span class="keyword">int</span> o,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">		L[o]=l,R[o]=r,v[o]=t[o]=NUL;</span><br><span class="line">		<span class="keyword">if</span>(l==r)<span class="keyword">return</span>;</span><br><span class="line">		<span class="keyword">int</span> md=l+r&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		<span class="built_in">bd</span>(lc,l,md),<span class="built_in">bd</span>(rc,md+<span class="number">1</span>,r);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">pd</span><span class="params">(<span class="keyword">int</span> o)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(t[o]==NUL)<span class="keyword">return</span>;</span><br><span class="line">		<span class="built_in">up</span>(v[lc],t[o]),<span class="built_in">up</span>(v[rc],t[o]);</span><br><span class="line">		<span class="built_in">up</span>(t[lc],t[o]),<span class="built_in">up</span>(t[rc],t[o]),t[o]=NUL;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">pii <span class="title">ask</span><span class="params">(<span class="keyword">int</span> o,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(l&lt;=L[o] &amp;&amp; R[o]&lt;=r)<span class="keyword">return</span> v[o];</span><br><span class="line">		<span class="built_in">pd</span>(o);</span><br><span class="line">		<span class="keyword">int</span> md=L[o]+R[o]&gt;&gt;<span class="number">1</span>;pii z=NUL;</span><br><span class="line">		<span class="keyword">if</span>(l&lt;=md)<span class="built_in">up</span>(z,<span class="built_in">ask</span>(lc,l,r));</span><br><span class="line">		<span class="keyword">if</span>(r&gt;md)<span class="built_in">up</span>(z,<span class="built_in">ask</span>(rc,l,r));</span><br><span class="line">		v[o]=<span class="built_in">max</span>(v[lc],v[rc]);</span><br><span class="line">		<span class="keyword">return</span> z;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> o,<span class="keyword">int</span> l,<span class="keyword">int</span> r,pii x)</span></span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(l&lt;=L[o] &amp;&amp; R[o]&lt;=r)<span class="keyword">return</span> (<span class="keyword">void</span>)(<span class="built_in">up</span>(v[o],x),<span class="built_in">up</span>(t[o],x));</span><br><span class="line">		<span class="keyword">int</span> md=L[o]+R[o]&gt;&gt;<span class="number">1</span>;<span class="built_in">pd</span>(o);</span><br><span class="line">		<span class="keyword">if</span>(l&lt;=md)<span class="built_in">add</span>(lc,l,r,x);</span><br><span class="line">		<span class="keyword">if</span>(r&gt;md)<span class="built_in">add</span>(rc,l,r,x);</span><br><span class="line">		v[o]=<span class="built_in">max</span>(v[lc],v[rc]);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">int</span> n,m,l=<span class="number">0</span>,x,y,z,i;</span><br><span class="line">		<span class="keyword">for</span>(cin&gt;&gt;n&gt;&gt;m;m--;)</span><br><span class="line">			cin&gt;&gt;x&gt;&gt;y&gt;&gt;z,g[x].<span class="built_in">push_back</span>(&#123;y,z&#125;),b[l++]=y,b[l++]=z;</span><br><span class="line">		<span class="built_in">sort</span>(b,b+l),l=<span class="built_in">unique</span>(b,b+l)-b,<span class="built_in">bd</span>(<span class="number">1</span>,<span class="number">1</span>,l);</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;++i)<span class="keyword">for</span>(<span class="keyword">auto</span>&amp;[x,y]:g[i])</span><br><span class="line">			x=<span class="built_in">lower_bound</span>(b,b+l,x)-b+<span class="number">1</span>,y=<span class="built_in">lower_bound</span>(b,b+l,y)-b+<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;++i)&#123;</span><br><span class="line">			pii mx=NUL;</span><br><span class="line">			<span class="keyword">if</span>(i==<span class="number">5</span>)f=<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">auto</span>[x,y]:g[i])mx=<span class="built_in">max</span>(mx,<span class="built_in">ask</span>(<span class="number">1</span>,x,y));</span><br><span class="line">			las[i]=mx.second,mx.second=i,++mx.first;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">auto</span>[x,y]:g[i])<span class="built_in">add</span>(<span class="number">1</span>,x,y,mx);</span><br><span class="line">		&#125;</span><br><span class="line">		pii mx=<span class="built_in">ask</span>(<span class="number">1</span>,<span class="number">1</span>,l);cout&lt;&lt;n-mx.first&lt;&lt;<span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">		<span class="keyword">for</span>(x=mx.second;~x;x=las[x])b[x]=<span class="number">-1</span>;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;++i)<span class="keyword">if</span>(~b[i])cout&lt;&lt;i&lt;&lt;<span class="string">&#x27; &#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> Acc::<span class="built_in">work</span>(),<span class="number">0</span>;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="小细节"><a href="#小细节" class="headerlink" title="小细节"></a>小细节</h3><p>此题的值域较大，需要离散化。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/08/11/solver/CF1557D%20Ezzat%20and%20Grid%20%E9%A2%98%E8%A7%A3/" data-id="cksb6pvso0005bh8eemhr2s86" data-title="CF1557D Ezzat and Grid 题解" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DP%E4%BC%98%E5%8C%96/" rel="tag">DP优化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/08/12/solver/%E3%80%8CJSOI2015%E3%80%8D%E6%9C%80%E5%B0%8F%E8%A1%A8%E7%A4%BA%E9%A2%98%E8%A7%A3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          「JSOI2015」最小表示 题解
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/08/11/note/%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">「未完成」不抽象代数学习笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%90%9C%E7%B4%A2/">搜索</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E5%AD%A6/">数学</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%8F%E8%AE%B0/">小记</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%8F%E8%AE%B0/%E6%95%B0%E5%AD%A6/">数学</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B0%8F%E8%AE%B0/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94%E6%9D%82%E8%B0%88/">随笔杂谈</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%9A%8F%E7%AC%94%E6%9D%82%E8%B0%88/%E6%95%B0%E5%AD%A6/">数学</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A2%98%E8%A7%A3/">题解</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A2%98%E8%A7%A3/DP/">DP</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A2%98%E8%A7%A3/DP/DP%E4%BC%98%E5%8C%96/">DP优化</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A2%98%E8%A7%A3/DP/DP%E4%BC%98%E5%8C%96/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%BC%98%E5%8C%96DP/">数据结构优化DP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A2%98%E8%A7%A3/DP/%E6%A0%91DP/">树DP</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A2%98%E8%A7%A3/%E5%9B%BE%E8%AE%BA/">图论</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A2%98%E8%A7%A3/%E5%9B%BE%E8%AE%BA/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/">拓扑排序</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%A2%98%E8%A7%A3/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></li></ul></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/01BFS/" rel="tag">01BFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DP/" rel="tag">DP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DP%E4%BC%98%E5%8C%96/" rel="tag">DP优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/FFT/" rel="tag">FFT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UOJ/" rel="tag">UOJ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E6%95%B0/" rel="tag">代数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%81%8F%E5%BA%8F%E5%85%B3%E7%B3%BB/" rel="tag">偏序关系</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9B%BE%E8%AE%BA/" rel="tag">图论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F/" rel="tag">多项式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="tag">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%9D%E8%80%83/" rel="tag">思考</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%BB%E7%BB%93/" rel="tag">总结</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/" rel="tag">拓扑排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag">排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2/" rel="tag">搜索</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag">数据结构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E8%AE%BA/" rel="tag">数论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%9F%E6%9C%9B/" rel="tag">期望</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91DP/" rel="tag">树DP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" rel="tag">树状数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" rel="tag">线段树</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8E%AB%E5%8F%8D/" rel="tag">莫反</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B4%AA%E5%BF%83/" rel="tag">贪心</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A2%98%E8%A7%A3/" rel="tag">题解</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/01BFS/" style="font-size: 10px;">01BFS</a> <a href="/tags/DP/" style="font-size: 13.33px;">DP</a> <a href="/tags/DP%E4%BC%98%E5%8C%96/" style="font-size: 10px;">DP优化</a> <a href="/tags/FFT/" style="font-size: 10px;">FFT</a> <a href="/tags/UOJ/" style="font-size: 10px;">UOJ</a> <a href="/tags/%E4%BB%A3%E6%95%B0/" style="font-size: 10px;">代数</a> <a href="/tags/%E5%81%8F%E5%BA%8F%E5%85%B3%E7%B3%BB/" style="font-size: 10px;">偏序关系</a> <a href="/tags/%E5%9B%BE%E8%AE%BA/" style="font-size: 10px;">图论</a> <a href="/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F/" style="font-size: 10px;">多项式</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 10px;">字符串</a> <a href="/tags/%E6%80%9D%E8%80%83/" style="font-size: 10px;">思考</a> <a href="/tags/%E6%80%BB%E7%BB%93/" style="font-size: 13.33px;">总结</a> <a href="/tags/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">拓扑排序</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 10px;">排序</a> <a href="/tags/%E6%90%9C%E7%B4%A2/" style="font-size: 10px;">搜索</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 20px;">数学</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="font-size: 16.67px;">数据结构</a> <a href="/tags/%E6%95%B0%E8%AE%BA/" style="font-size: 10px;">数论</a> <a href="/tags/%E6%9C%9F%E6%9C%9B/" style="font-size: 10px;">期望</a> <a href="/tags/%E6%A0%91DP/" style="font-size: 10px;">树DP</a> <a href="/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/" style="font-size: 10px;">树状数组</a> <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 16.67px;">笔记</a> <a href="/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/" style="font-size: 10px;">线段树</a> <a href="/tags/%E8%8E%AB%E5%8F%8D/" style="font-size: 10px;">莫反</a> <a href="/tags/%E8%B4%AA%E5%BF%83/" style="font-size: 10px;">贪心</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 13.33px;">题解</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/08/">August 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/08/13/solver/CF846E%20Chemistry%20in%20Berland%20%E9%A2%98%E8%A7%A3/">CF846E Chemistry in Berland 题解</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/12/solver/%E3%80%8CJSOI2015%E3%80%8D%E6%9C%80%E5%B0%8F%E8%A1%A8%E7%A4%BA%E9%A2%98%E8%A7%A3/">「JSOI2015」最小表示 题解</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/11/solver/CF1557D%20Ezzat%20and%20Grid%20%E9%A2%98%E8%A7%A3/">CF1557D Ezzat and Grid 题解</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/11/note/%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/">「未完成」不抽象代数学习笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2021/08/10/markdown/%E4%B8%80%E4%BA%9B%E7%BB%8F%E5%85%B8%E9%97%AE%E9%A2%98%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95/">「未完成」一些经典问题的数据结构处理方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2021 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

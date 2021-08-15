@@ -113,9 +113,9 @@
         <tag>题解</tag>
         <tag>树DP</tag>
         <tag>IOI</tag>
+        <tag>2014</tag>
         <tag>UOJ</tag>
         <tag>洛谷</tag>
-        <tag>2014</tag>
       </tags>
   </entry>
   <entry>
@@ -256,13 +256,13 @@ M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
         <category>构造</category>
       </categories>
       <tags>
-        <tag>字符串</tag>
         <tag>题解</tag>
         <tag>IOI</tag>
+        <tag>UOJ</tag>
         <tag>2018</tag>
         <tag>构造</tag>
+        <tag>字符串</tag>
         <tag>交互</tag>
-        <tag>UOJ</tag>
       </tags>
   </entry>
   <entry>
@@ -382,8 +382,8 @@ M834 80h400000v40h-400000z'/></svg></span></span></span><span class="vlist-s">�
       <tags>
         <tag>图论</tag>
         <tag>题解</tag>
-        <tag>拓扑排序</tag>
         <tag>洛谷</tag>
+        <tag>拓扑排序</tag>
         <tag>BZOJ</tag>
         <tag>2015</tag>
       </tags>
@@ -824,8 +824,8 @@ g[i]=i!\sum_{j=0}^i  \frac 1{(i-j)!}\cdot \frac {h[j]}{j!}
         <category>字符串</category>
       </categories>
       <tags>
-        <tag>笔记</tag>
         <tag>字符串</tag>
+        <tag>笔记</tag>
         <tag>多项式</tag>
         <tag>FFT</tag>
       </tags>

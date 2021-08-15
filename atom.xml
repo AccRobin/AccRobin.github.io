@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-08-15T07:23:26.784Z</updated>
+  <updated>2021-08-15T07:25:34.005Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://example.com/2021/08/15/solver/IOI2018%E7%BB%84%E5%90%88%E5%8A%A8%E4%BD%9C/"/>
     <id>http://example.com/2021/08/15/solver/IOI2018%E7%BB%84%E5%90%88%E5%8A%A8%E4%BD%9C/</id>
     <published>2021-08-15T06:37:01.000Z</published>
-    <updated>2021-08-15T07:23:26.784Z</updated>
+    <updated>2021-08-15T07:25:34.005Z</updated>
     
     
       
@@ -52,6 +52,8 @@
     
     <category term="交互" scheme="http://example.com/tags/%E4%BA%A4%E4%BA%92/"/>
     
+    <category term="题解" scheme="http://example.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
   </entry>
   
   <entry>
@@ -59,7 +61,7 @@
     <link href="http://example.com/2021/08/15/solver/CF825G/"/>
     <id>http://example.com/2021/08/15/solver/CF825G/</id>
     <published>2021-08-15T03:11:01.000Z</published>
-    <updated>2021-08-15T03:46:34.283Z</updated>
+    <updated>2021-08-15T07:25:55.165Z</updated>
     
     
       
@@ -87,6 +89,8 @@
     
     <category term="树" scheme="http://example.com/tags/%E6%A0%91/"/>
     
+    <category term="题解" scheme="http://example.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
   </entry>
   
   <entry>
@@ -94,7 +98,7 @@
     <link href="http://example.com/2021/08/13/solver/CF846E%20Chemistry%20in%20Berland%20%E9%A2%98%E8%A7%A3/"/>
     <id>http://example.com/2021/08/13/solver/CF846E%20Chemistry%20in%20Berland%20%E9%A2%98%E8%A7%A3/</id>
     <published>2021-08-13T15:56:02.000Z</published>
-    <updated>2021-08-15T03:14:08.123Z</updated>
+    <updated>2021-08-15T07:26:17.455Z</updated>
     
     
       
@@ -122,6 +126,8 @@
     <category term="贪心" scheme="http://example.com/tags/%E8%B4%AA%E5%BF%83/"/>
     
     <category term="树DP" scheme="http://example.com/tags/%E6%A0%91DP/"/>
+    
+    <category term="题解" scheme="http://example.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
   </entry>
   
@@ -265,17 +271,17 @@
     <link href="http://example.com/2021/08/10/solver/uoj180%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%A4%96%E7%9A%84%E6%94%BB%E9%98%B2%E6%88%98/"/>
     <id>http://example.com/2021/08/10/solver/uoj180%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%A4%96%E7%9A%84%E6%94%BB%E9%98%B2%E6%88%98/</id>
     <published>2021-08-10T01:50:11.000Z</published>
-    <updated>2021-08-10T02:54:14.740Z</updated>
+    <updated>2021-08-15T07:25:21.237Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;p&gt;##[UOJ180]实验室外的攻防战 题解&lt;/p&gt;
+    <summary type="html">&lt;h2 id=&quot;uoj180-实验室外的攻防战-题解&quot;&gt;[UOJ180]实验室外的攻防战 题解&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://uoj.ac/problem/180&quot;&gt;题目链接&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;题意&quot;&gt;题意&lt;/h3&gt;
-&lt;p&gt;给定两个长度为 &lt;span class=&quot;katex&quot;&gt;&lt;span</summary>
+&lt;p&gt;给定两个长度为</summary>
         
       
     
@@ -297,6 +303,8 @@
     <category term="题解" scheme="http://example.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
     <category term="UOJ" scheme="http://example.com/tags/UOJ/"/>
+    
+    <category term="UR" scheme="http://example.com/tags/UR/"/>
     
   </entry>
   

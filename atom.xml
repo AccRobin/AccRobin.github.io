@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-08-15T03:43:16.445Z</updated>
+  <updated>2021-08-15T07:23:26.784Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,49 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>「IOI2018」组合动作 题解</title>
+    <link href="http://example.com/2021/08/15/solver/IOI2018%E7%BB%84%E5%90%88%E5%8A%A8%E4%BD%9C/"/>
+    <id>http://example.com/2021/08/15/solver/IOI2018%E7%BB%84%E5%90%88%E5%8A%A8%E4%BD%9C/</id>
+    <published>2021-08-15T06:37:01.000Z</published>
+    <updated>2021-08-15T07:23:26.784Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;ioi2018-组合动作-题解&quot;&gt;「IOI2018」组合动作 题解&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://uoj.ac/problem/405&quot;&gt;传送门&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;题意&quot;&gt;题意&lt;/h3&gt;
+&lt;p&gt;你在玩一个动作游戏。游戏控制器有</summary>
+        
+      
+    
+    
+    
+    <category term="题解" scheme="http://example.com/categories/%E9%A2%98%E8%A7%A3/"/>
+    
+    <category term="构造" scheme="http://example.com/categories/%E9%A2%98%E8%A7%A3/%E6%9E%84%E9%80%A0/"/>
+    
+    
+    <category term="字符串" scheme="http://example.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+    <category term="IOI" scheme="http://example.com/tags/IOI/"/>
+    
+    <category term="2018" scheme="http://example.com/tags/2018/"/>
+    
+    <category term="构造" scheme="http://example.com/tags/%E6%9E%84%E9%80%A0/"/>
+    
+    <category term="交互" scheme="http://example.com/tags/%E4%BA%A4%E4%BA%92/"/>
+    
+  </entry>
+  
+  <entry>
     <title>CF825G Tree Queries 题解</title>
     <link href="http://example.com/2021/08/15/solver/CF825G/"/>
     <id>http://example.com/2021/08/15/solver/CF825G/</id>
     <published>2021-08-15T03:11:01.000Z</published>
-    <updated>2021-08-15T03:43:16.445Z</updated>
+    <updated>2021-08-15T03:46:34.283Z</updated>
     
     
       
@@ -116,9 +154,9 @@
     
     <category term="图论" scheme="http://example.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
-    <category term="拓扑排序" scheme="http://example.com/tags/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/"/>
-    
     <category term="题解" scheme="http://example.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+    <category term="拓扑排序" scheme="http://example.com/tags/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/"/>
     
     <category term="洛谷" scheme="http://example.com/tags/%E6%B4%9B%E8%B0%B7/"/>
     
@@ -250,13 +288,13 @@
     
     <category term="数据结构" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-    <category term="题解" scheme="http://example.com/tags/%E9%A2%98%E8%A7%A3/"/>
-    
     <category term="树状数组" scheme="http://example.com/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
     
     <category term="排序" scheme="http://example.com/tags/%E6%8E%92%E5%BA%8F/"/>
     
     <category term="偏序关系" scheme="http://example.com/tags/%E5%81%8F%E5%BA%8F%E5%85%B3%E7%B3%BB/"/>
+    
+    <category term="题解" scheme="http://example.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
     <category term="UOJ" scheme="http://example.com/tags/UOJ/"/>
     

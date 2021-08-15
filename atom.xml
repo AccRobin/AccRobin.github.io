@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-08-15T03:42:33.417Z</updated>
+  <updated>2021-08-15T03:43:16.445Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -18,10 +18,10 @@
   
   <entry>
     <title>CF825G Tree Queries 题解</title>
-    <link href="http://example.com/2021/08/15/solver/CF825G/sol/"/>
-    <id>http://example.com/2021/08/15/solver/CF825G/sol/</id>
+    <link href="http://example.com/2021/08/15/solver/CF825G/"/>
+    <id>http://example.com/2021/08/15/solver/CF825G/</id>
     <published>2021-08-15T03:11:01.000Z</published>
-    <updated>2021-08-15T03:42:33.417Z</updated>
+    <updated>2021-08-15T03:43:16.445Z</updated>
     
     
       
@@ -224,8 +224,8 @@
   
   <entry>
     <title>「UOJ180」实验室外的攻防战 题解</title>
-    <link href="http://example.com/2021/08/10/solver/%E9%A2%98%E8%A7%A3uoj180%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%A4%96%E7%9A%84%E6%94%BB%E9%98%B2%E6%88%98/"/>
-    <id>http://example.com/2021/08/10/solver/%E9%A2%98%E8%A7%A3uoj180%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%A4%96%E7%9A%84%E6%94%BB%E9%98%B2%E6%88%98/</id>
+    <link href="http://example.com/2021/08/10/solver/uoj180%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%A4%96%E7%9A%84%E6%94%BB%E9%98%B2%E6%88%98/"/>
+    <id>http://example.com/2021/08/10/solver/uoj180%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%A4%96%E7%9A%84%E6%94%BB%E9%98%B2%E6%88%98/</id>
     <published>2021-08-10T01:50:11.000Z</published>
     <updated>2021-08-10T02:54:14.740Z</updated>
     

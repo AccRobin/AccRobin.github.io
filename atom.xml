@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-08-15T08:10:35.705Z</updated>
+  <updated>2021-08-15T08:27:59.405Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>「IOI2014」friend 题解</title>
+    <link href="http://example.com/2021/08/15/solver/IOI2014friend/"/>
+    <id>http://example.com/2021/08/15/solver/IOI2014friend/</id>
+    <published>2021-08-15T08:18:05.000Z</published>
+    <updated>2021-08-15T08:27:59.405Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;ioi2014-friend-题解&quot;&gt;「IOI2014」friend 题解&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://uoj.ac/problem/28&quot;&gt;UOJ传送门&lt;/a&gt; &lt;a</summary>
+        
+      
+    
+    
+    
+    <category term="题解" scheme="http://example.com/categories/%E9%A2%98%E8%A7%A3/"/>
+    
+    <category term="DP" scheme="http://example.com/categories/%E9%A2%98%E8%A7%A3/DP/"/>
+    
+    <category term="树DP" scheme="http://example.com/categories/%E9%A2%98%E8%A7%A3/DP/%E6%A0%91DP/"/>
+    
+    
+    <category term="DP" scheme="http://example.com/tags/DP/"/>
+    
+    <category term="图论" scheme="http://example.com/tags/%E5%9B%BE%E8%AE%BA/"/>
+    
+    <category term="树" scheme="http://example.com/tags/%E6%A0%91/"/>
+    
+    <category term="题解" scheme="http://example.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+    <category term="树DP" scheme="http://example.com/tags/%E6%A0%91DP/"/>
+    
+    <category term="IOI" scheme="http://example.com/tags/IOI/"/>
+    
+    <category term="UOJ" scheme="http://example.com/tags/UOJ/"/>
+    
+    <category term="洛谷" scheme="http://example.com/tags/%E6%B4%9B%E8%B0%B7/"/>
+    
+    <category term="2014" scheme="http://example.com/tags/2014/"/>
+    
+  </entry>
   
   <entry>
     <title>「UR4」元旦三侠的游戏 题解</title>
@@ -50,9 +96,9 @@
     
     <category term="UOJ" scheme="http://example.com/tags/UOJ/"/>
     
-    <category term="博弈" scheme="http://example.com/tags/%E5%8D%9A%E5%BC%88/"/>
-    
     <category term="UR" scheme="http://example.com/tags/UR/"/>
+    
+    <category term="博弈" scheme="http://example.com/tags/%E5%8D%9A%E5%BC%88/"/>
     
   </entry>
   
@@ -342,13 +388,13 @@
     
     <category term="UOJ" scheme="http://example.com/tags/UOJ/"/>
     
-    <category term="UR" scheme="http://example.com/tags/UR/"/>
-    
     <category term="树状数组" scheme="http://example.com/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
     
     <category term="排序" scheme="http://example.com/tags/%E6%8E%92%E5%BA%8F/"/>
     
     <category term="偏序关系" scheme="http://example.com/tags/%E5%81%8F%E5%BA%8F%E5%85%B3%E7%B3%BB/"/>
+    
+    <category term="UR" scheme="http://example.com/tags/UR/"/>
     
   </entry>
   

@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-08-15T03:37:14.267Z</updated>
+  <updated>2021-08-15T03:42:33.417Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://example.com/2021/08/15/solver/CF825G/sol/"/>
     <id>http://example.com/2021/08/15/solver/CF825G/sol/</id>
     <published>2021-08-15T03:11:01.000Z</published>
-    <updated>2021-08-15T03:37:14.267Z</updated>
+    <updated>2021-08-15T03:42:33.417Z</updated>
     
     
       
@@ -79,11 +79,11 @@
     
     <category term="DP" scheme="http://example.com/tags/DP/"/>
     
+    <category term="CodeForces" scheme="http://example.com/tags/CodeForces/"/>
+    
     <category term="贪心" scheme="http://example.com/tags/%E8%B4%AA%E5%BF%83/"/>
     
     <category term="树DP" scheme="http://example.com/tags/%E6%A0%91DP/"/>
-    
-    <category term="CodeForces" scheme="http://example.com/tags/CodeForces/"/>
     
   </entry>
   
@@ -158,11 +158,11 @@
     
     <category term="DP" scheme="http://example.com/tags/DP/"/>
     
-    <category term="CodeForces" scheme="http://example.com/tags/CodeForces/"/>
-    
     <category term="线段树" scheme="http://example.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
     <category term="DP优化" scheme="http://example.com/tags/DP%E4%BC%98%E5%8C%96/"/>
+    
+    <category term="CodeForces" scheme="http://example.com/tags/CodeForces/"/>
     
   </entry>
   

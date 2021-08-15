@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-08-15T07:25:34.005Z</updated>
+  <updated>2021-08-15T08:10:35.705Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,51 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>「UR4」元旦三侠的游戏 题解</title>
+    <link href="http://example.com/2021/08/15/solver/UOJ51%E5%85%83%E6%97%A6%E4%B8%89%E4%BE%A0%E7%9A%84%E6%B8%B8%E6%88%8F/"/>
+    <id>http://example.com/2021/08/15/solver/UOJ51%E5%85%83%E6%97%A6%E4%B8%89%E4%BE%A0%E7%9A%84%E6%B8%B8%E6%88%8F/</id>
+    <published>2021-08-15T07:31:33.000Z</published>
+    <updated>2021-08-15T08:10:35.705Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;ur4-元旦三侠的游戏-题解&quot;&gt;「UR4」元旦三侠的游戏 题解&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://uoj.ac/problem/51&quot;&gt;传送门&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;题意&quot;&gt;题意&lt;/h3&gt;
+&lt;p&gt;给定三个整数 &lt;span</summary>
+        
+      
+    
+    
+    
+    <category term="题解" scheme="http://example.com/categories/%E9%A2%98%E8%A7%A3/"/>
+    
+    <category term="数学" scheme="http://example.com/categories/%E9%A2%98%E8%A7%A3/%E6%95%B0%E5%AD%A6/"/>
+    
+    <category term="博弈" scheme="http://example.com/categories/%E9%A2%98%E8%A7%A3/%E6%95%B0%E5%AD%A6/%E5%8D%9A%E5%BC%88/"/>
+    
+    
+    <category term="数学" scheme="http://example.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+    <category term="题解" scheme="http://example.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+    <category term="UOJ" scheme="http://example.com/tags/UOJ/"/>
+    
+    <category term="博弈" scheme="http://example.com/tags/%E5%8D%9A%E5%BC%88/"/>
+    
+    <category term="UR" scheme="http://example.com/tags/UR/"/>
+    
+  </entry>
+  
+  <entry>
     <title>「IOI2018」组合动作 题解</title>
     <link href="http://example.com/2021/08/15/solver/IOI2018%E7%BB%84%E5%90%88%E5%8A%A8%E4%BD%9C/"/>
     <id>http://example.com/2021/08/15/solver/IOI2018%E7%BB%84%E5%90%88%E5%8A%A8%E4%BD%9C/</id>
     <published>2021-08-15T06:37:01.000Z</published>
-    <updated>2021-08-15T07:25:34.005Z</updated>
+    <updated>2021-08-15T07:28:26.081Z</updated>
     
     
       
@@ -44,6 +84,8 @@
     
     <category term="字符串" scheme="http://example.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     
+    <category term="题解" scheme="http://example.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
     <category term="IOI" scheme="http://example.com/tags/IOI/"/>
     
     <category term="2018" scheme="http://example.com/tags/2018/"/>
@@ -52,7 +94,7 @@
     
     <category term="交互" scheme="http://example.com/tags/%E4%BA%A4%E4%BA%92/"/>
     
-    <category term="题解" scheme="http://example.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    <category term="UOJ" scheme="http://example.com/tags/UOJ/"/>
     
   </entry>
   
@@ -123,11 +165,11 @@
     
     <category term="CodeForces" scheme="http://example.com/tags/CodeForces/"/>
     
+    <category term="题解" scheme="http://example.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
     <category term="贪心" scheme="http://example.com/tags/%E8%B4%AA%E5%BF%83/"/>
     
     <category term="树DP" scheme="http://example.com/tags/%E6%A0%91DP/"/>
-    
-    <category term="题解" scheme="http://example.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
   </entry>
   
@@ -273,17 +315,17 @@
     <link href="http://example.com/2021/08/10/solver/uoj180%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%A4%96%E7%9A%84%E6%94%BB%E9%98%B2%E6%88%98/"/>
     <id>http://example.com/2021/08/10/solver/uoj180%E5%AE%9E%E9%AA%8C%E5%AE%A4%E5%A4%96%E7%9A%84%E6%94%BB%E9%98%B2%E6%88%98/</id>
     <published>2021-08-10T01:50:11.000Z</published>
-    <updated>2021-08-15T07:25:21.237Z</updated>
+    <updated>2021-08-15T07:30:56.990Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;uoj180-实验室外的攻防战-题解&quot;&gt;[UOJ180]实验室外的攻防战 题解&lt;/h2&gt;
+    <summary type="html">&lt;h2 id=&quot;ur12-实验室外的攻防战-题解&quot;&gt;「UR12」实验室外的攻防战 题解&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://uoj.ac/problem/180&quot;&gt;题目链接&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;题意&quot;&gt;题意&lt;/h3&gt;
-&lt;p&gt;给定两个长度为</summary>
+&lt;p&gt;给定两个长度为 &lt;span</summary>
         
       
     
@@ -296,17 +338,17 @@
     
     <category term="数据结构" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-    <category term="树状数组" scheme="http://example.com/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
-    
-    <category term="排序" scheme="http://example.com/tags/%E6%8E%92%E5%BA%8F/"/>
-    
-    <category term="偏序关系" scheme="http://example.com/tags/%E5%81%8F%E5%BA%8F%E5%85%B3%E7%B3%BB/"/>
-    
     <category term="题解" scheme="http://example.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
     <category term="UOJ" scheme="http://example.com/tags/UOJ/"/>
     
     <category term="UR" scheme="http://example.com/tags/UR/"/>
+    
+    <category term="树状数组" scheme="http://example.com/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
+    
+    <category term="排序" scheme="http://example.com/tags/%E6%8E%92%E5%BA%8F/"/>
+    
+    <category term="偏序关系" scheme="http://example.com/tags/%E5%81%8F%E5%BA%8F%E5%85%B3%E7%B3%BB/"/>
     
   </entry>
   

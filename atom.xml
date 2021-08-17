@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-08-15T08:30:43.651Z</updated>
+  <updated>2021-08-17T15:07:54.130Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>「NOI2016」区间 题解</title>
+    <link href="http://example.com/2021/08/17/solver/NOI2016%E5%8C%BA%E9%97%B4/"/>
+    <id>http://example.com/2021/08/17/solver/NOI2016%E5%8C%BA%E9%97%B4/</id>
+    <published>2021-08-17T14:52:03.000Z</published>
+    <updated>2021-08-17T15:07:54.130Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;noi2016-区间-题解&quot;&gt;「NOI2016」区间 题解&lt;/h2&gt;
+&lt;h3 id=&quot;题意&quot;&gt;题意&lt;/h3&gt;
+&lt;p&gt;在数轴上有 &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math</summary>
+        
+      
+    
+    
+    
+    <category term="题解" scheme="http://example.com/categories/%E9%A2%98%E8%A7%A3/"/>
+    
+    <category term="数据结构" scheme="http://example.com/categories/%E9%A2%98%E8%A7%A3/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    <category term="线段树" scheme="http://example.com/categories/%E9%A2%98%E8%A7%A3/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    
+    
+    <category term="线段树" scheme="http://example.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    
+    <category term="双指针" scheme="http://example.com/tags/%E5%8F%8C%E6%8C%87%E9%92%88/"/>
+    
+  </entry>
   
   <entry>
     <title>「IOI2014」friend 题解</title>
@@ -42,13 +75,13 @@
     <category term="树DP" scheme="http://example.com/categories/%E9%A2%98%E8%A7%A3/DP/%E6%A0%91DP/"/>
     
     
+    <category term="DP" scheme="http://example.com/tags/DP/"/>
+    
     <category term="图论" scheme="http://example.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
     <category term="树" scheme="http://example.com/tags/%E6%A0%91/"/>
     
     <category term="题解" scheme="http://example.com/tags/%E9%A2%98%E8%A7%A3/"/>
-    
-    <category term="DP" scheme="http://example.com/tags/DP/"/>
     
     <category term="树DP" scheme="http://example.com/tags/%E6%A0%91DP/"/>
     
@@ -171,11 +204,11 @@
     <category term="树" scheme="http://example.com/categories/%E9%A2%98%E8%A7%A3/%E5%9B%BE%E8%AE%BA/%E6%A0%91/"/>
     
     
+    <category term="CodeForces" scheme="http://example.com/tags/CodeForces/"/>
+    
     <category term="图论" scheme="http://example.com/tags/%E5%9B%BE%E8%AE%BA/"/>
     
     <category term="树" scheme="http://example.com/tags/%E6%A0%91/"/>
-    
-    <category term="CodeForces" scheme="http://example.com/tags/CodeForces/"/>
     
     <category term="题解" scheme="http://example.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
@@ -207,15 +240,15 @@
     <category term="树DP" scheme="http://example.com/categories/%E9%A2%98%E8%A7%A3/DP/%E6%A0%91DP/"/>
     
     
+    <category term="DP" scheme="http://example.com/tags/DP/"/>
+    
     <category term="CodeForces" scheme="http://example.com/tags/CodeForces/"/>
     
     <category term="题解" scheme="http://example.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
-    <category term="DP" scheme="http://example.com/tags/DP/"/>
+    <category term="树DP" scheme="http://example.com/tags/%E6%A0%91DP/"/>
     
     <category term="贪心" scheme="http://example.com/tags/%E8%B4%AA%E5%BF%83/"/>
-    
-    <category term="树DP" scheme="http://example.com/tags/%E6%A0%91DP/"/>
     
   </entry>
   
@@ -290,13 +323,13 @@
     
     <category term="数据结构" scheme="http://example.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-    <category term="CodeForces" scheme="http://example.com/tags/CodeForces/"/>
-    
     <category term="DP" scheme="http://example.com/tags/DP/"/>
     
     <category term="线段树" scheme="http://example.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
     <category term="DP优化" scheme="http://example.com/tags/DP%E4%BC%98%E5%8C%96/"/>
+    
+    <category term="CodeForces" scheme="http://example.com/tags/CodeForces/"/>
     
   </entry>
   

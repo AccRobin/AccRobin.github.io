@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-08-17T15:07:54.130Z</updated>
+  <updated>2021-08-23T15:25:11.543Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,43 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>「PMOI-4」生成树 题解</title>
+    <link href="http://example.com/2021/08/23/solver/P7841/"/>
+    <id>http://example.com/2021/08/23/solver/P7841/</id>
+    <published>2021-08-23T15:24:00.000Z</published>
+    <updated>2021-08-23T15:25:11.543Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;pmoi-4-生成树-题解&quot;&gt;「PMOI-4」生成树 题解&lt;/h2&gt;
+&lt;h3 id=&quot;题意&quot;&gt;题意&lt;/h3&gt;
+&lt;p&gt;给定 &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math</summary>
+        
+      
+    
+    
+    
+    <category term="题解" scheme="http://example.com/categories/%E9%A2%98%E8%A7%A3/"/>
+    
+    <category term="数学" scheme="http://example.com/categories/%E9%A2%98%E8%A7%A3/%E6%95%B0%E5%AD%A6/"/>
+    
+    <category term="不等式" scheme="http://example.com/categories/%E9%A2%98%E8%A7%A3/%E6%95%B0%E5%AD%A6/%E4%B8%8D%E7%AD%89%E5%BC%8F/"/>
+    
+    
+    <category term="数学" scheme="http://example.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+    <category term="题解" scheme="http://example.com/tags/%E9%A2%98%E8%A7%A3/"/>
+    
+    <category term="不等式" scheme="http://example.com/tags/%E4%B8%8D%E7%AD%89%E5%BC%8F/"/>
+    
+    <category term="洛谷" scheme="http://example.com/tags/%E6%B4%9B%E8%B0%B7/"/>
+    
+  </entry>
   
   <entry>
     <title>「NOI2016」区间 题解</title>
@@ -85,13 +122,13 @@
     
     <category term="树DP" scheme="http://example.com/tags/%E6%A0%91DP/"/>
     
+    <category term="洛谷" scheme="http://example.com/tags/%E6%B4%9B%E8%B0%B7/"/>
+    
     <category term="IOI" scheme="http://example.com/tags/IOI/"/>
     
     <category term="2014" scheme="http://example.com/tags/2014/"/>
     
     <category term="UOJ" scheme="http://example.com/tags/UOJ/"/>
-    
-    <category term="洛谷" scheme="http://example.com/tags/%E6%B4%9B%E8%B0%B7/"/>
     
   </entry>
   
@@ -246,9 +283,9 @@
     
     <category term="题解" scheme="http://example.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
-    <category term="树DP" scheme="http://example.com/tags/%E6%A0%91DP/"/>
-    
     <category term="贪心" scheme="http://example.com/tags/%E8%B4%AA%E5%BF%83/"/>
+    
+    <category term="树DP" scheme="http://example.com/tags/%E6%A0%91DP/"/>
     
   </entry>
   

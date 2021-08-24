@@ -47,9 +47,9 @@
     
     <category term="题解" scheme="http://example.com/tags/%E9%A2%98%E8%A7%A3/"/>
     
-    <category term="不等式" scheme="http://example.com/tags/%E4%B8%8D%E7%AD%89%E5%BC%8F/"/>
-    
     <category term="洛谷" scheme="http://example.com/tags/%E6%B4%9B%E8%B0%B7/"/>
+    
+    <category term="不等式" scheme="http://example.com/tags/%E4%B8%8D%E7%AD%89%E5%BC%8F/"/>
     
   </entry>
   
@@ -122,13 +122,13 @@
     
     <category term="树DP" scheme="http://example.com/tags/%E6%A0%91DP/"/>
     
-    <category term="洛谷" scheme="http://example.com/tags/%E6%B4%9B%E8%B0%B7/"/>
-    
     <category term="IOI" scheme="http://example.com/tags/IOI/"/>
     
     <category term="2014" scheme="http://example.com/tags/2014/"/>
     
     <category term="UOJ" scheme="http://example.com/tags/UOJ/"/>
+    
+    <category term="洛谷" scheme="http://example.com/tags/%E6%B4%9B%E8%B0%B7/"/>
     
   </entry>
   
@@ -166,9 +166,9 @@
     
     <category term="UOJ" scheme="http://example.com/tags/UOJ/"/>
     
-    <category term="UR" scheme="http://example.com/tags/UR/"/>
-    
     <category term="博弈" scheme="http://example.com/tags/%E5%8D%9A%E5%BC%88/"/>
+    
+    <category term="UR" scheme="http://example.com/tags/UR/"/>
     
   </entry>
   
@@ -458,13 +458,13 @@
     
     <category term="UOJ" scheme="http://example.com/tags/UOJ/"/>
     
+    <category term="UR" scheme="http://example.com/tags/UR/"/>
+    
     <category term="树状数组" scheme="http://example.com/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
     
     <category term="排序" scheme="http://example.com/tags/%E6%8E%92%E5%BA%8F/"/>
     
     <category term="偏序关系" scheme="http://example.com/tags/%E5%81%8F%E5%BA%8F%E5%85%B3%E7%B3%BB/"/>
-    
-    <category term="UR" scheme="http://example.com/tags/UR/"/>
     
   </entry>
   

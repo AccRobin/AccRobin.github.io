@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-08-23T15:25:11.543Z</updated>
+  <updated>2021-08-24T08:20:23.959Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,16 +21,16 @@
     <link href="http://example.com/2021/08/23/solver/P7841/"/>
     <id>http://example.com/2021/08/23/solver/P7841/</id>
     <published>2021-08-23T15:24:00.000Z</published>
-    <updated>2021-08-23T15:25:11.543Z</updated>
+    <updated>2021-08-24T08:20:23.959Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;pmoi-4-生成树-题解&quot;&gt;「PMOI-4」生成树 题解&lt;/h2&gt;
-&lt;h3 id=&quot;题意&quot;&gt;题意&lt;/h3&gt;
-&lt;p&gt;给定 &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math</summary>
+    <summary type="html">&lt;h2 id=&quot;p7841-pmoi-4-生成树-题解&quot;&gt;P7841「PMOI-4」生成树 题解&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.luogu.com.cn/problem/P7841&quot;&gt;传送门&lt;/a&gt;&lt;/p&gt;
+&lt;h3</summary>
         
       
     
@@ -166,9 +166,9 @@
     
     <category term="UOJ" scheme="http://example.com/tags/UOJ/"/>
     
-    <category term="博弈" scheme="http://example.com/tags/%E5%8D%9A%E5%BC%88/"/>
-    
     <category term="UR" scheme="http://example.com/tags/UR/"/>
+    
+    <category term="博弈" scheme="http://example.com/tags/%E5%8D%9A%E5%BC%88/"/>
     
   </entry>
   
@@ -458,13 +458,13 @@
     
     <category term="UOJ" scheme="http://example.com/tags/UOJ/"/>
     
-    <category term="UR" scheme="http://example.com/tags/UR/"/>
-    
     <category term="树状数组" scheme="http://example.com/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
     
     <category term="排序" scheme="http://example.com/tags/%E6%8E%92%E5%BA%8F/"/>
     
     <category term="偏序关系" scheme="http://example.com/tags/%E5%81%8F%E5%BA%8F%E5%85%B3%E7%B3%BB/"/>
+    
+    <category term="UR" scheme="http://example.com/tags/UR/"/>
     
   </entry>
   

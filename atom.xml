@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2021-08-24T08:20:23.959Z</updated>
+  <updated>2021-08-25T16:18:11.125Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>「未完成」不抽象代数学习笔记</title>
+    <link href="http://example.com/2021/08/26/note/%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/"/>
+    <id>http://example.com/2021/08/26/note/%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/</id>
+    <published>2021-08-25T16:18:00.000Z</published>
+    <updated>2021-08-25T16:18:11.125Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;不抽象代数基础&quot;&gt;不抽象代数基础&lt;/h2&gt;
+&lt;h3 id=&quot;划分&quot;&gt;划分&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;定义&lt;/strong&gt; 设 &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math</summary>
+        
+      
+    
+    
+    
+    <category term="学习笔记" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="数学" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E5%AD%A6/"/>
+    
+    
+    <category term="数学" scheme="http://example.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+    <category term="笔记" scheme="http://example.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+    <category term="代数" scheme="http://example.com/tags/%E4%BB%A3%E6%95%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>「PMOI-4」生成树 题解</title>
@@ -367,39 +400,6 @@
     <category term="DP优化" scheme="http://example.com/tags/DP%E4%BC%98%E5%8C%96/"/>
     
     <category term="CodeForces" scheme="http://example.com/tags/CodeForces/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>「未完成」不抽象代数学习笔记</title>
-    <link href="http://example.com/2021/08/11/note/%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/"/>
-    <id>http://example.com/2021/08/11/note/%E4%BB%A3%E6%95%B0%E5%9F%BA%E7%A1%80/</id>
-    <published>2021-08-11T09:18:00.000Z</published>
-    <updated>2021-08-25T16:12:00.731Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;不抽象代数基础&quot;&gt;不抽象代数基础&lt;/h2&gt;
-&lt;h3 id=&quot;划分&quot;&gt;划分&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;定义&lt;/strong&gt; 设 &lt;span class=&quot;katex&quot;&gt;&lt;span class=&quot;katex-mathml&quot;&gt;&lt;math</summary>
-        
-      
-    
-    
-    
-    <category term="学习笔记" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    <category term="数学" scheme="http://example.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E5%AD%A6/"/>
-    
-    
-    <category term="数学" scheme="http://example.com/tags/%E6%95%B0%E5%AD%A6/"/>
-    
-    <category term="笔记" scheme="http://example.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
-    <category term="代数" scheme="http://example.com/tags/%E4%BB%A3%E6%95%B0/"/>
     
   </entry>
   

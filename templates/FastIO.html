@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript">
+        function copy() {
+            var e = document.getElementById("copy");
+            e.select(); // 选择对象
+            document.execCommand("Copy"); // 执行浏览器复制命令
+        }
+    </script>
+	<title>Fast Input/Output</title>
+</head>
+
+<body>
+	<a href="index_templates.html"><button>Back</button></a>
+	<input type="button" onclick="copy();" value="点击复制"></input>
+<pre><code><textarea id="copy" cols="100" rows="41" readonly>#include &lt;iostream&gt;
+namespace IO{
+	#define BUFSIZE 20000000
+	#define getchar() (p1==p2&amp;&amp;(p2=buf+fread(p1=buf,1,BUFSIZE,stdin),p1==p2)?EOF:*p1++)
+	#define putchar(c) (p1==p2?fwrite(buf,1,p1-buf,stdout),p1=buf:0,*p1++=c)
+	struct read{
+		char buf[BUFSIZE],*p1,*p2,c,f;
+		read():p1(buf),p2(buf){}
+		read&amp;operator&gt;&gt;(int&amp;x){
+			for(c=getchar(),x=f=0;c!=EOF&amp;&amp;!isdigit(c);c=getchar())if(c==&#x27;-&#x27;)f=1;
+			for(;isdigit(c);c=getchar())x=(x&lt;&lt;3)+(x&lt;&lt;1)+(c^48);
+			return x=f?-x:x,*this;
+		}
+		read&amp;operator&gt;&gt;(char*s){
+			while(isspace(*s=getchar()));
+			while(!isspace(*++s=getchar())&amp;&amp;*s!=EOF);
+			return *s=&#x27;\0&#x27;,*this;
+		}
+	}in;
+	struct write{
+		char buf[BUFSIZE],*p1,*p2,st[50];
+		int tp;
+		write():p1(buf),p2(buf+BUFSIZE){}
+		~write(){fwrite(buf,1,p1-buf,stdout),p1=buf;}
+		write&amp;operator&lt;&lt;(int x){
+			if(x&lt;0)putchar(&#x27;-&#x27;),x=-x;
+			do st[tp++]=x%10^48,x/=10;while(x);
+			while(tp)putchar(st[--tp]);
+			return *this;
+		}
+		write&amp;operator&lt;&lt;(char x){return putchar(x),*this;}
+		write&amp;operator&lt;&lt;(char*s){
+			while(!iscntrl(*s))putchar(*s++);
+			if(*s==&#x27;\n&#x27;)putchar(*s);
+			return *this;
+		}
+	}out;
+}
+using IO::in;
+using IO::out;
+</textarea></code></pre>
+</body>
+</html>

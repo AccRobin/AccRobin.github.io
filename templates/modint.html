@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript">
+        function copy() {
+            var e = document.getElementById("copy");
+            e.select(); // 选择对象
+            document.execCommand("Copy"); // 执行浏览器复制命令
+        }
+    </script>
+	<title>Fast Input/Output</title>
+</head>
+
+<body>
+	<a href="index_templates.html"><button>Back</button></a>
+	<input type="button" onclick="copy();" value="点击复制"></input>
+<pre><code><textarea id="copy" cols="100" rows="50" readonly>const int P = ;
+auto modv = [](int x) {
+	if(x &lt; 0) x += P;
+	if(x &gt;= P) x -= P;
+	return x;
+};
+template &lt;class T&gt;
+T qp(T a, int b = P - 2) {
+	T z = 1;
+	for (; b; b &gt;&gt;= 1, a *= a)
+		if (b &amp; 1) z *= a;
+	return z;
+};
+#include &lt;cassert&gt;
+struct Z{
+	int x;
+	Z() : x() {}
+	Z(int x) : x(modv(x)) {}
+	int val()const {return x;}
+	Z operator-()const {
+		return Z(modv(-x));
+	}
+	Z inv() const {
+		assert(x);
+		return qp(*this);
+	};
+	Z&amp; operator+=(const Z&amp; _) {
+		x = modv(x + _.x);
+		return *this;
+	}
+	Z&amp; operator-=(const Z&amp; _) {
+		x = modv(x - _.x);
+		return *this;
+	}
+	Z&amp; operator*=(const Z&amp; _) {
+		x = 1ll * x *_.x % P;
+		return *this;
+	}
+	Z&amp; operator/=(const Z&amp; _){
+		return *this *= _.inv();
+	}
+	Z operator+(const Z&amp; _) const {
+		return Z(modv(x + _.x));
+	}
+	Z operator-(const Z&amp; _) const {
+		return Z(modv(x - _.x));
+	}
+	Z operator*(const Z&amp; _) const {
+		return Z(1ll * x *_.x % P);
+	}
+	Z operator/(const Z&amp; _) const {
+		return *this * _.inv();
+	}
+};
+#include &lt;iostream&gt;
+std::ostream&amp; operator &lt;&lt;(std::ostream&amp; out, const Z&amp; x) {
+	return out &lt;&lt; x.x, out;
+}
+std::istream&amp; operator &gt;&gt;(std::istream&amp; in, Z&amp; x) {
+	return in &gt;&gt; x.x, in;
+}
+</textarea></code></pre>
+</body>
+</html>

@@ -16,7 +16,7 @@
 <body>
 	<a href="index_templates.html"><button>Back</button></a>
 	<input type="button" onclick="copy();" value="点击复制"></input>
-<pre><code><textarea id="copy" cols="100" rows="41" readonly>#include &lt;iostream&gt;
+<pre><code><textarea id="copy" cols="100" rows="50" readonly>#include &lt;iostream&gt;
 namespace IO{
 	#define BUFSIZE 20000000
 	#define getchar() (p1==p2&amp;&amp;(p2=buf+fread(p1=buf,1,BUFSIZE,stdin),p1==p2)?EOF:*p1++)

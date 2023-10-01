@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript">
+        function copy() {
+            var e = document.getElementById("copy");
+            e.select(); // 选择对象
+            document.execCommand("Copy"); // 执行浏览器复制命令
+        }
+    </script>
+	<title>Fast Input/Output</title>
+</head>
+
+<body>
+	<a href="index_templates.html"><button>Back</button></a>
+	<input type="button" onclick="copy();" value="点击复制"></input>
+<pre><code><textarea id="copy" cols="100" rows="50" readonly>
+template<typename T = int, typename P = int, 
+	const T infc = numeric_limits<T>::max(),
+	const P infw = numeric_limits<P>::max()>
+struct Max_Flow_Min_Cost {
+	vector<int> he, cur, ne, to, vs;
+	vector<P> w, d;
+	vector<T> c;
+	int s, t;
+	Max_Flow_Min_Cost(int _n) :
+		he(_n, -1), s(-1), t(-1) {}
+	void add(int x, int y, T _c1 = infc, P _w = 0, T _c2 = 0) {
+		ne.emplace_back(he[x]);
+		he[x] = ne.size() - 1;
+		to.emplace_back(y);
+		c.emplace_back(_c1);
+		w.emplace_back(_w);
+		
+		ne.emplace_back(he[y]);
+		he[y] = ne.size() - 1;
+		to.emplace_back(x);
+		c.emplace_back(_c2);
+		w.emplace_back(-_w);
+	}
+	int spfa() {
+		queue<int> q;
+		d.assign(he.size(), infw);
+		vs.assign(he.size(), 0);
+		q.emplace(s), d[s] = 0;
+		while (q.size()) {
+			int u = q.front(), v;
+			vs[u] = 0, q.pop();
+			for (int i = he[u]; ~i; i = ne[i]) {
+				if (c[i] && d[v = to[i]] > d[u] + w[i]) {
+					d[v] = d[u] + w[i];
+					if (!vs[v]) q.emplace(v), vs[v] = 1;
+				}
+			}
+		}
+		return d[t] != infw;
+	}
+	T dfs(int u, T fl) {
+		if (u == t) return fl;
+		vs[u] = 1;
+		T z = 0, r;
+		for (int& i = cur[u], v; ~i; i = ne[i]) {
+			if (c[i] && !vs[v = to[i]] && d[v] == d[u] + w[i]) {
+				r = dfs(v, min(fl, c[i]));
+				if (r == 0) d[v] = infw;
+				else {
+					c[i] -= r, c[i ^ 1] += r, fl -= r, z += r;
+					if (fl == 0) break;
+				}
+			}
+		}
+		return vs[u] = 0, z;
+	}
+	pair<T, long long> EK(int _s, int _t) {
+		long long z = 0;
+		T r = 0, c;
+		for (s = _s, t = _t; spfa(); ) {
+			vs.assign(he.size(), 0);
+			cur = he, c = dfs(s, infc);
+			r += c, z += 1ll * c * d[t];
+		}
+		return make_pair(r, z);
+	}
+};
+</textarea></code></pre>
+</body>
+</html>

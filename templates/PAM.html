@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript">
+        function copy() {
+            var e = document.getElementById("copy");
+            e.select(); // 选择对象
+            document.execCommand("Copy"); // 执行浏览器复制命令
+        }
+    </script>
+	<title>Fast Input/Output</title>
+</head>
+
+<body>
+	<a href="index_templates.html"><button>Back</button></a>
+	<input type="button" onclick="copy();" value="Copy"></input>
+<pre><code><textarea id="copy" cols="100" rows="50" readonly>
+template<const int M = 26>
+struct PAM {
+	struct T {
+		int len, d, fa, ch[M];
+		T() : len(), d(), fa(), ch() {}
+	};
+	int las;
+	string s;
+	vector<T> t;
+	vector<int> bl;
+	size_t count() const {
+		return t.size() - 2;
+	}
+	const T& operator[](const size_t& p) const {
+		return t[p];
+	}
+	const T& ask(const size_t& p) const {
+		return t[bl[p]];
+	}
+	int gf(int o, int p) {
+		while (p - t[o].len - 1 < 0 || s[p - t[o].len - 1] != s[p]) o = t[o].fa;
+		return o;
+	}
+	void append(int c) {
+		int p = s.size(), o;
+		s += c, o = gf(las, p);
+		if (t[o].ch[c] == 0) {
+			t.emplace_back();
+			t.back().len = t[o].len + 2;
+			t.back().fa = t[gf(t[o].fa, p)].ch[c];
+			t.back().d = t[t.back().fa].d + 1;
+			t[o].ch[c] = t.size() - 1;
+		}
+		bl.emplace_back(las = t[o].ch[c]);
+	}
+	PAM() : las(), s(), t(2) {
+		t[0].fa = t[1].fa = 1, t[1].len = -1;
+	}
+	PAM(const string& str, int h) : las(), s(), t(2) {
+		t[0].fa = t[1].fa = 1, t[1].len = -1;
+		for (char c : str) append(c - h);
+	}
+};
+</textarea></code></pre>
+</body>
+</html>

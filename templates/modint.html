@@ -10,13 +10,21 @@
             document.execCommand("Copy"); // 执行浏览器复制命令
         }
     </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">
+	    MathJax.Hub.Config({
+	        tex2jax: {inlineMath: [['$', '$']]},
+	        messageStyle: "none"
+	    });
+	</script>
 	<title>Fast Input/Output</title>
 </head>
 
 <body>
 	<a href="index_templates.html"><button>Back</button></a>
 	<input type="button" onclick="copy();" value="Copy"></input>
-<pre><code><textarea id="copy" cols="100" rows="50" readonly>const int P = ;
+<pre><code><textarea id="copy" cols="100" rows="50" readonly>
+const int P = ;
 auto modv = [](int x) {
 	if(x &lt; 0) x += P;
 	if(x &gt;= P) x -= P;
@@ -78,5 +86,6 @@ std::istream&amp; operator &gt;&gt;(std::istream&amp; in, Z&amp; x) {
 	return in &gt;&gt; x.x, in;
 }
 </textarea></code></pre>
+
 </body>
 </html>

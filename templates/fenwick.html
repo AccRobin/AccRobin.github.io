@@ -1,31 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script type="text/javascript">
-        function copy() {
-            var e = document.getElementById("copy");
-            e.select(); // 选择对象
-            document.execCommand("Copy"); // 执行浏览器复制命令
-        }
-    </script>
-	<title>Fast Input/Output</title>
+    <meta charset="utf-8">
+    <link href="../additional_files/pgmain.min.css" rel="stylesheet" type="text/css">
+    <title>Fast Input/Output</title>
 </head>
-
 <body>
-	<a href="index_templates.html"><button>Back</button></a>
-	<input type="button" onclick="copy();" value="Copy"></input>
-<pre><code><textarea id="copy" cols="100" rows="50" readonly>
+    <a href="index_templates.html"><button>Back</button></a>
+<pre>
 template&lt;typename T&gt;
 struct BIT{
-	int n;
-	vector&lt;T&gt;t;
-	BIT(int m):n(m),t(m+1,0){}
-	void ins(int x,int k){if(!x)return;for(;x&lt;=n;x+=x&amp;-x)t[x]+=k;}
-	int ask(int x){int z=0;for(;x;x^=x&amp;-x)z+=t[x];return z;}
-	int ask(int l,int r){return ask(r)-ask(l-1);}
+    int n;
+    vector&lt;T&gt;t;
+    BIT(int m):n(m),t(m+1,0){}
+    void ins(int x,int k){if(!x)return;for(;x&lt;=n;x+=x&amp;-x)t[x]+=k;}
+    int ask(int x){int z=0;for(;x;x^=x&amp;-x)z+=t[x];return z;}
+    int ask(int l,int r){return ask(r)-ask(l-1);}
 };
-</textarea></code></pre>
+</pre>
 </body>
 </html>

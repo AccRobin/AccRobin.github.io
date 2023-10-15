@@ -1,80 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script type="text/javascript">
-        function copy() {
-            var e = document.getElementById("copy");
-            e.select(); // 选择对象
-            document.execCommand("Copy"); // 执行浏览器复制命令
-        }
-    </script>
-	<title>Fast Input/Output</title>
+    <meta charset="utf-8">
+    <link href="../additional_files/pgmain.min.css" rel="stylesheet" type="text/css">
+    <title>Fast Input/Output</title>
 </head>
-
 <body>
-	<a href="index_templates.html"><button>Back</button></a>
-	<input type="button" onclick="copy();" value="Copy"></input>
-<pre><code><textarea id="copy" cols="100" rows="50" readonly>
-template<typename T, T inf = numeric_limits<T>::max()>
+    <a href="index_templates.html"><button>Back</button></a>
+<pre>
+template&lt;typename T, T inf = numeric_limits&lt;T&gt;::max()&gt;
 struct Max_Flow {
-	vector<int> he, cur, d, ne, to;
-	vector<T> c;
-	int s, t;
-	Max_Flow(int m) : he(m, -1), s(-1), t(-1) {}
-	void add(int x, int y, T z = inf, T w = 0) {
-		// cerr << x << ' ' << y << ' ';
-		// if (z == inf) cerr << "inf\n";
-		// else cerr << z << '\n';
-		ne.emplace_back(he[x]);
-		he[x] = ne.size() - 1;
-		to.emplace_back(y);
-		c.emplace_back(z);
-		ne.emplace_back(he[y]);
-		he[y] = ne.size() - 1;
-		to.emplace_back(x);
-		c.emplace_back(w);
-	}
-	int bfs() {
-		queue<int> q;
-		d.assign(he.size(), -1);
-		q.emplace(s), d[s] = 0;
-		for (; q.size(); q.pop()) {
-			int u = q.front(), v;
-			for (int i = he[u]; ~i; i = ne[i]) {
-				if (c[i] && d[v = to[i]] == -1) {
-					d[v] = d[u] + 1;
-					if (v == t) return 1;
-					q.emplace(v);
-				}
-			}
-		}
-		return 0;
-	};
-	T dfs(int u, T fl) {
-		if (u == t) return fl;
-		T z = 0, r;
-		for (int& i = cur[u], v; ~i; i = ne[i]) {
-			if (c[i] && d[v = to[i]] == d[u] + 1) {
-				r = dfs(v, min(fl, c[i]));
-				if (r == 0) d[v] = -1;
-				else {
-					fl -= r, z += r, c[i] -= r, c[i ^ 1] += r;
-					if (fl == 0) return z;
-				}
-			}
-		}
-		return z;
-	}
-	T dinic(int _s, int _t) {
-		T z = 0;
-		for (s = _s, t = _t; bfs();) {
-			cur = he, z += dfs(s, inf);
-		}
-		return z;
-	};
+    vector&lt;int&gt; he, cur, d, ne, to;
+    vector&lt;T&gt; c;
+    int s, t;
+    Max_Flow(int m) : he(m, -1), s(-1), t(-1) {}
+    void add(int x, int y, T z = inf, T w = 0) {
+        // cerr &lt;&lt; x &lt;&lt; &#x27; &#x27; &lt;&lt; y &lt;&lt; &#x27; &#x27;;
+        // if (z == inf) cerr &lt;&lt; &quot;inf\n&quot;;
+        // else cerr &lt;&lt; z &lt;&lt; &#x27;\n&#x27;;
+        ne.emplace_back(he[x]);
+        he[x] = ne.size() - 1;
+        to.emplace_back(y);
+        c.emplace_back(z);
+        ne.emplace_back(he[y]);
+        he[y] = ne.size() - 1;
+        to.emplace_back(x);
+        c.emplace_back(w);
+    }
+    int bfs() {
+        queue&lt;int&gt; q;
+        d.assign(he.size(), -1);
+        q.emplace(s), d[s] = 0;
+        for (; q.size(); q.pop()) {
+            int u = q.front(), v;
+            for (int i = he[u]; ~i; i = ne[i]) {
+                if (c[i] &amp;&amp; d[v = to[i]] == -1) {
+                    d[v] = d[u] + 1;
+                    if (v == t) return 1;
+                    q.emplace(v);
+                }
+            }
+        }
+        return 0;
+    };
+    T dfs(int u, T fl) {
+        if (u == t) return fl;
+        T z = 0, r;
+        for (int&amp; i = cur[u], v; ~i; i = ne[i]) {
+            if (c[i] &amp;&amp; d[v = to[i]] == d[u] + 1) {
+                r = dfs(v, min(fl, c[i]));
+                if (r == 0) d[v] = -1;
+                else {
+                    fl -= r, z += r, c[i] -= r, c[i ^ 1] += r;
+                    if (fl == 0) return z;
+                }
+            }
+        }
+        return z;
+    }
+    T dinic(int _s, int _t) {
+        T z = 0;
+        for (s = _s, t = _t; bfs();) {
+            cur = he, z += dfs(s, inf);
+        }
+        return z;
+    };
 };
-</textarea></code></pre>
+</pre>
 </body>
 </html>

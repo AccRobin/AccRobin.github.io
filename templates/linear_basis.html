@@ -1,58 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script type="text/javascript">
-        function copy() {
-            var e = document.getElementById("copy");
-            e.select(); // 选择对象
-            document.execCommand("Copy"); // 执行浏览器复制命令
-        }
-    </script>
-	<title>Fast Input/Output</title>
+    <meta charset="utf-8">
+    <link href="../additional_files/pgmain.min.css" rel="stylesheet" type="text/css">
+    <title>Fast Input/Output</title>
 </head>
-
 <body>
-	<a href="index_templates.html"><button>Back</button></a>
-	<input type="button" onclick="copy();" value="Copy"></input>
-<pre><code><textarea id="copy" cols="100" rows="50" readonly>
-template<typename T, const int M = sizeof(T) * 8>
+    <a href="index_templates.html"><button>Back</button></a>
+<pre>
+template&lt;typename T, const int M = sizeof(T) * 8&gt;
 struct Liner_Basis {
-	T a[M];
-	size_t sz;
-	Liner_Basis() : a(), sz() {}
-	size_t size() const {
-		return sz;
-	}
-	void clear() {
-		memset(a, 0, sizeof a);
-	}
-	bool ins(T x) {
-		for (size_t i = M - 1; ~i && x; --i)
-			if (x >> i & 1) {
-				if (a[i]) x ^= a[i];
-				else return a[i] = x, true;
-			}
-		return false;
-	}
-	Liner_Basis& operator+=(const Liner_Basis&_) {
-		for (T x : _.a) if (x) this->ins(x);
-		return *this;
-	}
-	Liner_Basis operator+(const Liner_Basis&_) {
-		Liner_Basis z = *this;
-		return z += _;
-	}
-	T qry(T x = 0) {
-		for (size_t i = M - 1; ~i; --i)
-			if ((x ^ a[i]) > x) x ^= a[i];
-		return x;
-	}
+    T a[M];
+    size_t sz;
+    Liner_Basis() : a(), sz() {}
+    size_t size() const {
+        return sz;
+    }
+    void clear() {
+        memset(a, 0, sizeof a);
+    }
+    bool ins(T x) {
+        for (size_t i = M - 1; ~i &amp;&amp; x; --i)
+            if (x &gt;&gt; i &amp; 1) {
+                if (a[i]) x ^= a[i];
+                else return a[i] = x, true;
+            }
+        return false;
+    }
+    Liner_Basis&amp; operator+=(const Liner_Basis&amp;_) {
+        for (T x : _.a) if (x) this-&gt;ins(x);
+        return *this;
+    }
+    Liner_Basis operator+(const Liner_Basis&amp;_) {
+        Liner_Basis z = *this;
+        return z += _;
+    }
+    T qry(T x = 0) {
+        for (size_t i = M - 1; ~i; --i)
+            if ((x ^ a[i]) &gt; x) x ^= a[i];
+        return x;
+    }
 };
-template<typename T>
-using LB = Liner_Basis<T>;
-
-</textarea></code></pre>
+template&lt;typename T&gt;
+using LB = Liner_Basis&lt;T&gt;;
+</pre>
 </body>
 </html>

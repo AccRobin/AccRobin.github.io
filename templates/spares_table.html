@@ -1,70 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script type="text/javascript">
-        function copy() {
-            var e = document.getElementById("copy");
-            e.select(); // 选择对象
-            document.execCommand("Copy"); // 执行浏览器复制命令
-        }
-    </script>
-	<title>Fast Input/Output</title>
+    <meta charset="utf-8">
+    <link href="../additional_files/pgmain.min.css" rel="stylesheet" type="text/css">
+    <title>Fast Input/Output</title>
 </head>
-
 <body>
-	<a href="index_templates.html"><button>Back</button></a>
-	<input type="button" onclick="copy();" value="Copy"></input>
-<pre><code><textarea id="copy" cols="100" rows="50" readonly>
-template<typename T, class F>
+    <a href="index_templates.html"><button>Back</button></a>
+<pre>
+template&lt;typename T, class F&gt;
 struct Spares_Table {
-	using ui = size_t;
-	vector<vector<T>> f;
-	vector<ui> lg;
-	F mg;
-	ui n;
-	Spares_Table(const vector<T>& v) {
-		n = v.size();
-		lg.resize(n + 1), lg[0] = -1;
-		for (ui i = 1; i <= n; ++i) {
-			lg[i] = lg[i >> 1] + 1;
-		}
-		f = vector(n, vector<T>(lg[n] + 1));
-		for (ui i = 0; i < n; ++i) {
-			f[i][0] = v[i];
-		}
-		for (ui j = 1; j <= lg[n]; ++j) { 
-			for (ui i = 0; i + (1 << j) - 1 < n; ++i) {
-				f[i][j] = mg(f[i][j - 1], f[i + (1 << j - 1)][j - 1]);
-			}
-		}
-	}
-	Spares_Table(const T* a, const ui& m) {
-		n = m;
-		lg.resize(n + 1), lg[0] = -1;
-		for (ui i = 1; i <= n; ++i) {
-			lg[i] = lg[i >> 1] + 1;
-		}
-		f = vector(n, vector<T>(lg[n] + 1));
-		for (ui i = 0; i < n; ++i) {
-			f[i][0] = a[i];
-		}
-		for (ui j = 1; j <= lg[n]; ++j) {
-			for (ui i = 0; i + (1 << j) - 1 < n; ++i) {
-				f[i][j] = mg(f[i][j - 1], f[i + (1 << j - 1)][j - 1]);
-			}
-		}
-	}
-	T ask(const ui& l, const ui& r) {
-		if (l > r) return T();
-		ui x = lg[r - l + 1];
-		return mg(f[l][x], f[r - (1 << x) + 1][x]);
-	}
+    using ui = size_t;
+    std::vector&lt;std::vector&lt;T&gt;&gt; f;
+    std::vector&lt;ui&gt; lg;
+    F mg;
+    ui n;
+    Spares_Table(const std::vector&lt;T&gt;&amp; v) {
+        n = v.size();
+        lg.resize(n + 1), lg[0] = -1;
+        for (ui i = 1; i &lt;= n; ++i) {
+            lg[i] = lg[i &gt;&gt; 1] + 1;
+        }
+        f = std::vector(n, std::vector&lt;T&gt;(lg[n] + 1));
+        for (ui i = 0; i &lt; n; ++i) {
+            f[i][0] = v[i];
+        }
+        for (ui j = 1; j &lt;= lg[n]; ++j) { 
+            for (ui i = 0; i + (1 &lt;&lt; j) - 1 &lt; n; ++i) {
+                f[i][j] = mg(f[i][j - 1], f[i + (1 &lt;&lt; j - 1)][j - 1]);
+            }
+        }
+    }
+    Spares_Table(const T* a, const ui&amp; m) {
+        n = m;
+        lg.resize(n + 1), lg[0] = -1;
+        for (ui i = 1; i &lt;= n; ++i) {
+            lg[i] = lg[i &gt;&gt; 1] + 1;
+        }
+        f = std::vector(n, std::vector&lt;T&gt;(lg[n] + 1));
+        for (ui i = 0; i &lt; n; ++i) {
+            f[i][0] = a[i];
+        }
+        for (ui j = 1; j &lt;= lg[n]; ++j) {
+            for (ui i = 0; i + (1 &lt;&lt; j) - 1 &lt; n; ++i) {
+                f[i][j] = mg(f[i][j - 1], f[i + (1 &lt;&lt; j - 1)][j - 1]);
+            }
+        }
+    }
+    T ask(const ui&amp; l, const ui&amp; r) {
+        if (l &gt; r) return T();
+        ui x = lg[r - l + 1];
+        return mg(f[l][x], f[r - (1 &lt;&lt; x) + 1][x]);
+    }
 };
-template<typename T, class F>
-using ST = Spares_Table<T, F>;
-
-</textarea></code></pre>
+template&lt;typename T, class F&gt;
+using ST = Spares_Table&lt;T, F&gt;;
+</pre>
 </body>
 </html>

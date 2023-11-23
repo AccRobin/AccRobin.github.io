@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="../additional_files/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['$', '$']]},
+            messageStyle: "none"
+        });
+    </script>
+    
+    <style>
+        p {
+            line-height: 200%;
+        }
+    </style>
+    <link href="../additional_files/pgmain.min.css" rel="stylesheet" type="text/css">
+    <title>CF1858D Trees and Segments</title>
+</head>
+
+<body>
+    <h1><p style="text-align: center;">2023 CCPC Qinhuangdao</p></h1>
+    <a href="index_solu.html"><button>Back</button></a>
+
+    <h2>题意</h2>
+    <p>
+        给定一个长为 $n$ 的 $01$ 串 $s$ 和一个整数 $k$，你可以进行不超过 $k$ 次操作，每次操作是将某个位置反转（$0$ 变 $1$，$1$ 变 $0$）。定义 $l_0$ 表示最长的连续 $0$ 的数量，$l_1$ 表示最长的连续 $1$ 的数量。<br>
+        
+        对于所有的 $a\in\{1,2,\cdots, n\}$，最大化 $al_0+l_1$，输出这个最大值。<br>
+    </p>
+    
+    <h2>数据范围</h2>
+    <p>
+    多组数据，$\sum n\le 3000,\sum k\le 3000$。
+    </p>
+
+    <h2>题解</h2>
+    <p>
+        核心思路：枚举 $l_1$，求最大的 $l_0$。<br>
+
+        具体地，枚举全 $1$ 串所在的区间 $[l,r]$，那么将 $[l,r]$ 全变为 $1$ 的代价就是 $[l,r]$ 中 $0$ 的个数，设为 $x$。接着只需使用剩下的 $k-x$ 次在 $[1,l-1]$ 或 $[r+1,n]$ 中最大化 $l_0$（这里是“或”是因为左右两侧只有一侧能作为 $l_0$ 出现）。<br>
+
+        故而我们需要处理出 $pre_{i,j}$ 表示前 $i$ 位，使用不超过 $j$ 次操作得到的最长全 $0$ 串的长度。方法：先求出 $pre_{i,j}$ 表示以 $i$ 为结尾，恰好使用 $j$ 次操作得到的最长全 $0$ 串的长度，有转移：
+        $$
+        pre_{i,j}=\begin{cases}
+        pre_{i-1,j} + 1 & s_i = 0\\
+        pre_{i-1,j-1}+1 & s_i = 1 \land j>0\\
+        0 & s_i=1 \land j = 0
+        \end{cases}
+        $$
+
+        然后做一次二维前缀 $\max$ 即可。
+    </p>
+    
+    <h2>代码</h2>
+
+<pre>
+#include&lt;bits/stdc++.h&gt;
+namespace Acc {
+    const int N = 3009;
+    int pre[N][N], suf[N][N], f[N], a[N];
+    auto work = []() {
+        int n, k;
+        std::string s;
+        std::cin &gt;&gt; n &gt;&gt; k &gt;&gt; s;
+        s = &#x27; &#x27; + s;
+        memset(f, -1, n + 1 &lt;&lt; 2);
+        for (int i = 1; i &lt;= n; ++i) {
+            if (s[i] == &#x27;0&#x27;) {
+                for (int j = 0; j &lt;= k; ++j) {
+                    pre[i][j] = pre[i - 1][j] + 1;
+                }
+            } else {
+                pre[i][0] = 0;
+                for (int j = 1; j &lt;= k; ++j) {
+                    pre[i][j] = pre[i - 1][j - 1] + 1;
+                }
+            }
+        }
+        for (int i = 1; i &lt;= n; ++i) {
+            for (int j = 0; j &lt;= k; ++j) {
+                pre[i][j] = std::max(pre[i][j], pre[i - 1][j]);
+            }
+            for (int j = 1; j &lt;= k; ++j) {
+                pre[i][j] = std::max(pre[i][j], pre[i][j - 1]);
+            }
+        }
+        memset(suf[n + 1], 0, k + 1 &lt;&lt; 2);
+        for (int i = n; i; --i) {
+            if (s[i] == &#x27;0&#x27;) {
+                for (int j = 0; j &lt;= k; ++j) {
+                    suf[i][j] = suf[i + 1][j] + 1;
+                }
+            } else {
+                suf[i][0] = 0;
+                for (int j = 1; j &lt;= k; ++j) {
+                    suf[i][j] = suf[i + 1][j - 1] + 1;
+                }
+            }
+        }
+        for (int i = n; i; --i) {
+            for (int j = 0; j &lt;= k; ++j) {
+                suf[i][j] = std::max(suf[i][j], suf[i + 1][j]);
+            }
+            for (int j = 1; j &lt;= k; ++j) {
+                suf[i][j] = std::max(suf[i][j], suf[i][j - 1]);
+            }
+        }
+        for (int i = 1; i &lt;= n; ++i) {
+            a[i] = a[i - 1] + (s[i] == &#x27;0&#x27;);
+        }
+        for (int i = 1; i &lt;= n; ++i) {
+            for (int j = i; j &lt;= n; ++j) {
+                if (int x = a[j] - a[i - 1]; x &lt;= k) {
+                    f[j - i + 1] = std::max({f[j - i + 1], pre[i - 1][k - x], suf[j + 1][k - x]});
+                }
+            }
+        }
+        f[0] = pre[n][k];
+        for (int a = 1; a &lt;= n; ++a) {
+            int z = 0;
+            for (int l = 0; l &lt;= n; ++l) if (~f[l]) {
+                z = std::max(z, a * f[l] + l);
+            }
+            std::cout &lt;&lt; z &lt;&lt; &#x27; &#x27;;
+        }
+        std::cout &lt;&lt; &#x27;\n&#x27;;
+    };
+}
+int main() {
+    std::ios::sync_with_stdio(0);
+    std::cin.tie(0);
+    int T;
+    std::cin &gt;&gt; T;
+    while (T--) Acc::work();
+}
+</pre>
+
+</body>
+</html>

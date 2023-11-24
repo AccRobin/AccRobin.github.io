@@ -23,119 +23,64 @@
     <h1><p style="text-align: center;">2023 CCPC Qinhuangdao</p></h1>
     <a href="index_solu.html"><button>Back</button></a>
 
-    <h2>题意</h2>
-    <p>
-        给定一个长为 $n$ 的 $01$ 串 $s$ 和一个整数 $k$，你可以进行不超过 $k$ 次操作，每次操作是将某个位置反转（$0$ 变 $1$，$1$ 变 $0$）。定义 $l_0$ 表示最长的连续 $0$ 的数量，$l_1$ 表示最长的连续 $1$ 的数量。<br>
-        
-        对于所有的 $a\in\{1,2,\cdots, n\}$，最大化 $al_0+l_1$，输出这个最大值。<br>
-    </p>
+    <h2>整体评价</h2>
     
-    <h2>数据范围</h2>
-    <p>
-    多组数据，$\sum n\le 3000,\sum k\le 3000$。
-    </p>
+    VP $5$ 题罚时 $656$，铜尾。
 
-    <h2>题解</h2>
-    <p>
-        核心思路：枚举 $l_1$，求最大的 $l_0$。<br>
-
-        具体地，枚举全 $1$ 串所在的区间 $[l,r]$，那么将 $[l,r]$ 全变为 $1$ 的代价就是 $[l,r]$ 中 $0$ 的个数，设为 $x$。接着只需使用剩下的 $k-x$ 次在 $[1,l-1]$ 或 $[r+1,n]$ 中最大化 $l_0$（这里是“或”是因为左右两侧只有一侧能作为 $l_0$ 出现）。<br>
-
-        故而我们需要处理出 $pre_{i,j}$ 表示前 $i$ 位，使用不超过 $j$ 次操作得到的最长全 $0$ 串的长度。方法：先求出 $pre_{i,j}$ 表示以 $i$ 为结尾，恰好使用 $j$ 次操作得到的最长全 $0$ 串的长度，有转移：
-        $$
-        pre_{i,j}=\begin{cases}
-        pre_{i-1,j} + 1 & s_i = 0\\
-        pre_{i-1,j-1}+1 & s_i = 1 \land j>0\\
-        0 & s_i=1 \land j = 0
-        \end{cases}
-        $$
-
-        然后做一次二维前缀 $\max$ 即可。
-    </p>
+    <h3>A Make SYSU Great Again I</h3>
     
-    <h2>代码</h2>
+    签到构造。
 
-<pre>
-#include&lt;bits/stdc++.h&gt;
-namespace Acc {
-    const int N = 3009;
-    int pre[N][N], suf[N][N], f[N], a[N];
-    auto work = []() {
-        int n, k;
-        std::string s;
-        std::cin &gt;&gt; n &gt;&gt; k &gt;&gt; s;
-        s = &#x27; &#x27; + s;
-        memset(f, -1, n + 1 &lt;&lt; 2);
-        for (int i = 1; i &lt;= n; ++i) {
-            if (s[i] == &#x27;0&#x27;) {
-                for (int j = 0; j &lt;= k; ++j) {
-                    pre[i][j] = pre[i - 1][j] + 1;
-                }
-            } else {
-                pre[i][0] = 0;
-                for (int j = 1; j &lt;= k; ++j) {
-                    pre[i][j] = pre[i - 1][j - 1] + 1;
-                }
-            }
-        }
-        for (int i = 1; i &lt;= n; ++i) {
-            for (int j = 0; j &lt;= k; ++j) {
-                pre[i][j] = std::max(pre[i][j], pre[i - 1][j]);
-            }
-            for (int j = 1; j &lt;= k; ++j) {
-                pre[i][j] = std::max(pre[i][j], pre[i][j - 1]);
-            }
-        }
-        memset(suf[n + 1], 0, k + 1 &lt;&lt; 2);
-        for (int i = n; i; --i) {
-            if (s[i] == &#x27;0&#x27;) {
-                for (int j = 0; j &lt;= k; ++j) {
-                    suf[i][j] = suf[i + 1][j] + 1;
-                }
-            } else {
-                suf[i][0] = 0;
-                for (int j = 1; j &lt;= k; ++j) {
-                    suf[i][j] = suf[i + 1][j - 1] + 1;
-                }
-            }
-        }
-        for (int i = n; i; --i) {
-            for (int j = 0; j &lt;= k; ++j) {
-                suf[i][j] = std::max(suf[i][j], suf[i + 1][j]);
-            }
-            for (int j = 1; j &lt;= k; ++j) {
-                suf[i][j] = std::max(suf[i][j], suf[i][j - 1]);
-            }
-        }
-        for (int i = 1; i &lt;= n; ++i) {
-            a[i] = a[i - 1] + (s[i] == &#x27;0&#x27;);
-        }
-        for (int i = 1; i &lt;= n; ++i) {
-            for (int j = i; j &lt;= n; ++j) {
-                if (int x = a[j] - a[i - 1]; x &lt;= k) {
-                    f[j - i + 1] = std::max({f[j - i + 1], pre[i - 1][k - x], suf[j + 1][k - x]});
-                }
-            }
-        }
-        f[0] = pre[n][k];
-        for (int a = 1; a &lt;= n; ++a) {
-            int z = 0;
-            for (int l = 0; l &lt;= n; ++l) if (~f[l]) {
-                z = std::max(z, a * f[l] + l);
-            }
-            std::cout &lt;&lt; z &lt;&lt; &#x27; &#x27;;
-        }
-        std::cout &lt;&lt; &#x27;\n&#x27;;
-    };
-}
-int main() {
-    std::ios::sync_with_stdio(0);
-    std::cin.tie(0);
-    int T;
-    std::cin &gt;&gt; T;
-    while (T--) Acc::work();
-}
-</pre>
+    <h3>B Yet Another Subsequence Problem</h3>
 
+    <h3>C Palindrome</h3>
+
+    <h3>D Yet Another Coffee</h3>
+
+    不知道大佬怎么贪心，我直接决策单调性+权值线段树。
+
+    <h3>E Coloring Tape</h3>
+
+    <h3>F Mystery of Prime</h3>
+
+    队友搞 DP。
+
+    <h3>G Path</h3>
+
+    签到题。
+
+    <h3>H Quake and Rebuild</h3>
+
+    <h3>I Phony</h3>
+
+    <p>
+        题意<br>
+
+        给定一个长为 $n$ 的序列和整数 $k$，要求支持 $m$ 次操作：<br>
+
+        1.将当前最大的数减去 $k$，重复 $t$ 次；<br>
+
+        2. 查询当前序列的第 $x$ 大的数。<br>
+
+        数据范围：$1\le n,m\le 5\times 10^5$，$1\le a_i,k,t\le 10^{18}$，保证时刻有 $-10^{18}\le a_i\le 10^{18}$。<br>
+
+        题解<br>
+
+        将每个数 $x$ 转化为一个二元组 $\left(\left\lfloor \dfrac xk\right\rfloor, x\bmod k \right)$，那么修改操作就是在进行最靠右的列的分割与合并，可以用线段树分裂合并维护。<br>
+
+        考虑更简单的做法，用一个值域线段树维护最右的列，用指针 $p$ 指向当前最右的列中分裂到哪个位置了，每次修改会将指针向下移动，扫过的元素理应分裂出这颗线段树，不能保证复杂度。但是我们把下一列的元素插进这颗线段树，不过每次二分第 $k$ 大要从 $p$ 开始。这样，当 $p$ 行进到底端时线段树上留有的元素就是下一列的元素，只需再把 $p$ 重置即可。
+    </p>
+
+    <h3>J Keyi LIkes Reading</h3>
+
+    裸状压 DP。
+
+    <h3>K Make SYSU Great Again II</h3>
+
+    <h3>L Yet Another Maximize Permutation Subarrays</h3>
+
+    <h3>M Inverted</h3>
+
+ 
 </body>
 </html>

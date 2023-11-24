@@ -33,6 +33,22 @@
 
     <h3>B Yet Another Subsequence Problem</h3>
 
+    <p>
+        本质不同子序列数的求法 III：<a href="https://www.cnblogs.com/hzy1/p/16878663.html">Link</a>。<br>
+
+        令 $sol(a, b, m_0, m_1)$ 为答案矩阵，其中 $m_0, m_1$ 是 $0$ 和 $1$ 的转移矩阵，那么有
+        $$
+        sol(a, b, m_0, m_1)=
+        \begin{cases}
+        m_0^a & b = 0\\
+        sol\left(a, b \bmod a, m_0\cdot m_1^{b/a}, m_1\right) & b\ge a\\
+        sol\left(a - ((a - 1) / b) \cdot b, b, m_0, m_1\cdot m_0^{(a-1)/b}\right) & a>b\\
+        \end{cases}
+        $$
+
+        递归解决即得答案。
+    </p>
+
     <h3>C Palindrome</h3>
 
     <h3>D Yet Another Coffee</h3>

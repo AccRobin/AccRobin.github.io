@@ -2,12 +2,16 @@
 Monokai style - ported by Luigi Maselli - http://grigio.org
 */
 @font-face {
-  font-family: 'Consolas';
-  src: url('./Consolas.ttf');
+  font-family: "consolas";
+  src: url('./consolas.ttf');
+}
+
+html, body {
+    font-family: "consolas";
 }
 
 .hljs {
-  font-family: 'Consolas';
+  font-family: "consolas" !important; 
   display: block;
   overflow-x: auto;
   padding: 0.5em;
@@ -25,7 +29,7 @@ Monokai style - ported by Luigi Maselli - http://grigio.org
 }
 
 .hljs-code {
-  font-family: 'Consolas';
+  font-family: "consolas";
   color: #66d9ef;
 }
 

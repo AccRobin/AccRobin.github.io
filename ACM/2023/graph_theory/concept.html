@@ -10,54 +10,41 @@
         });
     </script>
     
-    <style>
-        p {
-            line-height: 200%;
-        }
-    </style>
-    <link href="https://accrobin.github.io/additional_files/pgmain.min.css" rel="stylesheet" type="text/css">
-
+    
     <link rel="stylesheet" href="https://accrobin.github.io/additional_files/reveal/reveal.css">
-    <link rel="stylesheet" href="https://accrobin.github.io/additional_files/reveal/theme/white.css" id="theme">
     <link rel="stylesheet" href="https://accrobin.github.io/additional_files/reveal/plugin/highlight/monokai.css">
-    <style type="text/css" media="screen">
-        .slides section.has-dark-background,
-        .slides section.has-dark-background h2 {
-            color: #fff;
-        }
-        .slides section.has-light-background,
-        .slides section.has-light-background h2 {
-            color: #222;
-        }
-    </style>
+    <link rel="stylesheet" href="E:/Documents/GitHub/accrobin.github.io/additional_files/reveal/theme/white.css" id="theme">
+    <!-- <link rel="stylesheet" href="io.css"> -->
+    
     <title>图论概念与存储结构</title>
 </head>
 
 <body>
     <div class="reveal">
         <div class="slides">
-            <section data-markdown>
-                ```cpp
-                const int P = ;
-                auto modv = [](int x) {
-                    if(x &lt; 0) x += P;
-                    if(x &gt;= P) x -= P;
-                    return x;
-                };
-                template &lt;class T&gt;
-                T qp(T a, int b = P - 2) {
-                    T z = 1;
-                    for (; b; b &gt;&gt;= 1, a *= a)
-                        if (b &amp; 1) z *= a;
-                    return z;
-                };
-                const char* s = "123";
-                ```
+            <section data-markdown data-separator-vertical="--">
+                # 图论概念与存储结构
+                $$
+                \texttt{Acc Robin Abraham}
+                $$
+                --
+                ## 直观上的“图”
+                由“点”和“边”组成，“边”是依赖于两个点的。
                 ---
-                # Test $\LaTeX$
-                $$
-                f(x)
-                $$
+                ## 图的形式化定义
+                - 二元组 $G=\langle V,E\rangle$，其中 $V,E$ 是集合
+                    - 点集 $V$ 中的元素称为顶点/节点/点
+                    - 对于无向图，边集 $E$ 中的元素是无序二元组 $e=(u,v)$，称为无向边，$u,v\in V$ 称为 $e$ 的端点.
+                    - 对于有向图，边集 $E$ 中的元素是有序二元组 $e=(u,v)$，称为有向边，$u\in V$ 称为 $e$ 的起点，$v\in V$ 称为 $e$ 的终点
+                - 简单图：没有自环和重边的图
+                    - 自环：$e=(u,u)\in E$
+                    - 重边：$e_1=e_2\in E$
+                --
+                ## 邻接
+                对于无向图 $G=\langle V,E\rangle$
+                - 若 $v$ 是 $e$ 的一个端点，则称 $v$ 和 $e$ 是关联的；对于 $u,v\in V$，若存在 $e$ 与它们均关联，则称 $u,v$ 是相邻的
+                - 点 $u$ 的邻域 $N(u)$：所有与 $u$ 相邻的点的集合
+                - 点 $u$ 的度数 $d(u)$：与点 $u$ 关联的边的条数，特别地，边 $(u,u)$ 要对 $d(u)$ 产生两次贡献（Well-Defination）
             </section>
         </div>
     </div>
@@ -67,12 +54,14 @@
     <script src="https://accrobin.github.io/additional_files/reveal/plugin/notes/notes.js"></script>
     <script>
         Reveal.initialize({
-            width: 960,
-            height: 700,
+            width: 1024,
+            height: 768,
+            slideNumber: 'c/t',
+            // vertical: true,
             // display: 'block',
             // margin: 0.04,
             // embedded: true,
-            // center: true,
+            center: false,
             // transition: 'linear',
             // backgroundTransition: 'slide'
             // hash: true,

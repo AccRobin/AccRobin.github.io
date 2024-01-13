@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <link rel="stylesheet" href="https://accrobin.github.io/additional_files/reveal/reveal.css">
+    <link rel="stylesheet" href="https://accrobin.github.io/additional_files/reveal/plugin/highlight/monokai.css">
+    <link rel="stylesheet" href="https://accrobin.github.io/additional_files/reveal/theme/white.css" id="theme">    
+    
+    <title>搜索</title>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-markdown data-separator-vertical="--">
+                # 搜索
+
+                ---
+                ## 深度优先搜索（DFS）
+                一种用于遍历或搜索树或图的算法
+                
+                - 深度优先：每次都尝试向更深的节点走
+                - 特征：递归调用自身 & 保证每个点只访问一次
+                - 复杂度：总状态数（点数）+ 总转移数（边数）
+                
+                --
+                
+                ## 递归实例：斐波那契数
+                > 给出斐波那契数列第 $n$ 项 $f(n)$ 的定义：
+                > `$$
+                f(n)=\begin{cases}
+                1 & n=1,2\\
+                f(n-1)+f(n-2) & n\ge 3
+                \end{cases}
+                > $$`
+                > 输入 $n$，求 $f(n)$
+                
+                - 数列的后项无法直接求出，而是依赖于前项
+                - 通俗的递归：函数自己调用自己
+                
+                ```cpp
+                int f(int n) {
+                    if (n == 1 || n == 2) return 1;
+                    return f(n - 1) + f(n - 2);
+                }
+                ```
+                --
+                
+                ## DFS 实例 1：输出全排列
+                
+                > 输入正整数 $n$，按字典序从小到大输出所有长度为 $n$ 的排列
+                
+                画出“递归树结构”
+                
+                ```cpp
+                void dfs(int d) {
+                    if (d == n + 1) {
+                        for (int i = 1; i <= n; ++i) cout << a[i] << ' ';
+                        return ;
+                    }
+                    for (int i = 1; i <= n; ++i) {
+                        if (vis[i] == 0) {
+                            a[d] = i, vis[i] = 1;
+                            dfs(d + 1);
+                            vis[i] = 0;
+                        }
+                    }
+                }
+                ```
+                
+                --
+                
+                ## DFS 实例 2：八皇后问题
+                
+                > 输入正整数 $n$，输出 $n\times n$ 的棋盘上至多放多少个互不攻击的皇后
+                
+                 
+            </section>
+        </div>
+    </div>
+    <script src="https://accrobin.github.io/additional_files/reveal/reveal.js"></script>
+    <script src="https://accrobin.github.io/additional_files/reveal/plugin/markdown/markdown.js"></script>
+    <script src="https://accrobin.github.io/additional_files/reveal/plugin/highlight/highlight.js"></script>
+    <script src="https://accrobin.github.io/additional_files/reveal/plugin/notes/notes.js"></script>
+    <script src="https://accrobin.github.io/additional_files/reveal/plugin/math/math.js"></script>
+    <script>
+        Reveal.initialize({
+            width: 1024,
+            height: 768,
+            slideNumber: 'c/t',
+            vertical: true,
+            // display: 'block',
+            // margin: 0.04,
+            // embedded: true,
+            center: false,
+            // transition: 'linear',
+            // backgroundTransition: 'slide'
+            // hash: true,
+            // controls: true,
+            // progress: true,
+            // history: true,
+            // center: true,
+            katex: {
+                version: 'latest',
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            },
+            plugins: [ RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes ]
+        });
+    </script>
+</body>
+</html>

@@ -5,7 +5,7 @@
 ## 搜索与剪枝
 
 - 大部分问题不像排序一样存在高效且准确的算法
-    - [NP-complete](https://en.wikipedia.org/wiki/NP-completeness)：目前不存在多项式解法的问题（著名的千禧年七大数学难题之 [P=NP](https://en.wikipedia.org/wiki/P_versus_NP_problem)）
+    - [NP-complete](https://en.wikipedia.org/wiki/NP-completeness)：目前不存在多项式解法的问题（[P=NP](https://en.wikipedia.org/wiki/P_versus_NP_problem)）
     
     - 甚至很难有优秀的近似算法：[Khot, Minzer & Safra, 2017] 对于任意 $\epsilon>0$，一个多项式时间复杂度的 $(\sqrt 2-\epsilon)$-近似算法的存在意味着 P=NP.
 
@@ -173,7 +173,7 @@ while (q.size()) {
 
 以每个非障碍的格子为点，向四个方向的格子（如果有的话）连边，那么题目所求本质上就是点 $(1,1)$ 到点 $(n,n)$ 的最短路
 
-枚举四个方向：
+- 小 trick：枚举四个方向
 ```cpp
 int dx[] = {0, 1, 0, -1};
 int dy[] = {1, 0, -1, 0};
@@ -189,3 +189,48 @@ for (int i = 0; i < 4; ++i) {
 > 给定一张边权为 $0$ 或 $1$ 的无向图，求单源最短路
 
 使用双端队列 `deque`，由边权为 $0$ 的边扩展得到的点放入队首，由边权为 $1$ 的边扩展得到的点放入队尾
+
+正确性来源于 BFS 的分层结构：边只会出现在同一层内部或相邻两层之间
+
+例题：[P4554](https://www.luogu.com.cn/problem/P4554)
+
+---
+
+# 双向搜索/折半搜索（Meet in the middle）
+
+@@
+
+## Meet in the middle
+
+- 想要得到起点 $s$ 到目标 $t$ 的所有路径的某些信息（最短路径，路径数目等），但是直接搜索复杂度较高
+    - 双向搜索：考虑从 $s$ 出发搜索一部分，从 $t$ 出发搜索一部分，将这两部分信息进行快速合并
+- 直接搜索代价过大
+    - 将问题分为两部分分别处理，再高效合并
+
+@@
+
+## Meet in the middle 实例：[CF888E](https://codeforces.com/contest/888/problem/E)
+
+> 给定一个序列 $a_1, a_2, \cdots, a_n$ 和正整数 $m$，你可以选出一个子能序列 $a_{b_1}, a_{b_2}, \cdots, a_{b_k}(1\le b_1<b_2<\cdots<b_k\le n)$，你需要最大化这个子序列的和模 $m$ 的值，即
+> $$
+\left(\sum_{i=1}^k a_{b_i}\right)\bmod m
+> $$
+> 其中 $n\le 35, a_i, m\le 10^9$
+
+从长为 $n$ 的序列中选出一个子列的方案数为 $2^n$，是不能够接受的
+
+@@
+
+## Meet in the middle 实例：[CF888E](https://codeforces.com/contest/888/problem/E)
+
+- 将 $a$ 分为尽可能一样多的两部分，分别算出这两部分所有的子序列和模 $m$，记为 $x_1,\cdots, x_p$ 和 $y_1,\cdots, y_q$，这一部分复杂度为 $O(2^{\frac n2})$，可以接受
+
+- 问题转化为了：从 $x$ 中选出一个数 $t$，从 $y$ 中选出一个数 $s$，使得 $s+t\bmod m$ 最大
+
+- $p,q$ 都是 $O(2^{\frac n2})$ 级别，直接两两合并就是 $O(2^n)$，与暴力没区别
+
+- 对于序列 $x$ 中的每一个元素 $t$，与 $t$ 可能作为最大值的只有 $y$ 中小于 $m-t$ 的最大数（前驱）和 $y$ 中的最大数
+
+- 对 $x$ 和 $y$ 分别排序，使用二分（或双指针）可以解决
+
+- 事实上，更进一步地，第二种情况只会发生在 $\max x+\max y$ 上

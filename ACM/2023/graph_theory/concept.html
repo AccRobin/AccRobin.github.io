@@ -2,28 +2,34 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <script type="text/javascript" src="https://accrobin.github.io/additional_files/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-            tex2jax: {inlineMath: [['$', '$']]},
-            messageStyle: "none"
-        });
-    </script>
-    
     
     <link rel="stylesheet" href="https://accrobin.github.io/additional_files/reveal/reveal.css">
     <link rel="stylesheet" href="https://accrobin.github.io/additional_files/reveal/plugin/highlight/monokai.css">
-    <link rel="stylesheet" href="https://accrobin.github.io/additional_files/reveal/theme/white.css" id="theme">
-    <!-- <link rel="stylesheet" href="io.css"> -->
+    <link rel="stylesheet" href="https://accrobin.github.io/additional_files/reveal/theme/white.css" id="theme">    
     
-    <title>图论概念与存储结构</title>
+    <title>图论概念、存储结构及遍历</title>
 </head>
 
 <body>
     <div class="reveal">
         <div class="slides">
             <section data-markdown data-separator-vertical="@@">
-                # 图论概念与存储结构
+                # 图论概念、存储结构及遍历
+
+@@
+
+
+## something to talk...
+- 作业为什么进不去？
+    - 加入团队
+- 作业什么时候讲？
+    - 周日 14:30-17:00
+- 是不是一定得 C++？
+    - C++ $>$ Python, C++ $>$ C
+    - Actually, C+STL
+- 我听不懂
+    - 讲师太菜了
+    - 新增“推荐阅读”
 
 @@
 
@@ -156,6 +162,10 @@ $$
 @@
 
 ## 树
+
+- 树是二分图
+- 树上任意两点间只有一条简单路径
+
 指定一个节点作为这棵树的根，那么可以根据每个节点到根的距离对节点分层
 - 节点的深度/高度：到根的距离，记作 $dep_v$
 - 树高/树深：深度最大的节点的深度
@@ -167,7 +177,6 @@ $$
 - $u$ 的子树：$u$ 和 $u$ 的子孙
 - 叶子：没有儿子的节点
 
-树也是二分图
 @@
 
 ## 树
@@ -218,12 +227,12 @@ $$
 
 设点数上界为 $N$
 
-- 声明（全局）：`vector<int> G[N];`
+- 声明（全局）：`vector&lt;int> G[N];`
 - 加边 $(u,v)$：`G[u].push_back(v)`
     - 无向图需要双向建边
 - 遍历 $u$ 的出边：
     ```cpp
-    for(int i = 0; i < G[u].size(); ++i) {
+    for(int i = 0; i &lt; G[u].size(); ++i) {
         int v = G[u][i]; // u -> v
     }
     ```
@@ -234,9 +243,9 @@ $$
 
 若有边权，则存储的内容从 $v$ 变为 $(v,w)$：
 ```cpp
-vector<pair<int, int>> G[N]; // 声明
+vector&lt;pair&lt;int, int>> G[N]; // 声明
 G[u].push_back({v, w}) // 加边
-for (int i = 0; i < G[u].size(); ++i) { // 遍历
+for (int i = 0; i &lt; G[u].size(); ++i) { // 遍历
     int v = G[u][i].first, w = G[u][i].second;
 }
 ```
@@ -271,7 +280,7 @@ for (auto[v, w] : G[u]) { // C++17
         head[u] = cnt;
     }
     ```
-- 遍历
+- 遍历：
     ```cpp
     for (int i = head[u]; i; i = nex[i]) {
         int v = to[i], w = _w[i];
@@ -292,9 +301,13 @@ for (auto[v, w] : G[u]) { // C++17
     - 优点：直观展现边的信息（欧拉回路/网络流常用）
     - 缺点：代码稍长
 
+---
+
+# 图的遍历
+
 @@
 
-## 图的遍历
+## DFS/BFS
 
 把 DFS/BFS 放在具体的图上即可
 
@@ -312,11 +325,11 @@ void dfs(int u) {
 
 @@
 
-## 图的遍历
+## DFS/BFS
 
 ```cpp
 auto bfs = [](int s) { // C++11
-    queue<int> q;
+    queue&lt;int> q;
     q.emplace(s); // C++11, C++98 为 push
     vis[s] = 1;
     d[s] = 0;
@@ -335,12 +348,35 @@ auto bfs = [](int s) { // C++11
 
 @@
 
-## 图的遍历
+## DFS/BFS
 DFS 可以将原图的边分类：树边和非树边（有向图的非树边：前向边，后向边和横叉边）
 
 - DFS/BFS 树：DFS/BFS 给出的一棵生成树
 - DFS/BFS 序：以 DFS/BFS 访问的顺序记录每个点
 - 括号序：当 DFS 进入一个点时记录一个左括号，退出一个点时记录一个右括号
+
+@@
+
+## 例 1：[Fence Planning](https://www.luogu.com.cn/problem/P5429)
+
+> 有 $n(n\le 10^5)$ 头奶牛，第 $i$ 头奶牛的位置在 $(x_i,y_i)$，同时它们之间有 $m(m\le 10^5)$ 对“哞叫”关系，两头互相哞叫的奶牛属于同一个“哞网”。
+>
+> 现在你需要划出一个周长最小的矩形围栏（要求边与坐标轴平行），使得这个围栏包含至少一个完整的“哞网”。
+
+- 简化&抽象题意：给定二维上的 $n$ 个点，有 $m$ 条无向边，找出周长最小的矩形（四边与坐标轴平行）使其包含一个闭合子图。
+- 事实上给出了这 $n$ 个点的一个划分（等价关系），对每个（极大）连通块做 DFS 并更新最上/下/左/右的点坐标即可
+
+@@
+
+## 例 2：[Flight Routes Check](https://vjudge.net/problem/CSES-1682)
+
+> There are $n(n\le 10^5)$ cities and $m(m\le 2\times 10^5)$ flight connections. Your task is to check if you can travel from any city to any other city using the available flights.
+
+- 简化&抽象题意：给定一张有向图，判断其是否为强连通图
+- Kosaraju 算法：建立图 $G$ 的反图 $G'$，任选点 $v$ 在 $G,G'$ 分别跑一次 DFS，判断在 $G,G'$ 中 $v$ 是否均可达任意一点
+- 正确性：
+    - 必要性显然
+    - 对于充分性，对 $\forall u\in V,u\neq v$，都存在 $G$ 上的路径 $p:v\to u$ 和 $G'$ 上的路径 $p':v\to u$，将 $p'$ 反向，说明 $G$ 上 $u$ 可达 $v$，即任意一点可达 $v$ 且 $v$ 可达任意一点
 
 @@
 
@@ -357,6 +393,44 @@ DFS 可以将原图的边分类：树边和非树边（有向图的非树边：�
 - 对于二叉树而言，根据记录根与儿子访问的先后顺序分为前序遍历（根左右）、中序遍历（左根右）和后序遍历（左右根）
     - 已知前序+中序或后序+中序可以推出另一个
     - 已知前序+后序不一定能推出中序
+
+@@
+
+## 例 3：[Journey](https://www.luogu.com.cn/problem/CF839C)
+> 给出一个 $n(n\le 10^5)$ 个点的有根树，你从根出发，每次等概率随机走到一个儿子上，问期望多少次走到叶子。
+
+- 设 $f_u$ 表示从 $u$ 出发，走到叶子的期望步数
+
+$$
+f_u=\dfrac 1{|son_u|}\sum_{v\in son_u}(f_v+1)
+$$
+
+- DFS 回溯时转移即可
+
+```cpp
+for (int v : G[u]) {
+    if (v == fa) continue;
+    dfs(v, u), ++cnt;
+    f[u] += f[v] + 1;
+}
+f[u] /= cnt;
+```
+
+@@
+
+## 例 4：[Milk Visits](https://www.luogu.com.cn/problem/P5836)
+
+> 给出一个 $n(n\le 10^5)$ 个点的树，每个点有 `G` 或 `H` 中的某一种颜色，$q(q\le 10^5)$ 次询问点 $a$ 和 $b$ 之间的路径上是否含有颜色为 $c$ 的点。
+
+- 对每个节点 $u$ 维护 $f_u$：从 $u$ 开始向上走与 $u$ 同色的点至多走到哪里
+- $f_a=f_b\Longleftrightarrow $ $a$ 和 $b$ 的路径上颜色都相同
+- 设 $u$ 的父亲是 $p$
+`$$
+f_u=\begin{cases}
+u & c_u\neq c_{p}\\
+f_{p} & c_u=c_{p}\\
+\end{cases}
+$$`
             </section>
         </div>
     </div>
@@ -364,12 +438,13 @@ DFS 可以将原图的边分类：树边和非树边（有向图的非树边：�
     <script src="https://accrobin.github.io/additional_files/reveal/plugin/markdown/markdown.js"></script>
     <script src="https://accrobin.github.io/additional_files/reveal/plugin/highlight/highlight.js"></script>
     <script src="https://accrobin.github.io/additional_files/reveal/plugin/notes/notes.js"></script>
+    <script src="https://accrobin.github.io/additional_files/reveal/plugin/math/math.js"></script>
     <script>
         Reveal.initialize({
             width: 1024,
-            height: 768,
+            height: 800,
             slideNumber: 'c/t',
-            // vertical: true,
+            vertical: false,
             // display: 'block',
             // margin: 0.04,
             // embedded: true,
@@ -381,7 +456,17 @@ DFS 可以将原图的边分类：树边和非树边（有向图的非树边：�
             // progress: true,
             // history: true,
             // center: true,
-            plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+            katex: {
+                version: 'latest',
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            },
+            plugins: [ RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes ]
         });
     </script>
 </body>

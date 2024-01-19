@@ -337,9 +337,8 @@ while (q.size()) {
 
 @@
 
-## Dijkstra 算法
+## 非负权图上的最短路：Dijkstra 算法
 
-- 用于非负权图上的最短路
 - 维护“当前最短路已知”的点集
     - 用这个点集松弛其它点
     - 扩展不在这个点集中且到源点距离最短的点
@@ -364,22 +363,13 @@ while (q.size()) {
 
 @@
 
-## 最短路 DAG
-
-求出每个点的最短路之后，保留所有满足 $d_v=d_u+w(u,v)$ 的边得到一个 DAG
-
-- $G$ 上从源点到任意一点的任意一条最短路都是 DAG 上的一条路径
-- DAG 上从源点到任意一点的任意一条路径都是 $G$ 上的一条最短路
-
-配合拓扑排序：最短路计数，边数最多/少的最短路
-
-@@
-
 ## 最短路例 1：[邮递员送信](https://www.luogu.com.cn/problem/P1629)
 > 有一个邮递员要送东西，邮局在节点 $1$。他总共要送 $n-1$ 样东西，其目的地分别是节点 $2$ 到节点 $n$。由于这个城市的交通比较繁忙，因此所有的道路都是单行的，共有 $m$ 条道路。这个邮递员每次只能带一样东西，并且运送每件物品过后必须返回邮局。求送完这 $n-1$ 样东西并且最终回到邮局最少需要的时间。
 
 - 在正图 $G$ 上求最短路，再在反图 $G'$ 上求最短路
 - 答案为 $2\sim n$ 正图最短路与反图最短路的和
+
+@@
 
 ## 最短路例 2：[冻结](https://www.luogu.com.cn/problem/P4822)
 > 给定一张 $n(n\le 50)$ 个点 $m(m\le 10^3)$ 条边的带权无向图，你有 $k\le 50$ 次使用魔法的机会，每次可以将一条边的边权打五折（不能重复打折），求 $s$ 到 $t$ 的最短路。
@@ -387,4 +377,25 @@ while (q.size()) {
 - 分层图最短路：$K$ 层图，图间用“五折边”连接
 - 从第 $0$ 层开始跑最短路，最后统计每一层节点 $t$ 的最短路
 
----
+@@
+
+## 最短路 DAG
+
+求出每个点的最短路之后，保留所有满足 $d_v=d_u+w(u,v)$ 的边得到一个 DAG
+
+- $G$ 上从源点到任意一点的任意一条最短路都是 DAG 上的一条路径
+- DAG 上从源点到任意一点的任意一条路径都是 $G$ 上的一条最短路
+
+@@
+
+## 最短路 DAG 例 1：[Investigation](https://cses.fi/problemset/task/1202)
+
+> You are going to travel from Syrjälä to Lehmälä by plane. You would like to find answers to the following questions:
+> 
+> - what is the minimum price of such a route?
+> - how many minimum-price routes are there? (modulo $10^9+7$)
+> - what is the minimum number of flights in a minimum-price route?
+> - what is the maximum number of flights in a minimum-price route?
+
+- 建出最短路 DAG
+- 用拓扑排序维护信息（路径计数/最长路/最短路……）

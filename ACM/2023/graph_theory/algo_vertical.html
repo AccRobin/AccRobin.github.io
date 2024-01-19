@@ -1,4 +1,20 @@
-# 图论基础算法
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <link rel="stylesheet" href="https://accrobin.github.io/additional_files/reveal/reveal.css">
+    <link rel="stylesheet" href="https://accrobin.github.io/additional_files/reveal/plugin/highlight/monokai.css">
+    <link rel="stylesheet" href="https://accrobin.github.io/additional_files/reveal/theme/white.css" id="theme">    
+    
+    <title>图论基础算法</title>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-markdown data-separator-vertical="@@"><script type="text/template">
+                # 图论基础算法
 
 ---
 
@@ -10,7 +26,7 @@
 
 > 静态版本：给出一个 $n(n\le 10^5)$ 个点的树，第 $i$ 个点有点权 $a_i$，请输出每个节点子树的点权和
 
-- 在回溯时计入儿子的子树贡献
+- 在回溯时计入儿子的子树贡献<!-- .element: class="fragment" -->
     ```cpp
     void dfs(int u, int fa) {
         f[u] = a[u];
@@ -21,7 +37,9 @@
         }
     }
     ```
+    <!-- .element: class="fragment" -->
 - 当 $a_i=1$ 时退化为子树大小和
+<!-- .element: class="fragment" -->
 
 @@
 
@@ -29,7 +47,7 @@
 
 > 静态版本：给出一个 $n(n\le 10^5)$ 点的树，第 $i$ 个点有点权 $a_i$，请输出每个节点到根路径的点权和
 
-- 继承父亲的信息
+- 继承父亲的信息<!-- .element: class="fragment" -->
     ```cpp
     void dfs(int u, int fa) {
         f[u] = f[fa] + a[u];
@@ -39,7 +57,9 @@
         }
     }
     ```
+    <!-- .element: class="fragment" -->
 - 当 $a_i=1$ 时退化为深度
+<!-- .element: class="fragment" -->
 
 @@
 
@@ -48,23 +68,51 @@
 > 给出一个 $n(n\le 10^5)$ 个点的树，$q(q\le 10^5)$ 次询问两个点 $a,b$ 间路径的边权和
 
 - 设最近公共祖先（LCA）为 $c$，则答案为 $f_a+f_b-2f_c$
+<!-- .element: class="fragment" -->
 - 如何求最近公共祖先？
+<!-- .element: class="fragment" -->
     - 不妨设 $d_a\ge d_b$，那么 $a$ 一直向上跳直到 $d_a=d_b$
+    <!-- .element: class="fragment" -->
     - 当两个点深度相同但不是同一个点时，一起向上跳，直到同一个点
+    <!-- .element: class="fragment" -->
 - 复杂度：单次询问 $O(n)$，$q$ 次询问 $O(qn)$
+<!-- .element: class="fragment" -->
     - 超时
+    <!-- .element: class="fragment" -->
 
 @@
 
 ## 倍增求 LCA
 
 - 维护 $f_{i,j}$ 表示 $i$ 的 $2^j$ 级祖先是谁（$O(n\log n)$ 个状态）
-    $$
+<!-- .element: class="fragment" -->
+    `$$
     f_{i,j}=\begin{cases}
     fa_i & j=0\\
     f_{f_{i,j-1},j-1} & j>0\\
     \end{cases}
-    $$
+    $$`
+    <!-- .element: class="fragment" -->
+- 求解 LCA 时
+<!-- .element: class="fragment" -->
+    - 不妨设 $d_a\ge d_b$，那么令 $k:\log n\to 0$
+    <!-- .element: class="fragment" -->
+    - 若 $d_{f_{a,k}}\ge d_b$，则 $a=f_{a,k}$
+    <!-- .element: class="fragment" -->
+    - 此时若有 $a=b$，则返回
+    <!-- .element: class="fragment" -->
+    - 否则令 $k:\log n\to 0$
+    <!-- .element: class="fragment" -->
+        - 若 $f_{a,k}\neq f_{b,k}$，则 $a=f_{a,k},b=f_{b,k}$
+        <!-- .element: class="fragment" -->
+        - 那么最后会跳到 LCA 的下一层
+        <!-- .element: class="fragment" -->
+        - 返回 $fa_a$ 或 $fa_b$ 即可
+        <!-- .element: class="fragment" -->
+
+@@
+
+## 倍增求 LCA
 
 ```cpp
 void dfs(int u, int fa) {
@@ -78,19 +126,11 @@ void dfs(int u, int fa) {
     }
 }
 ```
+<!-- .element: class="fragment" -->
 
 @@
 
 ## 倍增求 LCA
-
-- 不妨设 $d_a\ge d_b$，那么令 $k:\log n\to 0$
-    - 若 $d_{f_{a,k}}\ge d_b$，则 $a=f_{a,k}$
-    - 此时若有 $a=b$，则返回
-    - 否则令 $k:\log n\to 0$
-        - 若 $f_{a,k}\neq f_{b,k}$，则 $a=f_{a,k},b=f_{b,k}$
-        - 那么最后会跳到 LCA 的下一层
-        - 返回 $fa_a$ 或 $fa_b$ 即可
-
 ```cpp
 int LCA(int a, int b) {
     if (d[a] < d[b]) swap(a, b);
@@ -107,6 +147,7 @@ int LCA(int a, int b) {
     return f[a][0];
 }
 ```
+<!-- .element: class="fragment" -->
 
 @@
 
@@ -114,12 +155,17 @@ int LCA(int a, int b) {
 > 给定一棵 $n(n\le 10^5)$ 个节点的树，$q(q\le 10^5)$ 次询问两个点 $a,b$ 间路径的边权异或和
 
 - 设 $f_u$ 表示 $u$ 到根边权的异或和
+<!-- .element: class="fragment" -->
 - 答案为 $f_a\oplus f_b$
+<!-- .element: class="fragment" -->
 
 > 变式：询问两个点 $a,b$ 间路径的点权异或和
+<!-- .element: class="fragment" -->
 
 - 需要扣出 LCA 的贡献
+<!-- .element: class="fragment" -->
 - 设 LCA 的点权为 $k$，答案为 $f_a\oplus f_b\oplus k$
+<!-- .element: class="fragment" -->
 
 ---
 
@@ -130,14 +176,19 @@ int LCA(int a, int b) {
 ## 最小生成树（MST）
 
 - 生成树：图 $G\langle V,E\rangle$ 的一个子图 $T\langle V',E'\rangle$ 满足 $V=V'$
+<!-- .element: class="fragment" -->
 - 最小生成树：边权和最小的生成树
+<!-- .element: class="fragment" -->
 - 瓶颈生成树：树上权值最大的边在所有生成树中最小
+<!-- .element: class="fragment" -->
 - 重要结论：最小生成树一定是瓶颈生成树
+<!-- .element: class="fragment" -->
 
 @@
 
 ## Prim 算法
 - 贪心策略：从一个点开始向外不断扩展，每次扩展到当前集合最近的边
+<!-- .element: class="fragment" -->
 
 ```cpp
 priority_queue<pair<ll, int>> q;
@@ -155,13 +206,17 @@ while (q.size()) {
     }
 }
 ```
+<!-- .element: class="fragment" -->
 
 @@
 
 ## Kruskal 算法
 - 贪心策略：将所有边从小到大加入，若新加边连接了两个连通块则加入
+<!-- .element: class="fragment" -->
 - 如何判断新加边的两个端点是否在同一个连通块？
+<!-- .element: class="fragment" -->
 - 数据结构：并查集
+<!-- .element: class="fragment" -->
 
 @@
 
@@ -170,7 +225,9 @@ while (q.size()) {
 > 二维平面上有 $n(n\le 1000)$ 个点，请你找出最小的 $X$ 使得：任意距离小于 $X$ 的两点连边后形成一个连通图。
 
 - 先 $n^2$ 建边，实际所求就是瓶颈
+<!-- .element: class="fragment" -->
 - 使用 Prim 算法求出最小生成树即可
+<!-- .element: class="fragment" -->
 
 @@
 
@@ -179,10 +236,15 @@ while (q.size()) {
 > 给定一个 $n\times m(n,m\le 3\times 10^5)$ 的网格图，$(i,j)$ 和 $(i,j+1)$ 间连有边权为 $a_i$ 的边，$(i,j)$ 和 $(i+1,j)$ 间连有边权为 $b_j$ 的边，给出 $a,b$，求这张图的最小生成树。
 
 - 直接求肯定 TLE，考虑模拟 Kruskal 算法
+<!-- .element: class="fragment" -->
 - 将 $a,b$ 放一起排序，从小到大枚举
+<!-- .element: class="fragment" -->
 - 设当前已经加入了 $r$ 次横边，$c$ 次竖边
+<!-- .element: class="fragment" -->
     - 若当前加入边权为 $k$ 的横边，贡献为 $k(m-1-c)$
+    <!-- .element: class="fragment" -->
     - 若当前加入边权为 $k$ 的竖边，贡献为 $k(n-1-r)$
+    <!-- .element: class="fragment" -->
 
 ---
 
@@ -195,7 +257,9 @@ while (q.size()) {
 > 对于一张有向无环图（DAG），存在一个遍历序列使得后遍历的点不可达先遍历的点，求出一个这样的序列
 
 - 不断删去入度为 $0$ 的点（若还剩点则有环）
+<!-- .element: class="fragment" -->
 - 许多优化/计数问题都可以转化为 DAG 上的优化/计数
+<!-- .element: class="fragment" -->
 
 ```cpp
 for (int i = 1; i <= n; ++i) {
@@ -209,15 +273,17 @@ while (q.size()) {
     }
 }
 ```
+<!-- .element: class="fragment" -->
 
 @@
 
 ## DAG 上的最长路/最短路/路径计数
 
 在向下转移时计入贡献：
-- 最长路：`f[v] = max(f[v], f[u] + w);`
-- 最短路：`f[v] = min(f[v], f[u] + w);`
-- 路径计数：`f[v] += f[u];`
+<!-- .element: class="fragment" -->
+- 最长路<!-- .element: class="fragment" -->：`f[v] = max(f[v], f[u] + w);`
+- 最短路<!-- .element: class="fragment" -->：`f[v] = min(f[v], f[u] + w);`
+- 路径计数<!-- .element: class="fragment" -->：`f[v] += f[u];`
 
 @@
 
@@ -226,9 +292,12 @@ while (q.size()) {
 > 有 $n(n\le 10^5)$ 个事件，第 $i$ 个事件不早于 $s_i$ 时刻发生，同时有 $q(q\le 10^5)$ 个限制，形如：第 $b$ 个事件不早于第 $a$ 个事件发生 $c$ 时刻之后。求一组合法的事件发生时间。
 
 - 限制：$t_i\ge s_i$ 以及 $t_b\ge t_a+c$
+<!-- .element: class="fragment" -->
 - 连边：$0\to i$ 连 $s_i$，$a\to b$ 连 $c$
+<!-- .element: class="fragment" -->
 
 扩展：差分约束（推荐阅读）
+<!-- .element: class="fragment" -->
 
 @@
 
@@ -237,19 +306,26 @@ while (q.size()) {
 > 给定一个 $n(n\le 2\times 10^5)$ 个点 $m(m\le 2\times 10^5)$ 的有向图和整数 $k$。你可以任选起点走 $k$ 步，问经过点的最大权值最小能是多少。
 
 - 先二分，题意转化为：保留一些边之后，是否存在一条长为 $k$ 的路径
+<!-- .element: class="fragment" -->
 - 拓扑排序：
+<!-- .element: class="fragment" -->
     - 若出现环，则一定可行
+    <!-- .element: class="fragment" -->
     - 否则跑最长路，比较最长路和 $k$ 的大小
+    <!-- .element: class="fragment" -->
 
 ---
 
 # 单源最短路
+
+@@
 
 ## Floyd 算法
 
 > 求任意两点间最短路
 
 - 设 $f_{k,i,j}$ 表示只经过前 $k$ 个点，$i$ 到 $j$ 的最短路
+<!-- .element: class="fragment" -->
 
 ```cpp
 for (int i = 1; i <= n; ++i) {
@@ -265,11 +341,13 @@ for (int k = 1; k <= n; ++k) {
     }
 }
 ```
+<!-- .element: class="fragment" -->
 
 @@
 
 ## Floyd 算法
 - 节省空间：$k$ 这一维度可以去掉
+<!-- .element: class="fragment" -->
 ```cpp
 for (int k = 1; k <= n; ++k) {
     for (int i = 1; i <= n; ++i) {
@@ -279,6 +357,7 @@ for (int k = 1; k <= n; ++k) {
     }
 }
 ```
+<!-- .element: class="fragment" -->
 
 @@
 
@@ -287,6 +366,7 @@ for (int k = 1; k <= n; ++k) {
 > 求无向图中边权和最小的环
 
 - 在 Floyd 中更新前计算贡献
+<!-- .element: class="fragment" -->
 ```cpp
 for (int k = 1; k <= n; ++k) {
     for (int i = 1; i <= n; ++i) {
@@ -301,18 +381,20 @@ for (int k = 1; k <= n; ++k) {
     }
 }
 ```
+<!-- .element: class="fragment" -->
 
 @@
 
 ## SPFA 算法与负环
 
 - 核心：松弛 $d_v>d_u+w(u,v)$
-
+<!-- .element: class="fragment" -->
 - 类似 BFS，记录每个点是否在队列中
-
+<!-- .element: class="fragment" -->
 - 在最短路问题中若出现负环，则最短路可以到 $-\infty$（SPFA 会死循环），因此需要判断是否存在负环
-
+<!-- .element: class="fragment" -->
 - 在 SPFA 的松弛树中不断记录深度，若一个点被松弛的次数超过 $n$，则说明出现了负环
+<!-- .element: class="fragment" -->
 
 @@
 
@@ -334,15 +416,18 @@ while (q.size()) {
     }
 }
 ```
+<!-- .element: class="fragment" -->
 
 @@
 
-## Dijkstra 算法
+## 负权图上的最短路：Dijkstra 算法
 
-- 用于非负权图上的最短路
 - 维护“当前最短路已知”的点集
+<!-- .element: class="fragment" -->
     - 用这个点集松弛其它点
+    <!-- .element: class="fragment" -->
     - 扩展不在这个点集中且到源点距离最短的点
+    <!-- .element: class="fragment" -->
 
 ```cpp
 priority_queue<pair<int, int>> q;
@@ -361,17 +446,22 @@ while (q.size()) {
     }
 }
 ```
+<!-- .element: class="fragment" -->
 
 @@
 
 ## 最短路 DAG
 
 求出每个点的最短路之后，保留所有满足 $d_v=d_u+w(u,v)$ 的边得到一个 DAG
+<!-- .element: class="fragment" -->
 
 - $G$ 上从源点到任意一点的任意一条最短路都是 DAG 上的一条路径
+<!-- .element: class="fragment" -->
 - DAG 上从源点到任意一点的任意一条路径都是 $G$ 上的一条最短路
+<!-- .element: class="fragment" -->
 
 配合拓扑排序：最短路计数，边数最多/少的最短路
+<!-- .element: class="fragment" -->
 
 @@
 
@@ -379,12 +469,58 @@ while (q.size()) {
 > 有一个邮递员要送东西，邮局在节点 $1$。他总共要送 $n-1$ 样东西，其目的地分别是节点 $2$ 到节点 $n$。由于这个城市的交通比较繁忙，因此所有的道路都是单行的，共有 $m$ 条道路。这个邮递员每次只能带一样东西，并且运送每件物品过后必须返回邮局。求送完这 $n-1$ 样东西并且最终回到邮局最少需要的时间。
 
 - 在正图 $G$ 上求最短路，再在反图 $G'$ 上求最短路
+<!-- .element: class="fragment" -->
 - 答案为 $2\sim n$ 正图最短路与反图最短路的和
+<!-- .element: class="fragment" -->
+
+@@
 
 ## 最短路例 2：[冻结](https://www.luogu.com.cn/problem/P4822)
 > 给定一张 $n(n\le 50)$ 个点 $m(m\le 10^3)$ 条边的带权无向图，你有 $k\le 50$ 次使用魔法的机会，每次可以将一条边的边权打五折（不能重复打折），求 $s$ 到 $t$ 的最短路。
 
-- 分层图最短路：$K$ 层图，图间用“五折边”连接
+- 分层图最短路：建立 $k$ 层图，图间用“五折边”连接
+<!-- .element: class="fragment" -->
 - 从第 $0$ 层开始跑最短路，最后统计每一层节点 $t$ 的最短路
+<!-- .element: class="fragment" -->
 
 ---
+            </script></section>
+        </div>
+    </div>
+    <script src="https://accrobin.github.io/additional_files/reveal/reveal.js"></script>
+    <script src="https://accrobin.github.io/additional_files/reveal/plugin/markdown/markdown.js"></script>
+    <script src="https://accrobin.github.io/additional_files/reveal/plugin/highlight/highlight.js"></script>
+    <script src="https://accrobin.github.io/additional_files/reveal/plugin/notes/notes.js"></script>
+    <script src="https://accrobin.github.io/additional_files/reveal/plugin/math/math.js"></script>
+    <script>
+        Reveal.initialize({
+            width: 1024,
+            height: 800,
+            slideNumber: 'c/t',
+            vertical: false,
+            // display: 'block',
+            // margin: 0.04,
+            // embedded: true,
+            center: false,
+            // transition: 'linear',
+            // backgroundTransition: 'slide'
+            // hash: true,
+            // controls: true,
+            // progress: true,
+            // history: true,
+            // center: true,
+            katex: {
+                version: 'latest',
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            },
+            plugins: [ RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes ]
+        });
+    </script>
+</body>
+</html>

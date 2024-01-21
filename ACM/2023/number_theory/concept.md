@@ -1,4 +1,4 @@
-# 数论
+# 数论初步
 
 ---
 
@@ -55,6 +55,8 @@ p = b / a, r = b % a;
 **Definition** 约数 (默认是正数) 只有 $1$ 和其本身的数 (默认是正数).
 
 **Properties** 若 $p$ 为素数且 $p \mid ab$, 那么 $p \mid a$ 或 $p \mid b$.
+
+@@
 
 ## 算数基本定理
 
@@ -116,7 +118,7 @@ $$
 
 @@
 
-## 加法
+## 高精度加法
 
 竖式计算的特征:
 
@@ -139,7 +141,7 @@ while (c.back() == 0) c.pop_back();
 
 @@
 
-## 减法
+## 高精度减法
 
 不妨只考虑大的数减去小的数. 
 
@@ -149,6 +151,10 @@ while (c.back() == 0) c.pop_back();
 
 1. 从低到高,
 2. 可能出现从更高位借位 (只借 $1$).
+
+@@
+
+## 高精度减法
 
 ```cpp
 /* c = a - b */
@@ -167,7 +173,7 @@ while (c.size() > 1 and c.back() == 0) c.pop_back();
 
 @@
 
-## 乘法
+## 高精度乘法
 
 竖式计算的特征:
 
@@ -181,6 +187,10 @@ $$
 $$
 
 思考: 为什么不能硬模拟两个超大的数相乘? (相当于分析复杂度)
+
+@@
+
+## 高精度乘法
 
 ```cpp
 /* c = a * b, and a is large */
@@ -243,14 +253,17 @@ $$
 能不能得到 $x, y$ 的值?
 
 注意到 $a \bmod b = a - (\lfloor\frac{a}{b}\rfloor \times b)$, 带入计算有
-$$
+`$$
 \begin{aligned}
 b x_1 + (a \bmod b) y_1
 &= b x_1 + \left(a - \left(\left\lfloor\frac{a}{b}\right\rfloor \times b\right)\right) y_1 \\
 &= a y_1 + b \left(x_1 - \left\lfloor\frac{a}{b}\right\rfloor y_1\right).
 \end{aligned}
-$$
+$$`
+
 @@
+
+## exGCD
 
 递归的终点.
 

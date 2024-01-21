@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <link rel="stylesheet" href="https://accrobin.github.io/additional_files/reveal/reveal.css">
+    <link rel="stylesheet" href="https://accrobin.github.io/additional_files/reveal/plugin/highlight/monokai.css">
+    <link rel="stylesheet" href="https://accrobin.github.io/additional_files/reveal/theme/white.css" id="theme">    
+    
+    <title>数论基础</title>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-markdown data-separator-vertical="@@">
+                # 数论
+
+---
+
+# 基础概念
+
+@@
+
+## 整除
+
+**Definition** 设 $a \neq 0, b \in \mathbb{Z}$, 如果 $\exist q \in \mathbb{Z}$ 满足 $b = aq$, 那么就称 $a \mid b$.
+
+**Properties**
+
+1. $a \mid b \Longleftrightarrow a \mid \pm b \Longleftrightarrow \pm a \mid b$.
+2. $a \mid b, b \mid c \Longleftrightarrow a \mid c$.
+3. $a \mid b, a \mid c \Longleftrightarrow a \mid (xb + yc)$.
+4. $a \mid b, b \mid a \Longleftrightarrow |a| = |b|$.
+
+@@
+
+## 带余除法
+
+**Throrem** 设 $a \neq 0$, 那么 $\forall b \in \mathbb{Z}$, 都会存在唯一的 $p, r \in [0, a - 1]$ 均为整数满足
+$$
+b = pa + r.
+$$
+``` cpp
+p = b / a, r = b % a;
+```
+
+@@
+
+## GCD 和 LCM
+
+**Definition** 若干个数的最大公约数 (Greatest Common Divisor) 是指这些数的公约数中最大的那一个.
+
+**Definition** 若干个数的最小公倍数 (Least Common Multiple) 是指这些数的公倍数中最小的那一个.
+
+**Properties**
+
+1. $\gcd(a_1, a_2, \cdots, a_k) \mid a_i, \quad i = 1, 2, \cdots, k$,
+2. $a_i \mid \operatorname{lcm}(a_1, a_2, \cdots, a_k), \quad i = 1, 2, \cdots, k$,
+3. $\gcd(a, b) \cdot \operatorname{lcm}(a, b) = a \cdot b$.
+4. (**Bezout 定理**) 存在 $x, y \in \mathbb{Z}$ 满足 $xa + yb = \gcd(a, b)$.
+
+**Definition** 若 $\gcd(a, b) = 1$, 称 $a$ 与 $b$ 互素.
+
+思考: 怎么计算若干个数的 GCD 和 LCM?
+
+@@
+
+## 素数
+
+**Definition** 约数 (默认是正数) 只有 $1$ 和其本身的数 (默认是正数).
+
+**Properties** 若 $p$ 为素数且 $p \mid ab$, 那么 $p \mid a$ 或 $p \mid b$.
+
+@@
+
+## 算数基本定理
+
+**Theorem** 对任意正整数 $a$, 必定有表示
+$$
+a = p_1 p_2 \cdots p_t,
+$$
+其中所有 $p_i$ 均为素数. 并且在不计次序的意义下, 上述表示唯一. 如果将上述表示中的相同的素数合并, 并且将它们从小到大排序可以得到
+$$
+a = p_1^{\alpha_1} p_2^{\alpha_2} \cdots p_s^{\alpha_s},
+$$
+这个表示是唯一的, 称为 $a$ 的标准素因数分解.
+
+@@
+
+## 同余
+
+**Definition** 设 $m \neq 0$, 如果 $m \mid (a - b)$, 就称 $a$ 与 $b$ 关于 $m$ 同余, 记为 $a \equiv b \bmod m$. (通常模数 $m$ 是正数)
+
+**Properties**
+
+1. 同余是一个二元关系.
+2. $a \equiv b \bmod m \Longleftrightarrow ak \equiv bk \bmod m$,
+3. $a \equiv b \bmod m \Longleftrightarrow \frac{a}{d} \equiv \frac{b}{d} \bmod \frac{m}{d}$, 其中 $d \mid \gcd(a, b, m)$,
+4. $a \equiv b \bmod m \Longleftrightarrow a \equiv b \bmod d$, 其中 $d \mid m$.
+
+@@
+
+## 乘法逆元
+
+**Definition** 如果 $x$ 满足 $ax \equiv 1 \bmod m$, 则称 $x$ 为 $a \bmod m$ 的逆元, 记为 $a^{-1}$.
+
+思考: 乘法逆元的存在性如何?
+
+@@
+
+## 线性同余方程
+
+**Definition** 形如
+$$
+ax \equiv b \pmod m
+$$
+的方程称为线性同余方程.
+
+思考: 如何解决灵魂三问? 即这类方程的解存在性如何? 如果存在其数量如何? 如何解?
+
+---
+
+# 高精度运算
+
+@@
+
+## 高精度运算
+
+模拟 (愚蠢的) 竖式计算.
+
+- 第一个问题: 如何存储要计算的数?
+- 第二个问题: 如何模拟竖式计算?
+
+@@
+
+## 高精度加法
+
+竖式计算的特征:
+
+1. 从低到高,
+2. 可能出现进位 (至多是 $1$), 进的位要同更高位一起计算加法.
+
+```cpp
+/* c = a + b */
+int n = std::max(a.size(), b.size()) + 1;
+a.resize(n);
+b.resize(n);
+c.resize(n);
+for (int i = 0; i < n - 1; i++) {
+    c[i] += a[i] + b[i];
+    c[i + 1] = c[i] / 10;
+    c[i] %= 10;
+}
+while (c.back() == 0) c.pop_back();
+```
+
+@@
+
+## 高精度减法
+
+不妨只考虑大的数减去小的数. 
+
+思考: 如果出现小减大怎么转换成大减小, 以及判断谁大谁小?
+
+竖式计算的特征:
+
+1. 从低到高,
+2. 可能出现从更高位借位 (只借 $1$).
+
+@@
+
+## 高精度减法
+
+```cpp
+/* c = a - b */
+int n = a.size();
+b.resize(n);
+c.resize(n);
+for (int i = 0; i < n; i++) {
+    c[i] = a[i] - b[i];
+    if (c[i] < 0) {
+        c[i] += 10;
+        c[i + 1] -= 1;
+    }
+}
+while (c.size() > 1 and c.back() == 0) c.pop_back();
+```
+
+@@
+
+## 高精度乘法
+
+竖式计算的特征:
+
+1. 从低到高,
+2. 每次计算 $b$ 的一位 (其实就是一个数) 与 $a$ 的乘积结果,
+3. 将这些数相加. (等价与 $b$ 的长度次高精度加法)
+
+只考虑超大的数乘以一个不大的数, 例如
+$$
+1234567891234567891234891234567890 \times 123456.
+$$
+
+思考: 为什么不能硬模拟两个超大的数相乘? (相当于分析复杂度)
+
+@@
+
+## 高精度乘法
+
+```cpp
+/* c = a * b, and a is large */
+int t = 0;
+for (int i = 0; i < a.size() or t; i++) {
+    if (i < a.size()) t += a[i] * b;
+    c.push_back(t);
+    t /= 10;
+}
+while (c.size() > 1 and c.back() == 0) c.pop_back();
+```
+
+---
+
+# 欧几里得算法
+
+@@
+
+## GCD
+
+如何求多个数的 GCD?
+
+**Lemma** $\gcd(a, b, c) = \gcd(\gcd(a, b), c)$.
+
+**Lemma** $\gcd(a, b) = \gcd(b, a \bmod b)$.
+
+```cpp
+int gcd(int a, int b) {
+    if (b == 0) return a;
+    return gcd(b, a % b);
+}
+/*
+Actuall, you can just use std::gcd and std::__gcd.
+The different between these two function above can be found by google.
+*/
+```
+
+@@
+
+## exGCD
+
+给定 $a, b, c \in \mathbb{Z}$, 方程
+$$
+ax + by = c
+$$
+的灵魂三问怎么解决?
+
+@@
+
+## exGCD
+
+问题转化为解
+$$
+ax + by = \gcd(a, b).
+$$
+如果能解
+$$
+b x_1 + (a \bmod b) y_1 = \gcd(b, a \bmod b),
+$$
+能不能得到 $x, y$ 的值?
+
+注意到 $a \bmod b = a - (\lfloor\frac{a}{b}\rfloor \times b)$, 带入计算有
+`$$
+\begin{aligned}
+b x_1 + (a \bmod b) y_1
+&= b x_1 + \left(a - \left(\left\lfloor\frac{a}{b}\right\rfloor \times b\right)\right) y_1 \\
+&= a y_1 + b \left(x_1 - \left\lfloor\frac{a}{b}\right\rfloor y_1\right).
+\end{aligned}
+$$`
+
+@@
+
+## exGCD
+
+递归的终点.
+
+在 GCD 中, 最后得到的是 $\gcd(a, 0) = a$.
+
+在这里一样, $a \times 1 + 0 \times 0 = a = \gcd(a, 0)$, 也就是 $x = 1, y = 0$.
+
+```cpp
+int exgcd(int a, int b, int &x, int &y) {
+    if (b == 0) {
+        x = 1, y = 0;
+        return a;
+    }
+    int d = exgcd(b, a % b, x, y);
+    int t = x;
+    x = y;
+    y = t - (a / b) * y;
+    return d;
+}
+```
+            </section>
+        </div>
+    </div>
+    <script src="https://accrobin.github.io/additional_files/reveal/reveal.js"></script>
+    <script src="https://accrobin.github.io/additional_files/reveal/plugin/markdown/markdown.js"></script>
+    <script src="https://accrobin.github.io/additional_files/reveal/plugin/highlight/highlight.js"></script>
+    <script src="https://accrobin.github.io/additional_files/reveal/plugin/notes/notes.js"></script>
+    <script src="https://accrobin.github.io/additional_files/reveal/plugin/math/math.js"></script>
+    <script>
+        Reveal.initialize({
+            width: 1024,
+            height: 800,
+            slideNumber: 'c/t',
+            vertical: false,
+            // display: 'block',
+            // margin: 0.04,
+            // embedded: true,
+            center: false,
+            // transition: 'linear',
+            // backgroundTransition: 'slide'
+            // hash: true,
+            // controls: true,
+            // progress: true,
+            // history: true,
+            // center: true,
+            katex: {
+                version: 'latest',
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            },
+            plugins: [ RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes ]
+        });
+    </script>
+</body>
+</html>

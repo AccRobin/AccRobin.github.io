@@ -48,19 +48,6 @@
 
 @@
 
-## B - ab-string
-- 实现：
-```cpp
-int l=1,r=1,ans=0;
-while(l<=n){
-    while(r<n&&cost(l,r+1)<=k)r++;
-    ans=max(ans,r-l+1);
-    l++;
-}
-```
-
-@@
-
 ## F - buying-item
 - 题目描述：
     - 商店内有 $n$ 件商品，第 $i$ 件商品价格为 $A_i$ 元
@@ -87,34 +74,6 @@ while(l<=n){
 
 @@
 
-## E - xor-road
-- 实现：
-```cpp
-map<LL,int>r[N][N];
-int n,m,mid;
-LL k,cnt=0;
-void dfsdown(int x,int y,LL val,int stp){
-    val^=a[x][y];
-    if(stp==mid){
-        r[x][y][val]++;
-        return;
-    }
-    if(x<=n)dfsdown(x+1,y,val,stp+1);
-    if(y<=m)dfsdown(x,y+1,val,stp+1);
-}
-void dfsup(int x,int y,LL val,int stp){
-    if(stp==n+m-2-mid){
-        if(r[x][y].count(k^val))cnt+=r[x][y][k^val];
-        return;
-    }
-    val^=a[x][y];
-    if(x>=1)dfsup(x-1,y,val,stp+1);
-    if(y>=1)dfsup(x,y-1,val,stp+1);
-}
-```
-
-@@
-
 ## G - virus-spread
 - 题目描述：
     - 给定一棵树，根节点为 $1$，每个时刻有两种操作可以选择：
@@ -125,8 +84,6 @@ void dfsup(int x,int y,LL val,int stp){
     - 考虑贪心策略：对于从根节点开始dfs的每个节点，如果不够分，则翻倍直到够分给所有儿子节点
     - 贪心的证明：最优策略肯定不会走回头路，即节点 $i$ 由 $i$ 的祖先转移来，且由父亲节点翻倍的 $dis$ 消耗最小，故由父亲节点翻倍转移得到是最优的
 
-
-
 @@
 
 ## C - edge-direction
@@ -136,8 +93,6 @@ void dfsup(int x,int y,LL val,int stp){
     - 我们将原图去掉无向边得到一个新图，对这个新图进行讨论
         - 如果该图存在环，则原图无向边不管如何更改方向都会存在环，故输出 $NO$
         - 如果该图无环，则该图是一个DAG，我们对其进行拓扑排序，对原图的每一条无向边，我们将方向定为由拓扑序较小的连至拓扑序较大的，则一定不会出现环
-
-
 
 @@
 
@@ -150,32 +105,6 @@ void dfsup(int x,int y,LL val,int stp){
     - 不难观察到，每个数都会在两条边中出现
     - 我们设一条边的和为 $s$，所有数字的总和为 $sum$，则 $6 \times s = 2 \times sum$，故 $s = sum \div 3$
     - 借此我们可以进行搜索的剪枝，每填完一条边检验边和是否等于 $s$，即可通过本题
-
-@@
-
-## D - hex-gon
-- 实现：
-```cpp
-void dfs(int x,int s){
-    switch(x){
-        case 6:if(st[1]+st[2]+st[4]+st[5]!=s)return;break;
-        case 8:if(st[3]+st[4]+st[6]+st[7]!=s)return;break;
-        case 10:if(st[5]+st[6]+st[8]+st[9]!=s)return;break;
-        case 12:if(st[7]+st[8]+st[10]+st[11]!=s)return;break;
-        case 13:if(st[11]+st[12]+st[2]+st[3]!=s)return;
-                if(st[9]+st[10]+st[12]+st[1]!=s)return;
-                cnt++;return;
-    }
-    for(int i=1;i<=12;i++){
-        if(!vis[i]){
-            vis[i]=1;
-            st[x]=a[i];
-            dfs(x+1,s);
-            vis[i]=0;
-        }
-    }
-}
-```
 
 @@
 

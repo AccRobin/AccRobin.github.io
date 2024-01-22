@@ -152,7 +152,7 @@ for (int i = 0; i < n - 1; i++) {
     c[i + 1] = c[i] / 10;
     c[i] %= 10;
 }
-while (c.back() == 0) c.pop_back();
+while (c.size() > 1 and c.back() == 0) c.pop_back();
 ```
 
 @@
@@ -239,8 +239,8 @@ int gcd(int a, int b) {
     return gcd(b, a % b);
 }
 /*
-Actuall, you can just use std::gcd and std::__gcd.
-The different between these two function above can be found by google.
+Actually, you can just use std::gcd and std::__gcd.
+The differences between these two functions above can be found via google.
 */
 ```
 
@@ -300,6 +300,7 @@ int exgcd(int a, int b, int &x, int &y) {
     return d;
 }
 ```
+
             </section>
         </div>
     </div>

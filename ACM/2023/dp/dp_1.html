@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <link rel="stylesheet" href="https://accrobin.github.io/additional_files/reveal/reveal.css">
+    <link rel="stylesheet" href="https://accrobin.github.io/additional_files/reveal/plugin/highlight/monokai.css">
+    <link rel="stylesheet" href="https://accrobin.github.io/additional_files/reveal/theme/white.css" id="theme">    
+    
+    <title>动态规划</title>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-markdown data-separator-vertical="@@"><script type="text/template">
+              # 动态规划（DP）
+$$
+\text{陈志锐}
+$$
+
+@@
+
+## 什么是动态规划？
+
+- 通过将原问题分解为相对简单的子问题来解决复杂问题
+- 最优子结构，无后效性，子问题重叠
+- 状态设计和状态转移
+
+@@
+
+## 例：数字三角形
+> 给定一个 $r(r\le 1000)$ 行的数字三角形，需要找到一条从最高点到底部任意处结束的路径，使路径经过数字的和最大。每一步可以走到当前点左下方的点或右下方的点。
+> ```
+>        7 
+>      3   8 
+>    8   1   0 
+>  2   7   4   4 
+>4   5   2   6   5 
+> ```
+- 暴力方法 $O(2 ^ r)$
+- 状态设计：令 $dp_{i, j}$ 表示走到第 $i$ 行第 $j$ 列的最小代价
+- 转移方程：$dp_{i,j} = min(dp_{i - 1,j - 1}, dp_{i - 1,j}) + a_{i,j}$
+- 复杂度：$O(r ^ 2)$ 
+@@
+
+## 状态设计
+
+- 状态设计即定义 $dp$ 的意义；一般可以从问题出发。如例题中，$dp_{i,j}$表示走到第 $i$ 行第 $j$ 个点的最小代价
+- 状态设计还应当考虑初值的设置，例题中对应就是设置 $dp_{1,1}$ 的值
+- 从一个暴力的状态开始，逐渐优化设计
+- 从数据范围考虑，对数据范围敏感
+
+@@
+
+## 状态转移
+
+- 顾名思义，就是考虑该状态如何转移过来
+- 思考我们定义的状态应该如何求得，如例题中，第 $i$ 行 $j$ 列的位置只能由 $i - 1$ 行 $j$ 列和第 $i - 1$ 行 $j - 1$ 列走到
+- 状态转移的设计依赖于状态的定义
+
+---
+
+# 线性 DP
+
+@@
+
+## 线性 DP
+- 线性 DP 是动态规划问题中的一类问题，指状态之间有线性关系的动态规划问题。
+- 即存在一个线性的递推式，如上述例题中的数字三角形
+- 定义过于抽象可以不用深究
+
+@@ 
+
+## 线性 DP 实例 1：最长上升子序列（LIS）
+> 给出一个由 $n(n\le 5000)$ 个不超过 $10^6$ 的正整数组成的序列。请输出这个序列的**最长上升子序列**的长度。
+>
+> 上升子序列是指，从原序列中**按顺序**取出一些数字排在一起，这些数字是**逐渐增大**的。
+
+- 状态设计：从问题出发，要求的是最长上升子序列，可以定义 $dp_i$ 表示以 $a_i$ 结尾的最长上升子序列，初值 $dp_1=1$
+- 状态转移：要求 $dp_i$，很自然想到从前面选一个比它小的即可。$dp_i = \max\limits _{j = 1}^{i-1}(dp_j + 1)(a_j < a_i)$
+```cpp
+for (int i = 1; i <= n; i ++) {
+    dp[i] = 1;
+    for (int j = 1; j < i; j ++)
+        if (a[j] < a[i]) dp[i] = max(dp[i], dp[j] + 1);  
+}
+```
+@@
+
+## 线性 DP 实例 2：最长公共子序列（LCS）
+> 给出两个长度分别为 $n,m(n,m\le 5000)$ 的序列 $a,b$，求它们最长的公共子序列的长度。
+>
+> 公共子序列是指，一个序列 $p$，既是 $a$ 的子序列，也是 $b$ 的子序列。
+
+- 状态设计：$dp_{i,j}$ 表示 $a[1\cdots i],b[1\cdots j]$ 的最长公共子序列的长度
+- 状态转移：对 $a_i$ 与 $a_j$ 的关系分类
+`$$
+dp_{i,j}=\begin{cases}
+dp_{i-1,j-1}+1 & a_i=a_j\\
+\max(dp_{i-1,j}+dp_{i,j-1}) & a_i\neq a_j\\
+\end{cases}
+$$`
+
+---
+
+# 背包问题
+
+@@
+
+## 背包问题一：01 背包
+> 有 $n(n \leq 1000)$ 个物品和一个容量为 $W(W \leq 1000)$ 的背包，每个物品有重量 $w_{i}(w_{i} \leq W)$ 和价值 $v_{i}(v_{i} \leq 10^9)$ 两种属性，要求选若干物品放入背包使背包中物品的总价值最大且背包中物品的总重量不超过背包的容量。
+
+- 暴力枚举，每个物品选或者不选，$O(2 ^ n)$ 
+- 朴素的剪枝：在暴力 dfs 时，竟然只记录了两个信息：“当前选到了第几个”，“选出的物品重量和是多少”
+- 记忆化搜索：原本有 $2^n$ 个状态的状态机在**合并相同状态**之后只剩 $n\cdot W$ 个状态
+
+朴素的剪枝——记忆化搜索能够胜任，而 DP 可以理解为 $01$ 状态机的合并，所以有暴论：DP 等价于记忆化搜索（在某些时候）
+
+@@
+
+## 背包问题一：01 背包
+
+- 状态设计（要求什么？最大价值！）
+
+$~~~~~~dp_{i, j}$ 表示前 $i$ 个物品中，选出重量和为 $j$ 的物品的最大价值，答案即 $dp_{n,W}$
+- 状态转移 `$$
+dp_{i,j} = \max(dp_{i - 1,j} + dp_{i - 1,j - w_i} + v_i)
+$$`
+
+```cpp
+for (int i = 1; i <= n; i ++) {
+    for (int j = 0; j <= W; j ++) {
+        dp[i][j] = dp[i - 1][j];
+        if (j - w[i] >= 0) {
+            dp[i][j] = max(dp[i][j], dp[i - 1][j - w[i]] + v[i]);
+        }
+    }
+}
+```
+
+@@
+
+## 背包问题一：01 背包
+
+- 题目空间限制不允许开 $O(nW)$的数组
+- 注意：我们每次转移使用仅使用了 $i$ 和 $i - 1$ 两行的数据
+- 滚动数组优化：只开长度为 $W$ 的数组，计算时**从后往前**转移
+```cpp
+for (int j = W; j >= 0; j--) {
+    if (j - w[i] >= 0) {
+        dp[j] = max(dp[j], dp[j - w[i]] + v[i]);
+    }
+}
+```
+- 为什么不能从前往后转移？
+
+每次转移 $dp_{i, j}$ 时需要用到 $dp_{i - 1, j - w_i}$ 的值，如果从前往后转移，那么在更新 $dp_{j}$ 前就更新了 $dp_{j - w_i}$
+
+@@
+
+## 背包问题二：完全背包
+> 有 $n(n \leq 1000)$ 种物品和一个容量为 $W(W \leq 1000)$ 的背包，每种物品有重量 $w_{i}(w_{i} \leq W)$ 和价值 $v_{i}(v_{i} \leq 1e9)$ 两种属性，**个数无限**。要求选若干物品放入背包使背包中物品的总价值最大且背包中物品的总重量不超过背包的容量。
+- 状态设计与01背包一致（$dp_{i, j}$），难点在于如何转移
+- 状态转移方程如何书写？
+- 朴素方法：
+`$$
+dp_{i,j} = \max\limits_{k=0}^{\infty}(dp_{i - 1,j - k\times w_i} + k \times v_i)
+$$`
+- $dp_{i,j} = \max(dp_{i-1,j}, dp_{i, j-w_i}+v_i)$
+
+@@
+
+## 背包问题二：完全背包
+```cpp
+for (int i = 1; i <= n; i ++) {
+    for (int j = 0; j <= W; j ++) {
+        dp[i][j] = dp[i - 1][j];
+        if (j - w[i] >= 0) {
+            dp[i][j] = max(dp[i][j], dp[i][j - w[i]] + v[i]);
+        }
+    }
+}
+```
+
+@@
+
+## 背包问题三：多重背包
+> 有 $n(n \leq 1000)$ 种物品和一个容量为 $W(W \leq 1000)$ 的背包，每种物品有重量 $w_{i}(w_{i} \leq W)$ ，价值 $v_{i}(v_{i} \leq 1e9)$ 和**个数** $k_{i}(k_{i} \leq 1e9)$三种属性。要求选若干物品放入背包使背包中物品的总价值最大且背包中物品的总重量不超过背包的容量
+- 本质上可以当做01背包，将每个物品拆开看成一种，共 $K(K = \sum\limits_{i = 1}^{n}k_i)$ 种。 
+- 时间复杂度 $O(KW)$
+
+@@
+
+## 背包问题三：多重背包——二进制优化
+- 将每种物品拆分成 $\log k_i$ 个物品，第 $j$ 种物品拆分成的第 $i$ 个物品的重量为 $2^{i - 1}w_j$，价值为 $2^{i - 1}v_j$，时间复杂度 $O(nW\log k)$。
+- 拆分时剩余部分直接合并，如 $6$ 拆分成 $1+2+3$；$8$ 拆分成 $1+2+4+1$
+- 原理：拆分出来的物品组合可以表示任意个数该种类物品
+```cpp
+vector<int> newW, newV;
+for (int i = 1; i <= n; i ++) {
+    for (int j = 1; j <= k[i]; j *= 2) {
+        k[i] -= j;
+        newW.push_back(j * w[i]);
+        newV.push_back(j * v[i]);
+    }
+    if (k[i]) {
+        newW.push_back(k[i] * w[i]);
+        newV.push_back(k[i] * v[i]);
+    }
+}
+```
+
+@@
+
+## 背包例题一：质数和分解
+>任何大于 $1$ 的自然数 $n$ 都可以写成若干个大于等于 $2$ 且小于等于 $n$ 的质数之和表达式（包括只有一个数构成的和表达式的情况），并且可能有不止一种质数和的形式。例如，$9$ 的质数和表达式就有四种本质不同的形式：
+>
+>$9 = 2 + 5 + 2 = 2 + 3 + 2 + 2 = 3 + 3 + 3 = 2 + 7$
+>
+> 这里所谓两个本质相同的表达式是指可以通过交换其中一个表达式中参加和运算的各个数的位置而直接得到另一个表达式。
+>
+> 试编程求解自然数 $n(2 \leq n \leq 200)$ 可以写成多少种本质不同的质数和表达式。
+
+@@
+
+## 背包例题一：质数和分解
+
+- 可以发现：$n$ 相当于背包容量，质数个数相当于物品种类，质数的值相当于物品的重量
+- 每个物品有无穷多种，所以是完全背包问题
+- 设状态 $dp_{i,j}$ 表示前 $i$ 种质数中和 $j$ 的本质不同质数和表达式数量
+- 状态转移 $dp_{i, j} = dp_{i - 1, j} + dp_{i, j - w[i]}$
+- tips: 多组数据最好提前预处理出所有质数，以免被卡
+
+@@
+
+## 背包例题二：多米诺骨牌
+> 多米诺骨牌由上下两个方块组成，每个方块中有 $1\sim6$ 个点。现有排成行的上方块中点数之和记为 $S_1$，下方块中点数之和记为 $S_2$，它们的差为 $\left|S_1-S_2\right|$。如图，$S1=6+1+1+1=9, S2=1+5+3+2=11, \left|S_1-S_2\right|=2$。每个多米诺骨牌可以旋转 $180°$，使得上下两个方块互换位置。现在有 $n(1 \leq n \leq 1000)$ 个方块，请你计算最少旋转多少次才能使多米诺骨牌上下 $2$ 行点数之差达到最小。
+>
+> ![](https://cdn.luogu.com.cn/upload/pic/91.png)
+>
+> 对于图中的例子，只要将最后一个多米诺骨牌旋转 $180°$，即可使上下 $2$ 行点数之差为 $0$。
+
+@@
+
+## 背包例题二：多米诺骨牌
+
+- 第一眼觉得和背包没有一点关系，这时候我们可以转变思路：把上下两行之差看做背包容量，把旋转次数设为待优化值（价值最小化）
+- 状态设计：$dp_{i, j}$ 表示前 $i$ 个多米诺骨牌中组成差为 $j$ 的最小翻转次数
+- 初值将：所有 $dp$ 值设为无穷（如 $10^9$），$dp_{0, 0} = 0$
+- 状态转移方程：
+$$
+dp_{i, j} = \min(dp_{i - 1, j + a_i - b_i}, dp_{i - 1, j + b_i - a_i + 1})
+$$
+- 最终答案即找到绝对值最小的 $j$ 使得 $dp_{n, j}$ 不为无穷
+- 由于数组下标 $j$ 可能为负，因此需要设置偏移量
+
+---
+
+# 区间 DP
+
+@@
+
+## 区间 DP
+- 区间 DP 是线性 DP 的拓展。顾名思义，区间 DP 的划分一般以一段区间的待求解值作为状态
+- $dp_{i, j}$ 一般表示为从 $i$ 到 $j$ 内的待求解值
+- 多适用于可以合并的问题
+- 状态转移一般会枚举合并点，将问题分为两个部分，通过合并两个部分的最优值得到原问题的最优值
+- 状态转移方程多是以下形式 $$
+dp_{i, j} = \max_{k = i} ^ {j - 1}f(dp_{i, k}, dp_{k + 1, j})
+$$
+
+@@ 
+
+## 区间 DP 实例 1：石子合并（弱化版）
+> 设有 $N(N \le 300)$ 堆石子排成一排，其编号为 $1,2,3,\cdots,N$。每堆石子有一定的质量 $m_i\ (m_i \le 1000)$。现在要将这 $N$ 堆石子合并成为一堆。每次只能合并相邻的两堆，合并的代价为这两堆石子的质量之和，合并后与这两堆石子相邻的石子将和新堆相邻。合并时由于选择的顺序不同，合并的总代价也不相同。试找出一种合理的方法，使总的代价最小，并输出最小代价。
+
+- 状态设计：$dp_{i, j}$ 表示合并区间 $i$ 到 $j$ 的最小代价
+- 区间合并时，枚举最后合并的两堆是以哪个中心点划分
+- 状态转移方程：$dp_{i, j} = \min_{k = i}^{j - 1}(dp_{i, k} + dp_{k + 1, j} + w_{i, k} + w_{k + 1, j})$
+- 使用前缀和可以快速算出 $w_{i, k}$ 和 $w_{k + 1, j}$
+- 时间复杂度 $O(n^3)$
+
+@@
+
+## 区间 DP 实例 2：石子合并
+> 在一个圆形操场的四周摆放 $N(N \leq 100)$ 堆石子，每堆石子有 $a_i(a_i \leq 20)$ 个。现要将石子有次序地合并成一堆，规定每次只能选相邻的 $2$ 堆合并成新的一堆，并将新的一堆的石子数，记为该次合并的得分。
+>
+> 试设计出一个算法,计算出将 $N$ 堆石子合并成 $1$ 堆的最小得分和最大得分。
+
+- 与上一题有些许不同，上一题排列成一排，这一题围成一圈
+- 常用手法：将石子复制一遍后放在末尾排列，如 1 3 2 变成 1 3 2 1 3 2
+- 这样就变成了上一个问题，最终问题的答案等于 $\min_{i = 1}^{n} f_{i, i + n - 1}$ 和 $\max_{i = 1}^{n} g_{i, i + n - 1}$
+- 时间复杂度 $O(n^3)$
+            </script></section>
+        </div>
+    </div>
+    <script src="https://accrobin.github.io/additional_files/reveal/reveal.js"></script>
+    <script src="https://accrobin.github.io/additional_files/reveal/plugin/markdown/markdown.js"></script>
+    <script src="https://accrobin.github.io/additional_files/reveal/plugin/highlight/highlight.js"></script>
+    <script src="https://accrobin.github.io/additional_files/reveal/plugin/notes/notes.js"></script>
+    <script src="https://accrobin.github.io/additional_files/reveal/plugin/math/math.js"></script>
+    <script>
+        Reveal.initialize({
+            width: 1024,
+            height: 800,
+            slideNumber: 'c/t',
+            vertical: false,
+            // display: 'block',
+            // margin: 0.04,
+            // embedded: true,
+            center: false,
+            // transition: 'linear',
+            // backgroundTransition: 'slide'
+            // hash: true,
+            // controls: true,
+            // progress: true,
+            // history: true,
+            // center: true,
+            katex: {
+                version: 'latest',
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\(', right: '\\)', display: false},
+                    {left: '\\[', right: '\\]', display: true}
+                ],
+                ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            },
+            plugins: [ RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes ]
+        });
+    </script>
+</body>
+</html>

@@ -115,12 +115,27 @@ for (int i = 1; i <= n; i ++) {
 
 - 状态设计：$dp_{i,j}$ 表示 $a[1\cdots i],b[1\cdots j]$ 的最长公共子序列的长度
 <!-- .element: class="fragment" -->
-- 状态转移：对 $a_i$ 与 $a_j$ 的关系分类<!-- .element: class="fragment" --> `$$
+- 状态转移：对 $a_i$ 与 $b_j$ 的关系分类<!-- .element: class="fragment" --> `$$
 dp_{i,j}=\begin{cases}
-dp_{i-1,j-1}+1 & a_i=a_j\\
-\max(dp_{i-1,j}+dp_{i,j-1}) & a_i\neq a_j\\
+dp_{i-1,j-1}+1 & a_i=b_j\\
+\max(dp_{i-1,j},dp_{i,j-1}) & a_i\neq b_j\\
 \end{cases}
 $$`
+<!-- .element: class="fragment" -->
+
+@@
+
+## 线性 DP 实例 3：大盗阿福
+> 阿福是一名经验丰富的大盗，他打算洗劫一条街上的店铺。这条街上一共有 $N(N\le 10^5)$ 家店铺，第 $i$ 家店中有现金 $w_i$。只有当阿福**同时洗劫了两家相邻的店铺**时，街上的报警系统才会启动。阿福想知道，在不惊动警察的情况下，他今晚最多可以得到多少现金？
+
+- 高观点：链的最大权独立集
+<!-- .element: class="fragment" -->
+- 状态设计：$f_i$ 表示洗劫前 $i$ 家店铺能得到的最多现金
+<!-- .element: class="fragment" -->
+- 状态转移：对是否洗劫第 $i$ 家店铺分类<!-- .element: class="fragment" -->
+$$
+f_i=\max(f_{i-1}, f_{i-2}+w_i)
+$$
 <!-- .element: class="fragment" -->
 
 ---

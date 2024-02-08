@@ -1,0 +1,365 @@
+# 字符串
+
+---
+
+## 字符串基础
+
+@@
+
+**字符集:** 字符集 $\Sigma$ 是一个具有全序关系的集合, 即集合内的任意两个不同元素之间存在严格的大小关系.
+
+**Example:**
+
+1. $\Sigma = \{\text{a, b, c}, \cdots, \text{z}\}$.
+2. $\Sigma = \{\text{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}\}$.
+
+@@
+
+**字符串:** 将 $n$ 个字符顺次排列可以得到一个长度为 $n$ 的字符串 $S$.
+
+1. $|S|$ 表示这个字符串的长度.
+2. $S[i], 0 \leq i \leq |S| - 1$ 表示这个字符串的第 $i$ 个字符.
+
+@@
+
+**子串: ** 字符串 $S$ 的子串 $S[i \dots j]$ 表示顺次连接 $S[i], S[i + 1], \cdots, S[j]$ 形成的字符串, 也就是从 $S$ 中取出 $i$ 到 $j$ 这一部分.
+
+**Example:**
+
+1. $S = \text{abcdabcd}, S_1 = S[2 \dots 6] = \text{cdabc}$.
+
+@@
+
+**子序列:** 字符串 $S$ 的子序列是指形如顺次连接 $S[p_1], S[p_2], \cdots S[p_k], 0 \leq p_1 < p_2 < \cdots < p_k \leq |S| - 1$ 形成的字符串, 也就是从 $S$ 中取出将若干元素并且不改变其相对位置形成的序列.
+
+区分子串 (substring) 与子序列 (subseqence).
+
+**Example:**
+
+$S = \text{codeforces}, S_1 = \text{cocs}$ 是子序列但不是子串.
+
+@@
+
+**前缀:** 从串首开始到某个位置 $i$ 结束的特殊子串, 也就是 $S[0 \dots i]$.
+
+**Example:**
+
+$S = \text{abcabcd}$ 的前缀有 $\text{a}, \text{ab}, \text{abc}, \text{abca}, \text{abcab}, \text{abcabc}, \text{abcabcd}$. 除去 $S$ 本身, 剩余的前缀被称为 **真前缀**.
+
+@@
+
+**前缀:** 从某个位置 $i$ 开始到串尾结束的特殊子串, 也就是 $S[i \dots |S| - 1]$.
+
+**Example:**
+
+$S = \text{abcabcd}$ 的后缀有 $\text{d}, \text{cd}, \text{bcd}, \text{abcd}, \text{cabcd}, \text{bcabcd}, \text{abcabcd}$. 除去 $S$ 本身, 剩余的后缀被称为 **真后缀**.
+
+@@
+
+**字典序:** 以第 $i$ 个字符作为第 $i$ 关键字进行大小比较，空字符小于字符集内任何字符.
+
+**Example:**
+
+1. $\text{abc} < \text{abd}$.
+2. $\text{abc} < \text{abcd}$.
+
+@@
+
+**回文串: ** $S$ 是回文串当且仅当 $S[i] = S[|S| - 1 - i], i = 0, \cdots, |S| - 1$, 也就是正着写与倒着写一样.
+
+---
+
+## std::string
+
+@@
+
+C++ 标准库中的 std::string 有如下功能:
+
+1. 重载赋值 =, 右侧可以是 std::string 或 char.
+
+2. 重载加法 +, 能够拼接两个字符串.
+
+```cpp
+std::string s = "abc", t = "xyz";
+auto a = s + t, b = s + 'd';
+/*
+a = "abcxyz", b = "abcd", types are both string.
+attention, 'd' is a char.
+*/
+```
+
+@@
+
+3. 支持下标访问.
+4. size() 返回字符串的长度.
+5. substr(start, lenth) 可以截取一个从 start 开始, 长度为 lenth 的子串.
+6. 重载了比较运算, 按照字典序比较, 复杂度 $O(n)$.
+
+---
+
+## 一类重要问题 - 字符串匹配
+
+@@
+
+模式匹配问题.
+
+给定文本串 $S$ 和模式串 $T$, 求 $T$ 在 $S$ 串中出现次数位置等信息.
+
+进一步可以划分为 单一/多 文本串 单一/多 模式串匹配.
+
+@@
+
+暴力做法: 枚举以 $S[i]$ 开始的子串, 判断是否与 $T$ 匹配.
+
+时间复杂度 $O(|S||T|)$.
+
+---
+
+## 字符串哈希
+
+@@
+
+字符串相等的暴力判断是 $O(n)$ 的, 而数字 (int 或者 long long 范围) 是 $O(1)$ 的.
+
+能不能造一个函数, 把一个字符串映射到一个数字?
+
+@@
+
+具体一下, 这个函数需要满足:
+
+1. 两个字符串的函数值一样那么这两个字符串一定一样.
+2. 两个字符串的函数值不一样那么这两个字符串 **绝大概率** 不一样.
+
+为什么是绝大概率?
+
+@@
+
+多项式哈希函数.
+
+方式一:
+$$
+f(S) = \sum_{i=0}^{|S| - 1} g(S[i]) \times p^{i} \pmod M.
+$$
+**Example:**
+$$
+f(\text{abc}) = 97 + 98 p + 99 p^2 \bmod M.
+$$
+方式二:
+$$
+f(S) = \sum_{i=0}^{|S| - 1} g(S[i]) \times p^{|S| - 1 - i} \pmod M.
+$$
+**Example:**
+$$
+f(\text{abc}) = 97 p^2 + 98 p + 99 \bmod M.
+$$
+@@
+
+1. $g(\cdot)$ 要保证是单射, 通常就取成 ASCII 码.
+2. $p, M$ 通常取素数, 后者不能太小.
+
+第二条是为了前面说的 **"绝大概率"** 尽可能大. 并且 $p, M$ 的取值不是随意的素数, 有不少常用的组合, 例如 $p = 131, 13331, M = 10^9 + 7$ 等. 但是由于太常见, 有概率被出题人精心构造的数据卡掉.
+
+<img src="https://s2.loli.net/2024/02/07/td5TpfwgucjoPBy.png" alt="image-20240207150412397" style="zoom: 50%;" />
+
+@@
+
+回到匹配的问题, 例如 $S = \text{abcab}, T = {ca}$, 如何知道 $S[2 \dots 3] = T$?
+
+在计算字符串哈希值的时候, 根据递推式我们计算了每一个前缀的哈希值.
+$$
+\begin{aligned}
+& f(S[0 \dots 3]) = a p^3 + b p^2 + c p + a \pmod M \\
+& f(S[0 \dots 1]) = a p + b \pmod M \\
+& f(T) = c p + a \pmod M \\
+\end{aligned}
+$$
+注意到 $f(S[0 \dots 3]) - p^2 f(S[0 \dots 1]) \equiv S(T) \bmod M$.
+
+@@
+
+更一般的, 
+$$
+\begin{aligned}
+& f(S[0 \dots l-1]) = S[0] p^{l-1} + s[1] p^{l-2} + \cdots + S[l-2] p + S[l-1] \\
+& f(S[0 \dots r]) = S[0] p^{r} + s[1] p^{r-1} + \cdots + S[l-2] p^{r-l+2} + S[l-1] p^{r-l+1} + \cdots + S[r] \\
+\end{aligned}
+$$
+那么
+$$
+f(S[0 \dots r]) - p^{r-l+1} f(S[0 \dots l-1]) \equiv S[l] p^{r-l-1} + \cdots + S[r] \bmod M.
+$$
+如果 $f(S[0 \dots r]) - p^{r-l+1} f(S[0 \dots l-1]) \equiv f(T) \bmod M$, 就可以说明 $S[l \dots r] = T$.
+
+
+
+## KMP
+
+@@
+
+**Definition** 如果 $S$ 的某一个子串 $s$ 即是它的前缀, 同时又是它的后缀, 就称 $s$ 是 $S$ 的 border.
+
+**Example:**
+
+1. $\text{a}$ 是 $\text{abca}$ 的 border.
+2. $\text{ab}$ 是 $\text{abefab}$ 的 border.
+3. $\text{aba}$ 是 $\text{aba}$ 的 border.
+
+@@
+
+KMP 计算的是 $S$ 的每一个前缀的最长 **真** border 的长度, 记录为 next 数组.
+
+@@
+
+一个例子.
+
+**Example:** 设 $S = \text{abcabcd}$.
+
+1. $S[0] = \text{a}, \text{next}[0] = 0$.
+2. $S[0 \dots 1] = \text{ab}, \text{next}[1] = 0$.
+3. $S[0 \dots 2] = \text{abc}, \text{next}[2] = 0$.
+4. $S[0 \dots 3] = \text{abca}, \text{next}[3] = 1$.
+5. $S[0 \dots 4] = \text{abcab}, \text{next}[1] = 2$.
+6. $S[0 \dots 5] = \text{abcabc}, \text{next}[1] = 3$.
+7. $S[0 \dots 6] = \text{abcabcd}, \text{next}[1] = 0$.
+
+@@
+
+另一个例子.
+
+**Example:** 设 $S = \text{aabaaab}$.
+
+1. $S[0] = \text{a}, \text{next}[0] = 0$.
+2. $S[0 \dots 1] = \text{aa}, \text{next}[1] = 1$.
+3. $S[0 \dots 2] = \text{aab}, \text{next}[2] = 0$.
+4. $S[0 \dots 3] = \text{aaba}, \text{next}[3] = 1$.
+5. $S[0 \dots 4] = \text{aabaa}, \text{next}[1] = 2$.
+6. $S[0 \dots 5] = \text{aabaaa}, \text{next}[1] = 2$.
+7. $S[0 \dots 6] = \text{aabaaab}, \text{next}[1] = 3$.
+
+@@
+
+如何计算?
+
+暴力 $O(n^2)$, 例如对每一个前缀, 枚举 border 长度, 利用哈希判断这个前缀的前后缀是否相同.
+
+更快的算法?
+
+@@
+
+考虑增加一个字符带来的影响.
+
+ **重要的结果:** $\text{next}[i]$ 至多是 $\text{next}[i-1] + 1$.
+
+![图片2](https://s2.loli.net/2024/02/07/pvf8m2RYq4aIxFL.png)
+
+如果蓝色部分是 $S[0 \dots i]$ 的 border, 那么红色部分一定是 $S[0 \dots i-1]$ 的 border.
+
+@@
+
+首先 $S[0 \dots \text{next}[i-1]]$ 是 $S[0 \dots i-1]$ 的 border.
+
+![图片1](https://s2.loli.net/2024/02/07/3jG2pFXwxJcZMik.png)
+
+如果 $S[\text{next}[i-1]]$ 与 $S[i]$ 相同, 那么红色和黄色部分拼接起来就是 $S[0 \dots i]$ 的 border, 也就是上图中蓝色部分.
+
+此时 $\text{next}[i] = \text{next}[i-1] + 1$.
+
+@@
+
+如果 $S[\text{next}[i-1]]$ 与 $S[i]$ 不相同呢? 考虑红色部分的 border.
+
+![图片3](https://s2.loli.net/2024/02/07/HGApseFfS3PUJij.png)
+
+如果 $S[\text{next}[\text{next}[i-1]-1]]$ 与 $S[i]$ 相同, 那么绿色和黄色部分拼接起来就是 $S[0 \dots i]$ 的 border.
+
+此时 $\text{next}[i] = \text{next}[\text{next}[i-1]-1] + 1$.
+
+@@
+
+如果 $S[\text{next}[\text{next}[i-1]-1]]$ 与 $S[i]$ 也不相同, 继续重复上述跳 next 的步骤判断即可.
+
+如果跳到 $S$ 的第一个字符, 也就是跳到 $\text{next}[0]$ 时, 要判断 $S[0]$ 与 $S[i]$ 是否相同, 有可能 $S[0 \dots i]$ 根本就不存在 border.
+
+```cpp
+auto get_next = [&](const std::string& s) -> vi {
+    int n = s.length();
+    vi next(n);
+    for (int i = 1; i < n; i++) {
+        int j = next[i - 1];
+        while (j > 0 and s[i] != s[j]) j = next[j - 1];
+        if (s[i] == s[j]) j++;
+        next[i] = j;
+    }
+    return next;
+};
+```
+
+@@
+
+再次回到匹配的问题, 同一个例子 $S = \text{abcab}, T = {ca}$, 利用 KMP 如何知道 $S[2 \dots 3] = T$?
+
+考虑构造字符串形如 $SS =  T + \# + S$, 这里的井号 # 通常被称为 **脏字符**, 脏字符不会在 $S$ 和 $T$ 中出现.
+
+例如在这个例子中, $SS = \text{ca\#abcab}$, 很容易知道 $SS[0 \dots 6]$ 的最长 border 长度为 $2$, 这就意味着 $T$ 是  $SS[0 \dots 6]$ 的一个后缀.
+
+@@
+
+一般地, 只需要将模式串与文本串用脏字符连接起来, 求新得到的字符串的 next 数组, 根据哪些位置的 next 值恰为模式串长度即可.
+
+---
+
+## Trie
+
+@@
+
+中文名为 **字典树**, 像字典一样的树.
+
+![trie1](https://s2.loli.net/2024/02/07/7ExNOzYASq6Q2t8.png)
+
+图中 $1 \to 4 \to 8 \to 13$ 表示字符串 $\text{cab}$.
+
+@@
+
+不妨设字符集为 26 个小写字母. 
+
+在这个字符集下, trie 上每一个节点都有 26 条出边, 分别表示 $\text{a}$ 到 $\text{z}$.
+
+区分:
+
+1. 有意义的边和实际不存在的边.
+2. 是某个字符串结尾的节点.
+
+操作:
+
+1. 插入/删除 一个字符串.
+
+2. 查询某个字符串是否出现过.
+
+@@
+
+```cpp
+int cnt;
+std::vector<std::array<int, 26>> trie(n + 1);
+vi exist(n + 1);
+auto insert = [&](const std::string& s) -> void {
+    int p = 0;
+    for (const auto ch : s) {
+        int c = ch - 'a';
+        if (!trie[p][c]) trie[p][c] = ++cnt;
+        p = trie[p][c];
+    }
+    exist[p] = true;
+};
+auto find = [&](const string& s) -> bool {
+    int p = 0;
+    for (const auto ch : s) {
+        int c = ch - 'a';
+        if (!trie[p][c]) return false;
+        p = trie[p][c];
+    }
+    return exist[p];
+};
+```
+
+
+

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    
+    <link rel="stylesheet" href="https://accrobin.github.io/additional_files/reveal/reveal.css">
+    <link rel="stylesheet" href="https://accrobin.github.io/additional_files/reveal/plugin/highlight/monokai.css">
+    <link rel="stylesheet" href="https://accrobin.github.io/additional_files/reveal/theme/white.css" id="theme">    
+    
+    <title>算法讲堂第二期</title>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-markdown data-separator-vertical="@@"><script type="text/template">
+                # 贪心，二分，前缀和与差分，快速幂，动态规划基础
+
+
+<!-- # 算法讲堂第二期
+$$
+\text{贪心，二分，前缀和与差分，快速幂，动态规划基础}
+$$ -->
+---
+
+## 前缀和/差分
+- 前缀和可以简单理解为用一个长度为 $n$ 的 $sum$ 数组记录原数组 $a$ 前 $i$ 项和 <!-- .element: class="fragment" -->
+- 计算 $\sum\limits_{i=l}^{r}a[i] = sum[r] - sum[l - 1]$ <!-- .element: class="fragment" -->
+- <!-- .element: class="fragment" -->而差分是一种和前缀和相对的策略，可以当做是求和的逆运算。这种策略是令
+`$$
+b_i = \begin{cases}
+a_i - a_{i - 1} & i \in [2, n] \\
+a_1 & i = 1
+\end{cases}
+$$`
+- 差分数组可以将原数组用 $a[i] = \sum\limits_{j=1}^{i}b[j]$ <!-- .element: class="fragment" -->
+
+@@ 
+
+## 前缀和实例1：[蓝桥杯 2022 省 A] 求和
+
+> 给定 $n$ 个整数 $a_{1}, a_{2}, \cdots, a_{n}$, 求它们两两相乘再相加的和，即
+> `$$
+\begin{aligned}
+S=a_{1} \cdot a_{2} +a_{1} \cdot a_{3}+\cdots+a_{1}\cdot a_{n}&\\
+                    +a_{2} \cdot a_{3}+\cdots+a_2\cdot a_n&\\
+                    \cdots\\
+                    +a_{n-1} \cdot a_{n}&\\
+\end{aligned}
+$$`
+
+- $S = \sum\limits_{i=1}^{n - 1}a[i]\sum\limits_{j=i + 1}^{n}a[j]$ <!-- .element: class="fragment" -->
+- 可以使用前缀和将式子转化为 $S = \sum\limits_{i=1}^{n - 1}a[i]\times(s[n] - s[i])$ <!-- .element: class="fragment" -->
+
+@@
+
+## 差分实例2：语文成绩
+
+> 第一行有两个整数 $n$，$p$，代表学生数与增加分数的次数。
+> 第二行有 $n$ 个数，$a_1 \sim a_n$，代表各个学生的初始成绩。
+> 接下来 $p$ 行，每行有三个数，$x$，$y$，$z$，代表给第 $x$ 个到第 $y$ 个学生每人增加 $z$ 分。
+
+- 每次操作相当于让原数组 $[x,y]$ 位置上加 $z$，考虑对差分数组进行操作 <!-- .element: class="fragment" -->
+- 对于差分数组 $b$，想要实现同样的效果，只需让 $b[x] + z, b[y + 1] - z$ <!-- .element: class="fragment" -->
+---
+
+## 贪心
+
+- 贪心算法即是在对于问题的每一步行动，都采取当前状态下的最优策略，以期望达到最终的全局最优 <!-- .element: class="fragment" -->
+- 在竞赛中，贪心算法更多依靠直觉和经验 <!-- .element: class="fragment" -->
+- 证明：通常采用反证法和归纳法 <!-- .element: class="fragment" -->
+
+@@
+
+## 贪心实例 1：Songs Compression
+
+> 现有 $n$（$1 \le n \le {10}^5$）个物品，第 $i$ 个物品的体积为 $a_i$，可以进行 $1$ 次操作使 $a_i$ 变为 $b_i$（保证 $1 \le b_i<a_i \le {10}^9$）。
+> 问最少多少次操作后能将所有物品装入空间为 $m$（$1 \le m \le {10}^9$）的背包。
+> 若无论如何也无法完成，请输出 `-1`。
+
+- 每次操作将差最大的进行交换即可 <!-- .element: class="fragment" -->
+
+---
+
+## 二分
+
+- 每次通过询问中间点来对查找区间进行缩小 <!-- .element: class="fragment" -->
+- 要求查找空间对于询问具有单调性 <!-- .element: class="fragment" -->
+- <!-- .element: class="fragment" --> 二分查找（lower_bound, upper_bound），二分答案 
+- “最大值最小”，“最小值最大” <!-- .element: class="fragment" -->
+
+```cpp
+// 查找最小满足条件的值
+while (l < r) {
+    int mid = l + r >> 1;
+    if (check(mid)) r = mid;
+    else l = mid + 1;
+}
+// 查找最大满足条件的值
+while (l < r) {
+    int mid = l + r + 1 >> 1;
+    if (check(mid)) l = mid;
+    else r = mid - 1;
+}
+```
+<!-- .element: class="fragment" -->
+
+@@
+
+## 二分答案实例1：跳石头
+> “跳石头”比赛在一条笔直的河道中进行，河道中分布着一些巨大岩石。
+> 
+> 组委会已选择了两块岩石作为比赛起点和终点。而在起点和终点之间有 $N$ 块岩石（不含起点和终点的岩石），选手们将从起点出发，跳向相邻的岩石，直至到达终点。
+>
+> 为了提高比赛难度，组委会将从起点和终点之间移走不超过 $M$ 块岩石（不能移走起点和终点的岩石），使得选手们在比赛过程中的最短跳跃距离尽可能长。
+
+- 二分枚举答案，二分区间即 $[1, L]$ <!-- .element: class="fragment" -->
+- 单调性：若最短跳跃距离为 $x$，移除的石头数 $y \leq M$，则对于所有的 $x' < x$，都有 $y' \leq y \leq M$，即说明在该询问上单调。 <!-- .element: class="fragment" -->
+
+---
+
+@@
+
+## 什么是动态规划？
+
+- 通过将原问题分解为相对简单的子问题来解决复杂问题
+<!-- .element: class="fragment" -->
+- 最优子结构，无后效性，子问题重叠
+<!-- .element: class="fragment" -->
+- 状态设计和状态转移
+<!-- .element: class="fragment" -->
+
+@@
+
+## 例：数字三角形
+> 给定一个 $r(r\le 1000)$ 行的数字三角形，需要找到一条从最高点到底部任意处结束的路径，使路径经过数字的和最大。每一步可以走到当前点左下方的点或右下方的点。
+> ```
+>        7 
+>      3   8 
+>    8   1   0 
+>  2   7   4   4 
+>4   5   2   6   5 
+> ```
+- 暴力方法 $O(2 ^ r)$
+<!-- .element: class="fragment" -->
+- 状态设计：令 $dp_{i, j}$ 表示走到第 $i$ 行第 $j$ 列的最小代价
+<!-- .element: class="fragment" -->
+- 转移方程：$dp_{i,j} = min(dp_{i - 1,j - 1}, dp_{i - 1,j}) + a_{i,j}$
+<!-- .element: class="fragment" -->
+- 复杂度：$O(r ^ 2)$ 
+<!-- .element: class="fragment" -->
+@@
+
+## 状态设计
+
+- 状态设计即定义 $dp$ 的意义；一般可以从问题出发。如例题中，$dp_{i,j}$表示走到第 $i$ 行第 $j$ 个点的最小代价
+<!-- .element: class="fragment" -->
+- 状态设计还应当考虑初值的设置，例题中对应就是设置 $dp_{1,1}$ 的值
+<!-- .element: class="fragment" -->
+- 从一个暴力的状态开始，逐渐优化设计
+<!-- .element: class="fragment" -->
+- 从数据范围考虑，对数据范围敏感
+<!-- .element: class="fragment" -->
+
+@@
+
+## 状态转移
+
+- 顾名思义，就是考虑该状态如何转移过来
+<!-- .element: class="fragment" -->
+- 思考我们定义的状态应该如何求得，如例题中，第 $i$ 行 $j$ 列的位置只能由 $i - 1$ 行 $j$ 列和第 $i - 1$ 行 $j - 1$ 列走到
+<!-- .element: class="fragment" -->
+- 状态转移的设计依赖于状态的定义
+<!-- .element: class="fragment" -->
+
+---
+
+# 线性 DP
+
+@@
+
+## 线性 DP
+- 线性 DP 是动态规划问题中的一类问题，指状态之间有线性关系的动态规划问题。
+<!-- .element: class="fragment" -->
+- 即存在一个线性的递推式，如上述例题中的数字三角形
+<!-- .element: class="fragment" -->
+- 定义过于抽象可以不用深究
+<!-- .element: class="fragment" -->
+
+@@ 
+
+## 线性 DP 实例 1：最长上升子序列（LIS）
+> 给出一个由 $n(n\le 5000)$ 个不超过 $10^6$ 的正整数组成的序列。请输出这个序列的**最长上升子序列**的长度。
+>
+> 上升子序列是指，从原序列中**按顺序**取出一些数字排在一起，这些数字是**逐渐增大**的。
+
+- 状态设计：从问题出发，要求的是最长上升子序列，可以定义 $dp_i$ 表示以 $a_i$ 结尾的最长上升子序列，初值 $dp_1=1$
+<!-- .element: class="fragment" -->
+- 状态转移：要求 $dp_i$，很自然想到从前面选一个比它小的即可。$dp_i = \max\limits _{j = 1}^{i-1}(dp_j + 1)(a_j < a_i)$
+<!-- .element: class="fragment" -->
+```cpp
+for (int i = 1; i <= n; i ++) {
+    dp[i] = 1;
+    for (int j = 1; j < i; j ++)
+        if (a[j] < a[i]) dp[i] = max(dp[i], dp[j] + 1);  
+}
+```
+<!-- .element: class="fragment" -->
+@@
+
+## 线性 DP 实例 2：最长公共子序列（LCS）
+> 给出两个长度分别为 $n,m(n,m\le 5000)$ 的序列 $a,b$，求它们最长的公共子序列的长度。
+>
+> 公共子序列是指，一个序列 $p$，既是 $a$ 的子序列，也是 $b$ 的子序列。
+
+- 状态设计：$dp_{i,j}$ 表示 $a[1\cdots i],b[1\cdots j]$ 的最长公共子序列的长度
+<!-- .element: class="fragment" -->
+- 状态转移：对 $a_i$ 与 $b_j$ 的关系分类<!-- .element: class="fragment" --> `$$
+dp_{i,j}=\begin{cases}
+dp_{i-1,j-1}+1 & a_i=b_j\\
+\max(dp_{i-1,j},dp_{i,j-1}) & a_i\neq b_j\\
+\end{cases}
+$$`
+<!-- .element: class="fragment" -->
+
+---
+
+# 背包问题
+
+@@
+
+## 背包问题一：01 背包
+> 有 $n(n \leq 1000)$ 个物品和一个容量为 $W(W \leq 1000)$ 的背包，每个物品有重量 $w_{i}(w_{i} \leq W)$ 和价值 $v_{i}(v_{i} \leq 10^9)$ 两种属性，要求选若干物品放入背包使背包中物品的总价值最大且背包中物品的总重量不超过背包的容量。
+
+- 暴力枚举，每个物品选或者不选，$O(2 ^ n)$ 
+<!-- .element: class="fragment" -->
+- 朴素的剪枝：在暴力 dfs 时，竟然只记录了两个信息：“当前选到了第几个”，“选出的物品重量和是多少”
+<!-- .element: class="fragment" -->
+- 记忆化搜索：<!-- .element: class="fragment" -->原本有 $2^n$ 个状态的状态机在**合并相同状态**之后只剩 $n\cdot W$ 个状态
+
+朴素的剪枝——记忆化搜索能够胜任，而 DP 可以理解为 $01$ 状态机的合并，所以有暴论：DP 等价于记忆化搜索（在某些时候）
+<!-- .element: class="fragment" -->
+
+@@
+
+## 背包问题一：01 背包
+
+- 状态设计（要求什么？最大价值！）
+<!-- .element: class="fragment" -->
+
+$~~~~~~dp_{i, j}$ 表示前 $i$ 个物品中，选出重量和为 $j$ 的物品的最大价值，答案即 $dp_{n,W}$
+<!-- .element: class="fragment" -->
+- 状态转移：$dp_{i,j} = \max(dp_{i - 1,j} + dp_{i - 1,j - w_i} + v_i)$
+<!-- .element: class="fragment" -->
+
+```cpp
+for (int i = 1; i <= n; i ++) {
+    for (int j = 0; j <= W; j ++) {
+        dp[i][j] = dp[i - 1][j];
+        if (j - w[i] >= 0) {
+            dp[i][j] = max(dp[i][j], dp[i - 1][j - w[i]] + v[i]);
+        }
+    }
+}
+```
+<!-- .element: class="fragment" -->
+
+@@
+
+## 背包问题一：01 背包
+
+- 题目空间限制不允许开 $O(nW)$的数组
+<!-- .element: class="fragment" -->
+- 注意：我们每次转移使用仅使用了 $i$ 和 $i - 1$ 两行的数据
+<!-- .element: class="fragment" -->
+- 滚动数组优化<!-- .element: class="fragment" -->：只开长度为 $W$ 的数组，计算时**从后往前**转移
+```cpp
+for (int j = W; j >= 0; j--) {
+    if (j - w[i] >= 0) {
+        dp[j] = max(dp[j], dp[j - w[i]] + v[i]);
+    }
+}
+```
+<!-- .element: class="fragment" -->
+- 为什么不能从前往后转移？
+<!-- .element: class="fragment" -->
+
+每次转移 $dp_{i, j}$ 时需要用到 $dp_{i - 1, j - w_i}$ 的值，如果从前往后转移，那么在更新 $dp_{j}$ 前就更新了 $dp_{j - w_i}$
+<!-- .element: class="fragment" -->
+
+@@
+
+
+## 背包问题二：完全背包
+> 有 $n(n \leq 1000)$ 种物品和一个容量为 $W(W \leq 1000)$ 的背包，每种物品有重量 $w_{i}(w_{i} \leq W)$ 和价值 $v_{i}(v_{i} \leq 1e9)$ 两种属性，**个数无限**。要求选若干物品放入背包使背包中物品的总价值最大且背包中物品的总重量不超过背包的容量。
+- 状态设计与01背包一致（$dp_{i, j}$），难点在于如何转移
+<!-- .element: class="fragment" -->
+- 状态转移方程如何书写？
+<!-- .element: class="fragment" -->
+- 朴素方法<!-- .element: class="fragment" -->：
+`$$
+dp_{i,j} = \max\limits_{k=0}^{\infty}(dp_{i - 1,j - k\times w_i} + k \times v_i)
+$$`
+<!-- .element: class="fragment" -->
+- $dp_{i,j} = \max(dp_{i-1,j}, dp_{i, j-w_i}+v_i)$
+<!-- .element: class="fragment" -->
+
+@@
+
+## 背包问题二：完全背包
+```cpp
+for (int i = 1; i <= n; i ++) {
+    for (int j = 0; j <= W; j ++) {
+        dp[i][j] = dp[i - 1][j];
+        if (j - w[i] >= 0) {
+            dp[i][j] = max(dp[i][j], dp[i][j - w[i]] + v[i]);
+        }
+    }
+}
+```
+
+@@
+
+## 背包问题三：多重背包
+> 有 $n(n \leq 1000)$ 种物品和一个容量为 $W(W \leq 1000)$ 的背包，每种物品有重量 $w_{i}(w_{i} \leq W)$ ，价值 $v_{i}(v_{i} \leq 1e9)$ 和**个数** $k_{i}(k_{i} \leq 1e9)$三种属性。要求选若干物品放入背包使背包中物品的总价值最大且背包中物品的总重量不超过背包的容量
+- 本质上可以当做01背包，将每个物品拆开看成一种，共 $K(K = \sum\limits_{i = 1}^{n}k_i)$ 种。 
+<!-- .element: class="fragment" -->
+- 时间复杂度 $O(KW)$
+<!-- .element: class="fragment" -->
+
+@@
+
+## 背包问题三：多重背包——二进制优化
+- 将每种物品拆分成 $\log k_i$ 个物品，第 $j$ 种物品拆分成的第 $i$ 个物品的重量为 $2^{i - 1}w_j$，价值为 $2^{i - 1}v_j$，时间复杂度 $O(nW\log k)$。
+<!-- .element: class="fragment" -->
+- 拆分时剩余部分直接合并，如 $6$ 拆分成 $1+2+3$；$8$ 拆分成 $1+2+4+1$
+<!-- .element: class="fragment" -->
+- 原理：拆分出来的物品组合可以表示任意个数该种类物品
+<!-- .element: class="fragment" -->
+```cpp
+vector<int> newW, newV;
+for (int i = 1; i <= n; i ++) {
+    for (int j = 1; j <= k[i]; j *= 2) {
+        k[i] -= j;
+        newW.push_back(j * w[i]);
+        newV.push_back(j * v[i]);
+    }
+    if (k[i]) {
+        newW.push_back(k[i] * w[i]);
+        newV.push_back(k[i] * v[i]);
+    }
+}
+```
+<!-- .element: class="fragment" -->
+
+@@
+
+## 背包例题一：质数和分解
+>任何大于 $1$ 的自然数 $n$ 都可以写成若干个大于等于 $2$ 且小于等于 $n$ 的质数之和表达式（包括只有一个数构成的和表达式的情况），并且可能有不止一种质数和的形式。例如，$9$ 的质数和表达式就有四种本质不同的形式：
+>
+>$9 = 2 + 5 + 2 = 2 + 3 + 2 + 2 = 3 + 3 + 3 = 2 + 7$
+>
+> 这里所谓两个本质相同的表达式是指可以通过交换其中一个表达式中参加和运算的各个数的位置而直接得到另一个表达式。
+>
+> 试编程求解自然数 $n(2 \leq n \leq 200)$ 可以写成多少种本质不同的质数和表达式。
+
+@@
+
+## 背包例题一：质数和分解
+
+- 可以发现：$n$ 相当于背包容量，质数个数相当于物品种类，质数的值相当于物品的重量
+<!-- .element: class="fragment" -->
+- 每个物品有无穷多种，所以是完全背包问题
+<!-- .element: class="fragment" -->
+- 设状态 $dp_{i,j}$ 表示前 $i$ 种质数中和 $j$ 的本质不同质数和表达式数量
+<!-- .element: class="fragment" -->
+- 状态转移 $dp_{i, j} = dp_{i - 1, j} + dp_{i, j - w[i]}$
+<!-- .element: class="fragment" -->
+- tips: 多组数据最好提前预处理出所有质数，以免被卡
+<!-- .element: class="fragment" -->
+
+@@
+
+
+---
+
+# 区间 DP
+
+@@
+
+## 区间 DP
+- 区间 DP 是线性 DP 的拓展。顾名思义，区间 DP 的划分一般以一段区间的待求解值作为状态
+<!-- .element: class="fragment" -->
+- $dp_{i, j}$ 一般表示为从 $i$ 到 $j$ 内的待求解值
+<!-- .element: class="fragment" -->
+- 多适用于可以合并的问题
+<!-- .element: class="fragment" -->
+- 状态转移一般会枚举合并点，将问题分为两个部分，通过合并两个部分的最优值得到原问题的最优值
+<!-- .element: class="fragment" -->
+- 状态转移方程多是以下形式 $$
+dp_{i, j} = \max_{k = i} ^ {j - 1}f(dp_{i, k}, dp_{k + 1, j})
+$$
+<!-- .element: class="fragment" -->
+
+@@ 
+
+## 区间 DP 实例 1：石子合并（弱化版）
+> 设有 $N(N \le 300)$ 堆石子排成一排，其编号为 $1,2,3,\cdots,N$。每堆石子有一定的质量 $m_i\ (m_i \le 1000)$。现在要将这 $N$ 堆石子合并成为一堆。每次只能合并相邻的两堆，合并的代价为这两堆石子的质量之和，合并后与这两堆石子相邻的石子将和新堆相邻。合并时由于选择的顺序不同，合并的总代价也不相同。试找出一种合理的方法，使总的代价最小，并输出最小代价。
+
+- 状态设计：$dp_{i, j}$ 表示合并区间 $i$ 到 $j$ 的最小代价
+<!-- .element: class="fragment" -->
+- 区间合并时，枚举最后合并的两堆是以哪个中心点划分
+<!-- .element: class="fragment" -->
+- 状态转移方程：$dp_{i, j} = \min_{k = i}^{j - 1}(dp_{i, k} + dp_{k + 1, j} + w_{i, k} + w_{k + 1, j})$
+<!-- .element: class="fragment" -->
+- 使用前缀和可以快速算出 $w_{i, k}$ 和 $w_{k + 1, j}$
+<!-- .element: class="fragment" -->
+- 时间复杂度 $O(n^3)$
+<!-- .element: class="fragment" -->
+
+
+</script></section>
+</div>
+</div>
+<script src="https://accrobin.github.io/additional_files/reveal/reveal.js"></script>
+<script src="https://accrobin.github.io/additional_files/reveal/plugin/markdown/markdown.js"></script>
+<script src="https://accrobin.github.io/additional_files/reveal/plugin/highlight/highlight.js"></script>
+<script src="https://accrobin.github.io/additional_files/reveal/plugin/notes/notes.js"></script>
+<script src="https://accrobin.github.io/additional_files/reveal/plugin/math/math.js"></script>
+<script>
+Reveal.initialize({
+    width: 1024,
+    height: 800,
+    slideNumber: 'c/t',
+    vertical: false,
+    // display: 'block',
+    // margin: 0.04,
+    // embedded: true,
+    center: false,
+    // transition: 'linear',
+    // backgroundTransition: 'slide'
+    // hash: true,
+    // controls: true,
+    // progress: true,
+    // history: true,
+    // center: true,
+    katex: {
+        version: 'latest',
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false},
+            {left: '\\(', right: '\\)', display: false},
+            {left: '\\[', right: '\\]', display: true}
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    },
+    plugins: [ RevealMath.KaTeX, RevealMarkdown, RevealHighlight, RevealNotes ]
+});
+</script>
+</body>
+</html>
